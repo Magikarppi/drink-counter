@@ -37,8 +37,8 @@ const AddDrink = ({ addDrink }: AddDrinkProps) => {
   const handleSubmit = () => {
     if (alcPercent && amount) {
       const drink: DrinkType = {
-        alcPercent: parseInt(alcPercent.replace(',', '.')),
-        amount: parseInt(amount.replace(',', '.')),
+        alcPercent: parseFloat(alcPercent.replace(',', '.')),
+        amount: parseFloat(amount.replace(',', '.')),
         timeConsumed: new Date(),
       };
       addDrink(drink);
