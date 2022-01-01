@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
     padding: 20,
     marginHorizontal: 20,
   },
+  buttonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
   input: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -69,7 +74,7 @@ const AddDrink = ({ addDrink }: AddDrinkProps) => {
           textAlign="center"
         />
       </View>
-      <Button title="+" onPress={handleSubmit} />
+      <View style={styles.buttonContainer}><Button title="+" onPress={handleSubmit} /></View>
     </View>
   );
 };
