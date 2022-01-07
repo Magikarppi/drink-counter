@@ -19,3 +19,8 @@ export interface DrinksProps {
 export interface GoalsProps {
   drinkList: DrinkList;
 }
+
+export interface SettingsModalProps {
+  showModal: boolean;
+  closeModal: () => void;
+};

@@ -1,6 +1,8 @@
 import React from "react";
-import { Modal, Settings, StyleSheet, Text, View } from "react-native";
+import { Modal, StyleSheet, Text, View } from "react-native";
 import CloseButton from "./CloseButton";
+import Settings from './Settings';
+import { SettingsModalProps } from "./types";
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -9,19 +11,10 @@ const styles = StyleSheet.create({
   },
 });
 
-type MenuModalsProps = {
-  modalToOpen: 'settings' | 'FAQ' | 'contact' | undefined;
-  showModal: boolean;
-  closeModal: () => void;
-};
-
-const MenuModals = ({
-  modalToOpen,
+const SettingsModal = ({
   showModal,
   closeModal,
-}: MenuModalsProps) => {
-  switch (modalToOpen) {
-    case 'settings':
+}: SettingsModalProps) => {
       return (
         <Modal visible={showModal} animationType="slide">
           <View style={styles.modalContainer}>
@@ -30,19 +23,7 @@ const MenuModals = ({
           </View>
         </Modal>
       );
-    case 'FAQ':
-      return (
-        <Modal visible={showModal} animationType="slide">
-          <View style={styles.modalContainer}>
-            <CloseButton handleClose={closeModal} />
-            <Text>FAQ Modaali</Text>
-          </View>
-        </Modal>
-      );
 
-    default:
-      return null;
-  }
 };
 
-export default MenuModals;
+export default SettingsModal;
