@@ -23,6 +23,7 @@ import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
 import AddDrink from './src/AddDrink';
 import Drinks from './src/Drinks';
 import Goals from './src/Goals';
+import SettingsModal from './src/SettingsModal';
 import { DrinkType } from './src/types';
 
 const styles = StyleSheet.create({
@@ -78,6 +79,7 @@ const Section: React.FC<{
 
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -93,6 +95,10 @@ const App = () => {
     }
   };
 
+  const closeSettings = () => {
+    setShowSettings(false);
+  }
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -100,6 +106,7 @@ const App = () => {
         style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
         }}>
+          <SettingsModal showModal={showSettings} closeModal={closeSettings} />
         <Section title="Lisää juoma">
           <AddDrink addDrink={handleAddDrink} />
         </Section>
