@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import CustomButton from './CustomButton';
+import CustomButton from './Buttons/CloseButton';
+import SettingsButton from './Buttons/SettingsButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,13 +24,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainHeader = (props: any) => {
+interface HeaderProps {
+  openModal: () => void;
+}
+
+const MainHeader = ({openModal}: HeaderProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.elementContainer} />
       <View style={styles.elementContainer}><Text style={styles.text}>Drinkkilaskuri</Text></View>
       <View style={styles.elementContainer}>
-        <CustomButton openOrClose={} />
+        <SettingsButton openModal={openModal} />
       </View>
     </View>
   );

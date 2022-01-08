@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
-import CloseButton from "./CloseButton";
+import CloseButton from "../Buttons/CloseButton";
 import Settings from './Settings';
-import { SettingsModalProps } from "./types";
+import { SettingsModalProps } from "../types";
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -18,7 +18,7 @@ const SettingsModal = ({
       return (
         <Modal visible={showModal} animationType="slide">
           <View style={styles.modalContainer}>
-            <CloseButton handleClose={closeModal} />
+            <CloseButton closeModal={closeModal} />
             <Settings />
           </View>
         </Modal>

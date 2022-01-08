@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import BodySize from './BodySize';
 import MaxDrinkCount from './MaxDrinkCount';
-import Reminder from './Reminder';
+import Reminder from './ReminderSetting';
 import SleepTime from './SleepTime';
 
 const styles = StyleSheet.create({

@@ -19,11 +19,12 @@ import {
   View,
 } from 'react-native';
 
-import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AddDrink from './src/AddDrink';
 import Drinks from './src/Drinks';
 import Goals from './src/Goals';
-import SettingsModal from './src/SettingsModal';
+import HeaderMain from './src/HeaderMain';
+import SettingsModal from './src/Settings/SettingsModal';
 import { DrinkType } from './src/types';
 
 const styles = StyleSheet.create({
@@ -95,6 +96,10 @@ const App = () => {
     }
   };
 
+  const openSettings = () => {
+    setShowSettings(true);
+  }
+
   const closeSettings = () => {
     setShowSettings(false);
   }
@@ -106,6 +111,7 @@ const App = () => {
         style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
         }}>
+          <HeaderMain openModal={openSettings}  />
           <SettingsModal showModal={showSettings} closeModal={closeSettings} />
         <Section title="Lisää juoma">
           <AddDrink addDrink={handleAddDrink} />
