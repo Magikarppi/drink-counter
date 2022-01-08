@@ -10,7 +10,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    height: '15%'
+    height: '15%',
+    borderBottomColor: 'dark-grey',
+    borderBottomWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 2
+    
   },
   elementContainer: {
     width: '30%',
@@ -20,7 +25,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#76447c',
-    fontSize: 27,
+    fontSize: 20,
   },
 });
 
