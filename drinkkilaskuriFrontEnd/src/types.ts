@@ -23,4 +23,5 @@ export interface GoalsProps {
 export interface SettingsModalProps {
   showModal: boolean;
   closeModal: () => void;
+  saveSettings: () => void;
 };
