@@ -25,15 +25,17 @@ import Drinks from './src/Drinks';
 import Goals from './src/Goals';
 import HeaderMain from './src/HeaderMain';
 import SettingsModal from './src/Settings/SettingsModal';
+import { colors } from './src/themes';
 import { DrinkType } from './src/types';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#dbc8a7',
+    backgroundColor: colors.backgroundDark,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    flexGrow: 1
+    // flexGrow: 4
+    height: '100%'
   },
   highlight: {
     fontWeight: '700',
@@ -83,21 +85,17 @@ const App = () => {
   }
 
   return (
-    // <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={backgroundStyle}>
+        {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
+        <HeaderMain openModal={openSettings}  />
       <View style={styles.container}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-            <HeaderMain openModal={openSettings}  />
+
             <SettingsModal showModal={showSettings} closeModal={closeSettings} />
             <AddDrink addDrink={handleAddDrink} />
             <Goals drinkList={drinklist} />
             <Drinks drinkList={drinklist} />
-        </View>
       </View>
-    // </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
