@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { colors } from '../themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,19 +14,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    marginHorizontal: 20,
+
+    // marginHorizontal: 20,
   },
   input: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50,
-    height: 50,
-    borderColor: 'grey',
+    width: '100%',
+    height: 100,
+    margin: 5,
+    backgroundColor: colors.violet,
+    borderColor: 'black',
+    borderBottomColor: colors.violet,
     borderWidth: 2,
   },
   inputText: {
     fontSize: 18,
-    color: 'black',
+    color: colors.white,
   },
 });
 
@@ -43,6 +48,8 @@ const Reminder = () => {
           value={reminder}
           placeholder="Oisko sittenkin vettä tähän väliin?"
           keyboardType="default"
+          placeholderTextColor={'#d9d9d9'}
+          textAlign='center'
         />
       </View>
   </View>

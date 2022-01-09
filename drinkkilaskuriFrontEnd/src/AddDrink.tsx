@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Text, Button } from 'react-native';
+import { colors } from './themes';
 import { AddDrinkProps, DrinkType } from './types';
 
 const styles = StyleSheet.create({
@@ -26,12 +27,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 50,
     height: 50,
-    borderColor: 'grey',
+    borderColor: colors.beige,
     borderWidth: 2,
+    margin: 5
   },
   inputText: {
     fontSize: 18,
     color: 'black',
+    shadowColor: 'grey',
+    textShadowColor: 'grey',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 2
   },
 });
 
@@ -61,6 +67,8 @@ const AddDrink = ({ addDrink }: AddDrinkProps) => {
           value={alcPercent}
           placeholder="4.7"
           keyboardType="decimal-pad"
+          placeholderTextColor={'grey'}
+          textAlign="center"
         />
       </View>
       <View style={styles.inputContainer}>
@@ -72,6 +80,8 @@ const AddDrink = ({ addDrink }: AddDrinkProps) => {
           placeholder="0.33"
           keyboardType="decimal-pad"
           textAlign="center"
+          placeholderTextColor={'grey'}
+
         />
       </View>
       <View style={styles.buttonContainer}><Button title="+" onPress={handleSubmit} /></View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { DrinksProps } from './types';
 
 const styles = StyleSheet.create({
@@ -26,13 +26,15 @@ const Drinks = ({ drinkList }: DrinksProps) => {
   }
   return (
     <View style={styles.container}>
-      {drinkList.map((drink, i) => {
-        return (
-          <View key={i} style={styles.item}>
-            <Text style={styles.infoText}>{drink.alcPercent}</Text>
-          </View>
-        );
-      })}
+      <ScrollView>
+        {drinkList.map((drink, i) => {
+          return (
+            <View key={i} style={styles.item}>
+              <Text style={styles.infoText}>{drink.alcPercent}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };

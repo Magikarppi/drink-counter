@@ -32,14 +32,25 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.backgroundDark,
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     // flexGrow: 4
     height: '100%'
   },
-  highlight: {
-    fontWeight: '700',
+  section: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '20%',
+    width: '90%',
+    marginVertical: 10,
+    borderBottomColor: colors.violet,
+    borderBottomWidth: 2
   },
+  text: {
+    fontSize: 18,
+    color: colors.white
+  }
 });
 
 // const Section: React.FC<{
@@ -84,16 +95,26 @@ const App = () => {
     setShowSettings(false);
   }
 
+  const saveSettings = () => {
+    console.log('save settings')
+  }
+
   return (
     <SafeAreaView style={backgroundStyle}>
         {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
-        <HeaderMain openModal={openSettings}  />
+      <HeaderMain openModal={openSettings}  />
       <View style={styles.container}>
-
-            <SettingsModal showModal={showSettings} closeModal={closeSettings} />
+        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
+          <View style={styles.section}>
+            <Text style={styles.text}>Lisää drinkki</Text>  
             <AddDrink addDrink={handleAddDrink} />
+          </View>
+          <View style={{...styles.section, height: 40}}>
             <Goals drinkList={drinklist} />
+          </View>
+          <View style={styles.section}>
             <Drinks drinkList={drinklist} />
+          </View>
       </View>
     </SafeAreaView>
   );

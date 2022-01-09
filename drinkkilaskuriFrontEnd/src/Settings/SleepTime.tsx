@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { colors } from '../themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,10 +23,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: 'grey',
     borderWidth: 2,
+    margin: 5
   },
   inputText: {
     fontSize: 18,
-    color: 'black',
+    color: colors.white,
   },
 });
 
