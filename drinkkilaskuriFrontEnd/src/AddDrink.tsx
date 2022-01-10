@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Text, Button } from 'react-native';
+import { View, StyleSheet, TextInput, Text, Button, KeyboardAvoidingView } from 'react-native';
 import { colors } from './themes';
 import { AddDrinkProps, DrinkType } from './types';
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: colors.beige,
     borderWidth: 2,
-    margin: 5
+    margin: 5,
   },
   inputText: {
     fontSize: 18,

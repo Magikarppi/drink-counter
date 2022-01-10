@@ -100,23 +100,23 @@ const App = () => {
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View style={backgroundStyle}>
         {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings}  />
-      <View style={styles.container}>
-        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
-          <View style={styles.section}>
-            <Text style={styles.text}>Lisää drinkki</Text>  
-            <AddDrink addDrink={handleAddDrink} />
-          </View>
-          <View style={{...styles.section, height: 40}}>
-            <Goals drinkList={drinklist} />
-          </View>
-          <View style={styles.section}>
-            <Drinks drinkList={drinklist} />
-          </View>
-      </View>
-    </SafeAreaView>
+        <View style={styles.container}>
+          <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
+            <View style={styles.section}>
+              <Text style={styles.text}>Lisää drinkki</Text>
+              <AddDrink addDrink={handleAddDrink} />
+            </View>
+            <View style={{...styles.section, height: 40}}>
+              <Goals drinkList={drinklist} />
+            </View>
+            <View style={styles.section}>
+              <Drinks drinkList={drinklist} />
+            </View>
+        </View>
+    </View>
   );
 };
 
