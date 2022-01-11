@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import { DrinksProps } from './types';
+import Drink from './Drink';
+import { DrinksProps, DrinkType } from './types';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,14 +25,15 @@ const Drinks = ({ drinkList }: DrinksProps) => {
   if (!drinkList || drinkList.length < 1) {
     return null;
   }
+  const addToFavorites = (drink: DrinkType) => {
+    console.log('add Favorite, ' ,drink.alcPercent)
+  }
   return (
     <View style={styles.container}>
       <ScrollView>
         {drinkList.map((drink, i) => {
           return (
-            <View key={i} style={styles.item}>
-              <Text style={styles.infoText}>{drink.alcPercent}</Text>
-            </View>
+            <Drink key={i} drink={drink} addToFavorites={addToFavorites} />
           );
         })}
       </ScrollView>

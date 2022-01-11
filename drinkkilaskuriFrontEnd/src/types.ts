@@ -5,6 +5,7 @@ export interface AddDrinkProps {
 }
 
 export interface DrinkType {
+  name?: string;
   alcPercent: number;
   amount: number;
   timeConsumed: Date;
