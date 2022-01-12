@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Text, Button, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, TextInput, Text, Button, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import { colors } from './themes';
 import { AddDrinkProps, DrinkType } from './types';
 
@@ -84,6 +86,11 @@ const AddDrink = ({ addDrink }: AddDrinkProps) => {
 
         />
       </View>
+      <TouchableOpacity onPress={() => (console.log('open favorites'))}>
+        <View>
+          <MaterialCommunityIcons name="folder-star-outline" size={50} />
+        </View>
+      </TouchableOpacity>
       <View style={styles.buttonContainer}><Button title="+" onPress={handleSubmit} /></View>
     </View>
   );

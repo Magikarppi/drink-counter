@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
+import RNDateTimeSelector from "react-native-date-time-scroll-picker";
+
 import { colors } from '../themes';
 
 const styles = StyleSheet.create({

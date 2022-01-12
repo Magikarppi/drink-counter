@@ -11,6 +11,11 @@ export interface DrinkType {
   timeConsumed: Date;
 }
 
+export interface DrinkProps {
+  drink: DrinkType
+  addToFavorites: (drink: DrinkType) => void;
+}
+
 export type DrinkList = DrinkType[] | undefined;
 
 export interface DrinksProps {

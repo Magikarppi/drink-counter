@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { colors } from './themes';
-import { DrinkType } from './types';
+import { DrinkProps, DrinkType } from './types';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,10 +29,7 @@ const styles = StyleSheet.create({
   }
 });
 
-interface DrinkProps {
-  drink: DrinkType
-  addToFavorites: (drink: DrinkType) => void;
-}
+// turn favorite star to yellow "star" once user clicks it?
 
 const Drink = ({ drink, addToFavorites }: DrinkProps) => {
   return (
@@ -48,7 +45,7 @@ const Drink = ({ drink, addToFavorites }: DrinkProps) => {
       </View>
       <TouchableOpacity onPress={() => addToFavorites(drink)}>
         <View style={styles.property}>
-          <Ionicons name='star' size={40}  />
+          <Ionicons name='star-outline' size={40}  />
         </View>
       </TouchableOpacity>
     </View>
