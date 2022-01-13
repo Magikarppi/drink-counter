@@ -41,16 +41,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '20%',
-    width: '90%',
+    height: '25%',
+    width: '100%',
     marginVertical: 10,
     borderBottomColor: colors.violet,
     borderBottomWidth: 2
   },
-  text: {
-    fontSize: 18,
-    color: colors.white
-  }
 });
 
 // const Section: React.FC<{
@@ -106,10 +102,9 @@ const App = () => {
         <View style={styles.container}>
           <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
             <View style={styles.section}>
-              <Text style={styles.text}>Lisää drinkki</Text>
               <AddDrink addDrink={handleAddDrink} />
             </View>
-            <View style={{...styles.section, height: 40}}>
+            <View style={{...styles.section, height: 30}}>
               <Goals drinkList={drinklist} />
             </View>
             <View style={styles.section}>
