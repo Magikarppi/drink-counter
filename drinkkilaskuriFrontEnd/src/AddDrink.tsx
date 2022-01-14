@@ -11,19 +11,34 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
+    height: '100%'
   },
   sectionContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
+    height: '50%',
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: 'black'
   },
   inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '20%',
+    height: '100%',
+    borderWidth: 2,
+    borderColor: 'black'
+    // padding: 20,
+    // marginHorizontal: 20,
+  },
+  inputBox: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    marginHorizontal: 20,
+    // width: '20%'
   },
   buttonContainer: {
     flexDirection: 'column',
@@ -53,7 +68,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const AddDrink = ({ addDrink }: AddDrinkProps) => {
+const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
 
@@ -73,35 +88,38 @@ const AddDrink = ({ addDrink }: AddDrinkProps) => {
     <View style={styles.container}>
         <Text style={styles.titleText}>Lisää drinkki</Text>
       <View style={styles.sectionContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>%</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setAlcPercent}
-            value={alcPercent}
-            placeholder="4.7"
-            keyboardType="decimal-pad"
-            placeholderTextColor={'grey'}
-            textAlign="center"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputText}>cl</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setAmount}
-            value={amount}
-            placeholder="0.33"
-            keyboardType="decimal-pad"
-            textAlign="center"
-            placeholderTextColor={'grey'}
-          />
-        </View>
-        <TouchableOpacity onPress={() => (console.log('open favorites'))}>
-          <View style={{...styles.inputContainer, width: 55}}>
-            <MaterialCommunityIcons name="folder-star-outline" size={50} />
+        <View style={{...styles.inputContainer, backgroundColor: 'blue'}} />
+        <View style={{...styles.inputContainer, width: '60%', backgroundColor: 'orange'}}>
+          <View style={styles.inputBox}>
+            <Text style={styles.inputText}>%</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setAlcPercent}
+              value={alcPercent}
+              placeholder="4.7"
+              keyboardType="decimal-pad"
+              placeholderTextColor={'grey'}
+              textAlign="center"
+            />
           </View>
+          <View style={styles.inputBox}>
+            <Text style={styles.inputText}>cl</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setAmount}
+              value={amount}
+              placeholder="0.33"
+              keyboardType="decimal-pad"
+              textAlign="center"
+              placeholderTextColor={'grey'}
+            />
+          </View>
+        </View>
+          <View style={{...styles.inputContainer, alignItems: 'center', backgroundColor: 'grey', width: '20%'}}>
+        <TouchableOpacity onPress={openFavorites}>
+            <MaterialCommunityIcons name="folder-star-outline" size={50} />
         </TouchableOpacity>
+          </View>
       </View>
         <View style={styles.buttonContainer}><Button title="Lisää" onPress={handleSubmit} /></View>
     </View>

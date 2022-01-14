@@ -2,6 +2,7 @@ export type RType = 0.68 | 0.55;
 
 export interface AddDrinkProps {
   addDrink: (drink: DrinkType) => void;
+  openFavorites: () => void;
 }
 
 export interface DrinkType {
@@ -30,4 +31,9 @@ export interface SettingsModalProps {
   showModal: boolean;
   closeModal: () => void;
   saveSettings: () => void;
+};
+
+export interface FavoritesModalProps {
+  showModal: boolean;
+  closeModal: () => void;
 };

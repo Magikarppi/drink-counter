@@ -22,6 +22,7 @@ import {
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AddDrink from './src/AddDrink';
 import Drinks from './src/Drinks';
+import FavoritesModal from './src/FavoritesModal';
 import Goals from './src/Goals';
 import HeaderMain from './src/HeaderMain';
 import SettingsModal from './src/Settings/SettingsModal';
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
   const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [showFavorites, setShowFavorites] = useState<boolean>(false);
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -74,7 +76,7 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const handleAddDrink = (drink: DrinkType) => {
+  const addDrink = (drink: DrinkType) => {
     if (drinklist) {
       const newDrinkList = [...drinklist, drink];
       return setDrinkList(newDrinkList);
@@ -91,6 +93,14 @@ const App = () => {
     setShowSettings(false);
   }
 
+  const openFavorites = () => {
+    setShowFavorites(true);
+  }
+
+  const closeFavorites = () => {
+    setShowFavorites(false);
+  }
+
   const saveSettings = () => {
     console.log('save settings')
   }
@@ -101,8 +111,9 @@ const App = () => {
       <HeaderMain openModal={openSettings}  />
         <View style={styles.container}>
           <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
+          <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} />
             <View style={styles.section}>
-              <AddDrink addDrink={handleAddDrink} />
+              <AddDrink addDrink={addDrink} openFavorites={openFavorites}/>
             </View>
             <View style={{...styles.section, height: 30}}>
               <Goals drinkList={drinklist} />
