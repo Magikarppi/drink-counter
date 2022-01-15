@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { colors } from './themes';
 import { FavoritesProps } from './types';
 
@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
+    height: 30,
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: colors.violet
     // backgroundColor: 'dark-grey'
   },
   tableTitlesWrapper: {
@@ -41,7 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Favorites = ({favoriteDrinks}: FavoritesProps) => {
+const Favorites = ({ favoriteDrinks, addDrink }: FavoritesProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.tableTitlesWrapper}>
@@ -49,26 +53,28 @@ const Favorites = ({favoriteDrinks}: FavoritesProps) => {
         <Text style={styles.tableTitleText}>%</Text>
         <Text style={styles.tableTitleText}>Määrä</Text>
       </View>
-        <ScrollView>
+      <ScrollView>
         {favoriteDrinks.map((drink) => {
           return (
-            <View key={Math.random()} style={styles.drinkWrapper}>
-              <View style={styles.section}>
-                <Text style={styles.text}>
-                  {drink.name}
-                </Text>
+            <TouchableOpacity key={Math.random()} onPress={() => addDrink(drink)}>
+              <View style={styles.drinkWrapper}>
+                <View style={styles.section}>
+                  <Text style={styles.text}>
+                    {drink.name}
+                  </Text>
+                </View>
+                <View style={styles.section}>
+                  <Text style={styles.text}>
+                    {drink.alcPercent}
+                  </Text>
+                </View>
+                <View>
+                  <Text style={styles.text}>
+                    {drink.amount}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.section}>
-                <Text style={styles.text}>
-                  {drink.alcPercent}
-                </Text>
-              </View>
-              <View>
-                <Text style={styles.text}>
-                  {drink.amount}
-                </Text>
-            </View>
-        </View>
+            </TouchableOpacity>
           )
         })}
       </ScrollView>

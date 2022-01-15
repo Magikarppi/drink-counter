@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
     borderColor: colors.beige,
     borderWidth: 1,
     borderRadius: 5,
-    padding: 5
+    padding: 5,
+    overflow: 'hidden'
+
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
 
 const drinkList = new Array(10).fill({name: "IPA", alc: 4.7, amount: 0.33});
 
-const FavoritesModal = ({closeModal, showModal}: FavoritesModalProps) => {
+const FavoritesModal = ({closeModal, showModal, addDrink}: FavoritesModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -50,7 +52,7 @@ const FavoritesModal = ({closeModal, showModal}: FavoritesModalProps) => {
               <CloseButton closeModal={closeModal} />
             </View>
           </View>
-          <Favorites favoriteDrinks={drinkList} />
+          <Favorites favoriteDrinks={drinkList} addDrink={addDrink}/>
         </View>
       </View>
     </Modal>

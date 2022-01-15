@@ -19,18 +19,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '50%',
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: 'black'
   },
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: '20%',
+    width: '15%',
     height: '100%',
-    borderWidth: 2,
-    borderColor: 'black'
     // padding: 20,
     // marginHorizontal: 20,
   },
@@ -88,8 +83,8 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
     <View style={styles.container}>
         <Text style={styles.titleText}>Lisää drinkki</Text>
       <View style={styles.sectionContainer}>
-        <View style={{...styles.inputContainer, backgroundColor: 'blue'}} />
-        <View style={{...styles.inputContainer, width: '60%', backgroundColor: 'orange'}}>
+        <View style={{...styles.inputContainer}} />
+        <View style={{...styles.inputContainer, width: '70%'}}>
           <View style={styles.inputBox}>
             <Text style={styles.inputText}>%</Text>
             <TextInput
@@ -115,7 +110,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
             />
           </View>
         </View>
-          <View style={{...styles.inputContainer, alignItems: 'center', backgroundColor: 'grey', width: '20%'}}>
+          <View style={{...styles.inputContainer, alignItems: 'center'}}>
         <TouchableOpacity onPress={openFavorites}>
             <MaterialCommunityIcons name="folder-star-outline" size={50} />
         </TouchableOpacity>

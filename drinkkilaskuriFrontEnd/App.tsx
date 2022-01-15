@@ -111,11 +111,11 @@ const App = () => {
       <HeaderMain openModal={openSettings}  />
         <View style={styles.container}>
           <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
-          <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} />
+          <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} />
             <View style={styles.section}>
               <AddDrink addDrink={addDrink} openFavorites={openFavorites}/>
             </View>
-            <View style={{...styles.section, height: '20%'}}>
+            <View style={{...styles.section, height: 20}}>
               <Goals drinkList={drinklist} />
             </View>
             <View style={styles.section}>
