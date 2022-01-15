@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import CustomButton from './Buttons/CloseButton';
+
 import SettingsButton from './Buttons/SettingsButton';
 import { colors } from './themes';
 
@@ -15,9 +15,7 @@ const styles = StyleSheet.create({
     height: '12%',
     borderBottomColor: 'dark-grey',
     borderBottomWidth: 2,
-    borderStyle: 'solid',
-    borderRadius: 2
-    
+    borderStyle: 'solid',    
   },
   titleContainer: {
     width: '60%',

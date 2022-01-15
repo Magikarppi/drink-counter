@@ -112,11 +112,11 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
         </View>
           <View style={{...styles.inputContainer, alignItems: 'center'}}>
         <TouchableOpacity onPress={openFavorites}>
-            <MaterialCommunityIcons name="folder-star-outline" size={50} />
+            <MaterialCommunityIcons name="folder-star-outline" size={50} color={colors.beige} />
         </TouchableOpacity>
           </View>
       </View>
-        <View style={styles.buttonContainer}><Button title="Lisää" onPress={handleSubmit} /></View>
+        <View style={styles.buttonContainer}><Button title="Lisää" onPress={handleSubmit} color={colors.violet} /></View>
     </View>
   );
 };
