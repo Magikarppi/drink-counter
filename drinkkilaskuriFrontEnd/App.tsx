@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '25%',
+    height: '40%',
     width: '100%',
     marginVertical: 10,
     borderBottomColor: colors.violet,
@@ -115,7 +115,7 @@ const App = () => {
             <View style={styles.section}>
               <AddDrink addDrink={addDrink} openFavorites={openFavorites}/>
             </View>
-            <View style={{...styles.section, height: 30}}>
+            <View style={{...styles.section, height: '20%'}}>
               <Goals drinkList={drinklist} />
             </View>
             <View style={styles.section}>

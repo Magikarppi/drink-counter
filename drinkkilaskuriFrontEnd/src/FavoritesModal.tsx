@@ -25,17 +25,19 @@ const styles = StyleSheet.create({
     borderColor: colors.beige,
     borderWidth: 1,
     borderRadius: 5,
-    padding: 20
+    padding: 5
   },
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   buttonElement: {
     width: '33%'
   }
 });
+
+const drinkList = new Array(10).fill({name: "IPA", alc: 4.7, amount: 0.33});
 
 const FavoritesModal = ({closeModal, showModal}: FavoritesModalProps) => {
   return (
@@ -48,7 +50,7 @@ const FavoritesModal = ({closeModal, showModal}: FavoritesModalProps) => {
               <CloseButton closeModal={closeModal} />
             </View>
           </View>
-          <Favorites />
+          <Favorites favoriteDrinks={drinkList} />
         </View>
       </View>
     </Modal>
