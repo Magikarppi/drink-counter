@@ -37,3 +37,7 @@ export interface FavoritesModalProps {
   showModal: boolean;
   closeModal: () => void;
 };
+
+export interface FavoritesProps {
+  favoriteDrinks: DrinkType[]
+}
