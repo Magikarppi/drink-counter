@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     color: 'black',
     shadowColor: 'grey',
     textShadowColor: 'grey',
-    textShadowOffset: {width: 1, height: 1},
+    textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2
   },
   titleText: {
@@ -70,13 +70,16 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
 
   const handleSubmit = () => {
     if (alcPercent && amount) {
-      const drink: DrinkType = {
-        alcPercent: parseFloat(alcPercent.replace(',', '.')),
-        amount: parseFloat(amount.replace(',', '.')),
-        timeConsumed: new Date(),
-        id: randomId()
-      };
-      addDrink(drink);
+      const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
+      const amountTrimmed = parseFloat(amount.replace(',', '.'));
+      addDrink(alcPercentTrimmed, amountTrimmed)
+      // const drink: DrinkType = {
+      //   alcPercent: parseFloat(alcPercent.replace(',', '.')),
+      //   amount: parseFloat(amount.replace(',', '.')),
+      //   timeConsumed: new Date(),
+      //   id: randomId()
+      // };
+      // addDrink(drink);
     }
     return;
   };
@@ -85,10 +88,10 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.titleText}>Lisää drinkki</Text>
+      <Text style={styles.titleText}>Lisää drinkki</Text>
       <View style={styles.sectionContainer}>
-        <View style={{...styles.inputContainer}} />
-        <View style={{...styles.inputContainer, width: '70%'}}>
+        <View style={{ ...styles.inputContainer }} />
+        <View style={{ ...styles.inputContainer, width: '70%' }}>
           <View style={styles.inputBox}>
             <Text style={styles.inputText}>%</Text>
             <TextInput
@@ -114,13 +117,13 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
             />
           </View>
         </View>
-          <View style={{...styles.inputContainer, alignItems: 'center'}}>
-        <TouchableOpacity onPress={openFavorites}>
+        <View style={{ ...styles.inputContainer, alignItems: 'center' }}>
+          <TouchableOpacity onPress={openFavorites}>
             <MaterialCommunityIcons name="folder-star-outline" size={50} color={colors.beige} />
-        </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
+        </View>
       </View>
-        <View style={styles.buttonContainer}><Button title="Lisää" onPress={handleSubmit} color={colors.violet} /></View>
+      <View style={styles.buttonContainer}><Button title="Lisää" onPress={handleSubmit} color={colors.violet} /></View>
     </View>
   );
 };

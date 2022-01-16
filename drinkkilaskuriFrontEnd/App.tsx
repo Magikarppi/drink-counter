@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 //   );
 // };
 
-const drinkList: FavDrinkType[] = new Array(10).fill({id: randomId(),name: "IPA", alcPercent: 4.7, amount: 0.33});
+const drinkList: FavDrinkType[] = new Array(10).fill({ id: randomId(), name: "IPA", alcPercent: 4.7, amount: 0.33 });
 
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
@@ -72,22 +72,32 @@ const App = () => {
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
-//   useEffect(() => {
-//     setDarkMode(colorScheme === "dark");
-// }, [colorScheme]);
+  console.log('favorites:', favorites)
+
+  //   useEffect(() => {
+  //     setDarkMode(colorScheme === "dark");
+  // }, [colorScheme]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const addDrink = (drink: DrinkType) => {
+  const addDrink = (alcPercent: number, amount: number, name?: string) => {
+    const newDrink: DrinkType = {
+      amount,
+      alcPercent,
+      timeConsumed: new Date(),
+      id: randomId()
+    };
+
     if (drinklist) {
-      const newDrinkList = [...drinklist, drink];
+      const newDrinkList = [...drinklist, newDrink];
       setDrinkList(newDrinkList);
       setShowFavorites(false);
-      return
+      return;
     } else {
-      return setDrinkList([drink]);
+      setDrinkList([newDrink]);
+      return;
     }
   };
 
@@ -107,6 +117,13 @@ const App = () => {
     setShowFavorites(false);
   }
 
+  const addToFavorites = (drink: DrinkType) => {
+    const drinkCopy: FavDrinkType = { ...drink };
+    delete drinkCopy.timeConsumed;
+    const newFavoritesList = [...favorites, drink];
+    setFavorites(newFavoritesList);
+  }
+
   const removeFavorite = (drink: FavDrinkType) => {
     const favoritesCopy = [...favorites];
     const newFavorites = favoritesCopy.filter((f) => f.id !== drink.id);
@@ -120,21 +137,21 @@ const App = () => {
 
   return (
     <View style={backgroundStyle}>
-        {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
-      <HeaderMain openModal={openSettings}  />
-        <View style={styles.container}>
-          <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
-          <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} removeFavorite={removeFavorite} />
-            <View style={styles.section}>
-              <AddDrink addDrink={addDrink} openFavorites={openFavorites}/>
-            </View>
-            <View style={{...styles.section, height: 20}}>
-              <Goals drinkList={drinklist} />
-            </View>
-            <View style={styles.section}>
-              <Drinks drinkList={drinklist} />
-            </View>
+      {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
+      <HeaderMain openModal={openSettings} />
+      <View style={styles.container}>
+        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
+        <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} removeFavorite={removeFavorite} />
+        <View style={styles.section}>
+          <AddDrink addDrink={addDrink} openFavorites={openFavorites} />
         </View>
+        <View style={{ ...styles.section, height: 20 }}>
+          <Goals drinkList={drinklist} />
+        </View>
+        <View style={{ ...styles.section }}>
+          <Drinks drinkList={drinklist} addToFavorites={addToFavorites} />
+        </View>
+      </View>
     </View>
   );
 };

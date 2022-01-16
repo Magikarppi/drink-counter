@@ -67,7 +67,7 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
         {favorites.map((drink) => {
           return (
             <View style={styles.drinkWrapper}>
-              <TouchableOpacity key={Math.random()} onPress={() => addDrink(drink)}>
+              <TouchableOpacity key={Math.random()} onPress={() => addDrink(drink.alcPercent, drink.amount, drink.name)}>
                 <View style={styles.drinkContentWrapper}>
                   <View style={styles.section}>
                     <Text style={styles.text}>

@@ -1,6 +1,6 @@
 export type RType = 0.68 | 0.55;
 
-type AddDrinkFunc = (drink: DrinkType) => void;
+export type AddDrinkFunc = (alcPercent: number, amount: number, name?: string) => void;
 
 export interface AddDrinkProps {
   addDrink: AddDrinkFunc;
@@ -15,10 +15,13 @@ export interface DrinkType {
   id: number;
 }
 
-export interface FavDrinkType extends DrinkType {
-  timeConsumer?: Date;
+export interface FavDrinkType {
+  name?: string;
+  alcPercent: number;
+  amount: number;
+  id: number;
+  timeConsumed?: Date;
 }
-
 export interface DrinkProps {
   drink: DrinkType
   addToFavorites: (drink: DrinkType) => void;
@@ -28,6 +31,7 @@ export type DrinkList = DrinkType[] | undefined;
 
 export interface DrinksProps {
   drinkList: DrinkList;
+  addToFavorites: (drink: DrinkType) => void;
 }
 
 export interface GoalsProps {

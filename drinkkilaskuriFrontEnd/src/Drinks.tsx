@@ -5,7 +5,7 @@ import { DrinksProps, DrinkType } from './types';
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1
   },
   item: {
     justifyContent: 'center',
@@ -21,23 +21,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const Drinks = ({ drinkList }: DrinksProps) => {
+const Drinks = ({ drinkList, addToFavorites }: DrinksProps) => {
   if (!drinkList || drinkList.length < 1) {
     return null;
   }
-  const addToFavorites = (drink: DrinkType) => {
-    console.log('add Favorite, ' ,drink.alcPercent)
-  }
+
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <ScrollView>
+      <View style={styles.container}>
         {drinkList.map((drink, i) => {
           return (
             <Drink key={i} drink={drink} addToFavorites={addToFavorites} />
           );
         })}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
