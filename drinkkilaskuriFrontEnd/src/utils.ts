@@ -15,3 +15,8 @@ export const calculateBAC = (drink: DrinkType, r: RType) => {
 
   console.log('eBAC', eBAC);
 };
+
+export const randomId = () => {
+  const r = Math.floor(Math.random() * 100000);
+  return r
+}

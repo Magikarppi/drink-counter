@@ -12,6 +12,7 @@ export interface DrinkType {
   alcPercent: number;
   amount: number;
   timeConsumed: Date;
+  id: number;
 }
 
 export interface FavDrinkType extends DrinkType {
@@ -44,10 +45,11 @@ export interface FavoritesModalProps {
   closeModal: () => void;
   addDrink: AddDrinkFunc;
   favorites: FavDrinkType[];
+  removeFavorite: (drink: FavDrinkType) => void;
 };
 
 export interface FavoritesProps {
-  favoriteDrinks: DrinkType[];
   addDrink: AddDrinkFunc;
   favorites: FavDrinkType[];
+  removeFavorite: (drink: FavDrinkType) => void;
 }

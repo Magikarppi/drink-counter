@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { colors } from './themes';
 import { AddDrinkProps, DrinkType } from './types';
+import { randomId } from './utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -73,6 +74,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
         alcPercent: parseFloat(alcPercent.replace(',', '.')),
         amount: parseFloat(amount.replace(',', '.')),
         timeConsumed: new Date(),
+        id: randomId()
       };
       addDrink(drink);
     }
