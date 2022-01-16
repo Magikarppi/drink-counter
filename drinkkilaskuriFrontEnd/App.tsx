@@ -27,7 +27,7 @@ import Goals from './src/Goals';
 import HeaderMain from './src/HeaderMain';
 import SettingsModal from './src/Settings/SettingsModal';
 import { colors } from './src/themes';
-import { DrinkType } from './src/types';
+import { DrinkType, FavDrinkType } from './src/types';
 
 const styles = StyleSheet.create({
   container: {
@@ -61,8 +61,11 @@ const styles = StyleSheet.create({
 //   );
 // };
 
+const drinkList: FavDrinkType[] = new Array(10).fill({name: "IPA", alcPercent: 4.7, amount: 0.33});
+
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
+  const [favorites, setFavorites] = useState<FavDrinkType[]>(drinkList);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
   // const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -113,7 +116,7 @@ const App = () => {
       <HeaderMain openModal={openSettings}  />
         <View style={styles.container}>
           <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
-          <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} />
+          <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} />
             <View style={styles.section}>
               <AddDrink addDrink={addDrink} openFavorites={openFavorites}/>
             </View>

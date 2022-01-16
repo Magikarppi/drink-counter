@@ -43,9 +43,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const drinkList = new Array(10).fill({name: "IPA", alc: 4.7, amount: 0.33});
-
-const FavoritesModal = ({closeModal, showModal, addDrink}: FavoritesModalProps) => {
+const FavoritesModal = ({closeModal, showModal, addDrink, favorites}: FavoritesModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -56,7 +54,7 @@ const FavoritesModal = ({closeModal, showModal, addDrink}: FavoritesModalProps) 
               <CloseButton closeModal={closeModal} />
             </View>
           </View>
-          <Favorites favoriteDrinks={drinkList} addDrink={addDrink}/>
+          <Favorites favorites={favorites} addDrink={addDrink}/>
         </View>
       </View>
     </Modal>

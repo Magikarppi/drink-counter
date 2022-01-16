@@ -14,6 +14,10 @@ export interface DrinkType {
   timeConsumed: Date;
 }
 
+export interface FavDrinkType extends DrinkType {
+  timeConsumer?: Date;
+}
+
 export interface DrinkProps {
   drink: DrinkType
   addToFavorites: (drink: DrinkType) => void;
@@ -39,9 +43,11 @@ export interface FavoritesModalProps {
   showModal: boolean;
   closeModal: () => void;
   addDrink: AddDrinkFunc;
+  favorites: FavDrinkType[];
 };
 
 export interface FavoritesProps {
   favoriteDrinks: DrinkType[];
   addDrink: AddDrinkFunc;
+  favorites: FavDrinkType[];
 }
