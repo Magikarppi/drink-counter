@@ -11,17 +11,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    height: 50
+    height: 50,
+    borderTopWidth: 1,
+    borderTopColor: colors.violet,
   },
   property: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '25%',
-    borderWidth: 1,
-    borderColor: colors.violet,
-    borderBottomColor: colors.backgroundDark,
-    borderTopColor: colors.backgroundDark
+    width: 50,
+
   },
   text: {
     fontSize: 15,
@@ -38,14 +37,14 @@ const Drink = ({ drink, addToFavorites }: DrinkProps) => {
         <Text style={styles.text}>{drink.name}</Text>
       </View>
       <View style={styles.property}>
-        <Text style={styles.text}>{drink.alcPercent}</Text>
+        <Text style={styles.text}>{`${drink.alcPercent}%`}</Text>
       </View>
       <View style={styles.property}>
-        <Text style={styles.text}>{drink.amount}</Text>
+        <Text style={styles.text}>{`${drink.amount}dl`}</Text>
       </View>
       <TouchableOpacity onPress={() => addToFavorites(drink)}>
         <View style={styles.property}>
-          <Ionicons name='star-outline' size={40}  />
+          <Ionicons name='star-outline' size={30} color={colors.beige} />
         </View>
       </TouchableOpacity>
     </View>

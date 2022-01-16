@@ -5,7 +5,7 @@ import { DrinksProps, DrinkType } from './types';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    // flexGrow: 1
   },
   item: {
     justifyContent: 'center',
