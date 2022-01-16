@@ -79,6 +79,8 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
     return;
   };
 
+  // change , to . input
+
   return (
     <View style={styles.container}>
         <Text style={styles.titleText}>Lisää drinkki</Text>

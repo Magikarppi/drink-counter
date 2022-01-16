@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-    // backgroundColor: 'black'
+    backgroundColor: 'black'
   },
   drinkWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: '100%',
-    height: 30,
+    width: '80%',
+    height: 45,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: colors.violet

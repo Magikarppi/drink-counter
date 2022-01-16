@@ -79,7 +79,9 @@ const App = () => {
   const addDrink = (drink: DrinkType) => {
     if (drinklist) {
       const newDrinkList = [...drinklist, drink];
-      return setDrinkList(newDrinkList);
+      setDrinkList(newDrinkList);
+      setShowFavorites(false);
+      return
     } else {
       return setDrinkList([drink]);
     }

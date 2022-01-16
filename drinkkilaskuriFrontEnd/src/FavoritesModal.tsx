@@ -15,12 +15,14 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.backgroundDark,
     // height: '100%',
   },
-  y: {
-    height: '10%'
+  filler: {
+    height: '10%',
   },
-  x: {
+  elementsContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
     width: '90%',
-    height: '50%',
+    height: '60%',
     backgroundColor: colors.backgroundDark,
     borderColor: colors.beige,
     borderWidth: 1,
@@ -32,7 +34,9 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
+    height: 50
   },
   buttonElement: {
     width: '33%'
@@ -45,8 +49,8 @@ const FavoritesModal = ({closeModal, showModal, addDrink}: FavoritesModalProps) 
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
-        <View style={styles.y} />
-        <View style={styles.x}>
+        <View style={styles.filler} />
+        <View style={styles.elementsContainer}>
           <View style={styles.buttonsContainer}>
             <View style={styles.buttonElement}>
               <CloseButton closeModal={closeModal} />
