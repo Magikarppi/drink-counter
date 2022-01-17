@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
 });
 
 const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
+  if (!favorites) return null;
+
   return (
     <View style={styles.container}>
       <View style={styles.tableTitlesWrapper}>
@@ -63,11 +65,11 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
         <Text style={styles.tableTitleText}>%</Text>
         <Text style={styles.tableTitleText}>Määrä</Text>
       </View>
-      <ScrollView>
+      <ScrollView decelerationRate='fast' contentContainerStyle={{ flexGrow: 1 }}>
         {favorites.map((drink) => {
           return (
-            <View style={styles.drinkWrapper}>
-              <TouchableOpacity key={Math.random()} onPress={() => addDrink(drink.alcPercent, drink.amount, drink.name)}>
+            <View style={styles.drinkWrapper} key={Math.random()}>
+              <TouchableOpacity onPress={() => addDrink(drink.alcPercent, drink.amount, drink.name)}>
                 <View style={styles.drinkContentWrapper}>
                   <View style={styles.section}>
                     <Text style={styles.text}>

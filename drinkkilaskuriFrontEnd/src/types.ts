@@ -48,12 +48,12 @@ export interface FavoritesModalProps {
   showModal: boolean;
   closeModal: () => void;
   addDrink: AddDrinkFunc;
-  favorites: FavDrinkType[];
+  favorites: FavDrinkType[] | null;
   removeFavorite: (drink: FavDrinkType) => void;
 };
 
 export interface FavoritesProps {
   addDrink: AddDrinkFunc;
-  favorites: FavDrinkType[];
+  favorites: FavDrinkType[] | null;
   removeFavorite: (drink: FavDrinkType) => void;
 }

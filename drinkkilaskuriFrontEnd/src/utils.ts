@@ -1,4 +1,4 @@
-import { DrinkType, RType } from './types';
+import { DrinkType, FavDrinkType, RType } from './types';
 
 export const calculateBAC = (drink: DrinkType, r: RType) => {
   const { alcPercent, amount } = drink;
@@ -20,3 +20,5 @@ export const randomId = () => {
   const r = Math.floor(Math.random() * 100000);
   return r
 }
+
+export const favDrinksDummy: FavDrinkType[] = new Array(10).fill({ id: randomId(), name: "IPA", alcPercent: 4.7, amount: 0.33 });

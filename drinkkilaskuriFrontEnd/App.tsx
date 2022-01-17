@@ -62,13 +62,12 @@ const styles = StyleSheet.create({
 //   );
 // };
 
-const drinkList: FavDrinkType[] = new Array(10).fill({ id: randomId(), name: "IPA", alcPercent: 4.7, amount: 0.33 });
-
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
-  const [favorites, setFavorites] = useState<FavDrinkType[]>(drinkList);
+  const [favorites, setFavorites] = useState<FavDrinkType[] | null>(null);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>()
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -110,7 +109,11 @@ const App = () => {
   }
 
   const openFavorites = () => {
-    setShowFavorites(true);
+    if (favorites) {
+      setShowFavorites(true);
+    } else {
+      setMessage('Paina tähteä lisätäksesi suosikin')
+    }
   }
 
   const closeFavorites = () => {
@@ -120,13 +123,19 @@ const App = () => {
   const addToFavorites = (drink: DrinkType) => {
     const drinkCopy: FavDrinkType = { ...drink };
     delete drinkCopy.timeConsumed;
-    const newFavoritesList = [...favorites, drink];
-    setFavorites(newFavoritesList);
+    if (favorites) {
+      const newFavoritesList = [...favorites, drink];
+      setFavorites(newFavoritesList);
+    } else {
+      setFavorites([drink]);
+    }
   }
 
   const removeFavorite = (drink: FavDrinkType) => {
+    if (!favorites) return;
     const favoritesCopy = [...favorites];
     const newFavorites = favoritesCopy.filter((f) => f.id !== drink.id);
+    console.log('n', newFavorites);
     setFavorites(newFavorites);
     return;
   }
@@ -148,7 +157,7 @@ const App = () => {
         <View style={{ ...styles.section, height: 20 }}>
           <Goals drinkList={drinklist} />
         </View>
-        <View style={{ ...styles.section }}>
+        <View style={{ ...styles.section, height: 200 }}>
           <Drinks drinkList={drinklist} addToFavorites={addToFavorites} />
         </View>
       </View>
