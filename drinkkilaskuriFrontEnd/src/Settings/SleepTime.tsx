@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
-import RNDateTimeSelector from "react-native-date-time-scroll-picker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { colors } from '../themes';
 
@@ -39,17 +39,12 @@ const SleepTime = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.inputContainer}>
+      <View style={styles.inputContainer}>
         <Text style={styles.inputText}>Mihin aikaan olet mennyt viime aikoina nukkumaan?</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setSleepTime}
-          value={sleepTime}
-          placeholder=""
-          keyboardType="number-pad"
-        />
+        <DateTimePicker value={new Date()} onChange={(event, date) => setSleepTime(event)} mode="time" minuteInterval={30} />
+
       </View>
-  </View>
+    </View>
   )
 };
 
