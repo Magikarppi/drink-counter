@@ -67,6 +67,7 @@ const App = () => {
   const [favorites, setFavorites] = useState<FavDrinkType[] | null>(null);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
+  const [sleepTime, setSleepTime] = useState<string>();
   const [message, setMessage] = useState<string>()
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
@@ -144,12 +145,18 @@ const App = () => {
     console.log('save settings')
   }
 
+  const changeSleepTime = (time: string) => {
+    if (time) {
+      return setSleepTime(time)
+    }
+  }
+
   return (
     <View style={backgroundStyle}>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>
-        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} />
+        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} changeSleepTime={changeSleepTime} />
         <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} removeFavorite={removeFavorite} />
         <View style={styles.section}>
           <AddDrink addDrink={addDrink} openFavorites={openFavorites} />

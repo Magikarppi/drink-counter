@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { colors } from '../themes';
+import { SleepTimeProps } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,16 +34,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const SleepTime = () => {
-  const [sleepTime, setSleepTime] = useState<string>();
-  // kirjasto jossa pyöritettävä kello?
+const SleepTime = ({ showClock, toggleTimePicker, changeSleepTime }: SleepTimeProps) => {
+
+  const handleTimeSet = (_event: any, date: any) => {
+    console.log('date', typeof (date));
+    changeSleepTime(date);
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.inputText}>Mihin aikaan olet mennyt viime aikoina nukkumaan?</Text>
-        <DateTimePicker value={new Date()} onChange={(event, date) => setSleepTime(event)} mode="time" minuteInterval={30} />
-
+        {
+          showClock && (
+            <View>
+              <DateTimePicker value={new Date()} onChange={handleTimeSet} mode="time" is24Hour={true} minuteInterval={30} />
+            </View>
+          )
+        }
       </View>
     </View>
   )

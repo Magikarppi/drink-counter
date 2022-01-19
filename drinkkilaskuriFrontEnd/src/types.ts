@@ -42,7 +42,12 @@ export interface SettingsModalProps {
   showModal: boolean;
   closeModal: () => void;
   saveSettings: () => void;
+  changeSleepTime: (time: string) => void;
 };
+
+export interface SettingsProps {
+  changeSleepTime: (time: string) => void;
+}
 
 export interface FavoritesModalProps {
   showModal: boolean;
@@ -56,4 +61,10 @@ export interface FavoritesProps {
   addDrink: AddDrinkFunc;
   favorites: FavDrinkType[] | null;
   removeFavorite: (drink: FavDrinkType) => void;
+}
+
+export interface SleepTimeProps {
+  toggleTimePicker: () => void;
+  showClock: boolean;
+  changeSleepTime: (time: string) => void;
 }
