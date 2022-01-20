@@ -25,6 +25,7 @@ import Drinks from './src/Drinks';
 import FavoritesModal from './src/FavoritesModal';
 import Goals from './src/Goals';
 import HeaderMain from './src/HeaderMain';
+import Message from './src/Message';
 import SettingsModal from './src/Settings/SettingsModal';
 import { colors } from './src/themes';
 import { DrinkType, FavDrinkType } from './src/types';
@@ -68,7 +69,7 @@ const App = () => {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date>(new Date());
-  const [message, setMessage] = useState<string>()
+  const [message, setMessage] = useState<string | null>(null)
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -113,13 +114,16 @@ const App = () => {
     if (favorites) {
       setShowFavorites(true);
     } else {
-      setMessage('Paina tähteä lisätäksesi suosikin')
+      setMessage('Paina tähteä lisätäksesi suosikin');
+      setTimeout(() => {
+        setMessage(null);
+      }, 2000);
     }
-  }
+  };
 
   const closeFavorites = () => {
     setShowFavorites(false);
-  }
+  };
 
   const addToFavorites = (drink: DrinkType) => {
     const drinkCopy: FavDrinkType = { ...drink };
@@ -130,7 +134,7 @@ const App = () => {
     } else {
       setFavorites([drink]);
     }
-  }
+  };
 
   const removeFavorite = (drink: FavDrinkType) => {
     if (!favorites) return;
@@ -139,17 +143,17 @@ const App = () => {
     console.log('n', newFavorites);
     setFavorites(newFavorites);
     return;
-  }
+  };
 
   const saveSettings = () => {
     console.log('save settings')
-  }
+  };
 
   const changeSleepTime = (time: Date) => {
     if (time) {
       return setSleepTime(time)
     }
-  }
+  };
 
   return (
     <View style={backgroundStyle}>
@@ -165,6 +169,7 @@ const App = () => {
           <Goals drinkList={drinklist} />
         </View>
         <View style={{ ...styles.section, height: 200 }}>
+          <Message message={message} />
           <Drinks drinkList={drinklist} addToFavorites={addToFavorites} />
         </View>
       </View>

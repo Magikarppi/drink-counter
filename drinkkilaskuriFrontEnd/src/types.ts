@@ -71,3 +71,7 @@ export interface SleepTimeProps {
   changeSleepTime: (time: Date) => void;
   sleepTime: Date;
 }
+
+export interface MessageProps {
+  message: string | null;
+}
