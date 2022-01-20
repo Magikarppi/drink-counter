@@ -42,27 +42,29 @@ const styles = StyleSheet.create({
 const SettingsModal = ({
   showModal,
   closeModal,
-  saveSettings
+  saveSettings,
+  sleepTime,
+  changeSleepTime
 }: SettingsModalProps) => {
-      return (
-        <Modal visible={showModal} animationType="slide" transparent={true}>
-          <View style={styles.modalContainer}>
-            <View style={styles.y} />
-            <View style={styles.x}>
-              <View style={styles.buttonsContainer}>
-                <View style={styles.buttonElement}>
-                  <CloseButton closeModal={closeModal} />
-                </View>
-                <View>
-                  <SaveButton saveSettings={saveSettings} />
-                </View>
-                <View style={styles.buttonElement} />
-              </View>
-              <Settings />
+  return (
+    <Modal visible={showModal} animationType="slide" transparent={true}>
+      <View style={styles.modalContainer}>
+        <View style={styles.y} />
+        <View style={styles.x}>
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonElement}>
+              <CloseButton closeModal={closeModal} />
             </View>
+            <View>
+              <SaveButton saveSettings={saveSettings} />
+            </View>
+            <View style={styles.buttonElement} />
           </View>
-        </Modal>
-      );
+          <Settings sleepTime={sleepTime} changeSleepTime={changeSleepTime} />
+        </View>
+      </View>
+    </Modal>
+  );
 
 };
 

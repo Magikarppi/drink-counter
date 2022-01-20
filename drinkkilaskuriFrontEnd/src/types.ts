@@ -42,11 +42,13 @@ export interface SettingsModalProps {
   showModal: boolean;
   closeModal: () => void;
   saveSettings: () => void;
-  changeSleepTime: (time: string) => void;
+  changeSleepTime: (time: Date) => void;
+  sleepTime: Date;
 };
 
 export interface SettingsProps {
-  changeSleepTime: (time: string) => void;
+  changeSleepTime: (time: Date) => void;
+  sleepTime: Date;
 }
 
 export interface FavoritesModalProps {
@@ -66,5 +68,6 @@ export interface FavoritesProps {
 export interface SleepTimeProps {
   toggleTimePicker: () => void;
   showClock: boolean;
-  changeSleepTime: (time: string) => void;
+  changeSleepTime: (time: Date) => void;
+  sleepTime: Date;
 }

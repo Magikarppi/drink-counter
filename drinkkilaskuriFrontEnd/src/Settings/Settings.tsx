@@ -14,11 +14,17 @@ const styles = StyleSheet.create({
   }
 });
 
-const Settings = ({ changeSleepTime }: SettingsProps) => {
+const Settings = ({ changeSleepTime, sleepTime }: SettingsProps) => {
   const [showClock, setShowClock] = useState<boolean>(false);
 
   const toggleTimePicker = () => {
-    setShowClock((prev) => !prev)
+    return setShowClock((prev) => !prev)
+  }
+
+  const sleepTimeChangePitStop = (time: Date) => {
+    changeSleepTime(time);
+    toggleTimePicker();
+    return;
   }
 
   return (
@@ -26,7 +32,7 @@ const Settings = ({ changeSleepTime }: SettingsProps) => {
       <View style={styles.container}>
         <MaxDrinkCount />
         <Reminder />
-        <SleepTime showClock={showClock} toggleTimePicker={toggleTimePicker} changeSleepTime={changeSleepTime} />
+        <SleepTime showClock={showClock} toggleTimePicker={toggleTimePicker} sleepTime={sleepTime} changeSleepTime={sleepTimeChangePitStop} />
         <BodySize />
         <View style={{ height: 50 }}>
           <Text>Haa</Text>

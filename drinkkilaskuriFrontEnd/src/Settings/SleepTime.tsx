@@ -34,11 +34,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const SleepTime = ({ showClock, toggleTimePicker, changeSleepTime }: SleepTimeProps) => {
+const SleepTime = ({ showClock, toggleTimePicker, changeSleepTime, sleepTime }: SleepTimeProps) => {
 
   const handleTimeSet = (_event: any, date: any) => {
     console.log('date', typeof (date));
-    changeSleepTime(date);
+    // changeSleepTime(date);
+    changeSleepTime(date)
   }
 
   return (
@@ -48,7 +49,7 @@ const SleepTime = ({ showClock, toggleTimePicker, changeSleepTime }: SleepTimePr
         {
           showClock && (
             <View>
-              <DateTimePicker value={new Date()} onChange={handleTimeSet} mode="time" is24Hour={true} minuteInterval={30} />
+              <DateTimePicker value={sleepTime} onChange={handleTimeSet} mode="time" is24Hour={true} minuteInterval={30} />
             </View>
           )
         }
