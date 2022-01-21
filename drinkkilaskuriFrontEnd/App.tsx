@@ -114,10 +114,14 @@ const App = () => {
     if (favorites) {
       setShowFavorites(true);
     } else {
-      setMessage('Paina tähteä lisätäksesi suosikin');
+      if (drinklist) {
+        setMessage('Paina tähteä lisätäksesi suosikin');
+      } else {
+        setMessage('Lisää drinkki ja paina tähteä lisätäksesi suosikin');
+      }
       setTimeout(() => {
         setMessage(null);
-      }, 2000);
+      }, 2400);
     }
   };
 
@@ -140,7 +144,6 @@ const App = () => {
     if (!favorites) return;
     const favoritesCopy = [...favorites];
     const newFavorites = favoritesCopy.filter((f) => f.id !== drink.id);
-    console.log('n', newFavorites);
     setFavorites(newFavorites);
     return;
   };

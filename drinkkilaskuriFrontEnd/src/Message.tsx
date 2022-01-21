@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: 50,
-    backgroundColor: 'pink'
+    height: 40,
+    backgroundColor: colors.beige
   },
   text: {
     fontSize: 15,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 });
 
 const Message = ({ message }: MessageProps) => {
-  if (!message) return null;
+  if (!message) return <View style={{ ...styles.container, backgroundColor: undefined }} />;
 
   return (
     <View style={styles.container}>
