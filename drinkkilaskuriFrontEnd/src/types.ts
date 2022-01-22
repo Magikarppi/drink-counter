@@ -46,6 +46,8 @@ export interface SettingsModalProps {
   sleepTime: Date;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
+  handleSetMaxDrinkCount: HandleSetMaxDrinkCount,
+  maxDrinkCount: MaxDrinkCount;
 };
 
 export interface SettingsProps {
@@ -53,6 +55,8 @@ export interface SettingsProps {
   sleepTime: Date;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
+  handleSetMaxDrinkCount: HandleSetMaxDrinkCount,
+  maxDrinkCount: MaxDrinkCount;
 }
 
 export interface FavoritesModalProps {
@@ -90,4 +94,11 @@ export type SelectRemindInterval = (intervall: RemindInterval) => void;
 export interface ReminderProps {
   selectRemindInterval: SelectRemindInterval
   selectedRemindInterval: RemindInterval;
+}
+
+export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
+export type MaxDrinkCount = string | undefined;
+export interface MaxDrinkCountProps {
+  maxDrinkCount: MaxDrinkCount;
+  handleSetMaxDrinkCount: HandleSetMaxDrinkCount
 }

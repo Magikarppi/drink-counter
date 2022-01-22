@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     justifyContent: "space-evenly",
+    alignItems: 'center'
   }
 });
 
-const Settings = ({ changeSleepTime, sleepTime, selectRemindInterval, selectedRemindInterval }: SettingsProps) => {
+const Settings = ({ changeSleepTime, sleepTime, selectRemindInterval, selectedRemindInterval, handleSetMaxDrinkCount, maxDrinkCount }: SettingsProps) => {
   const [showClock, setShowClock] = useState<boolean>(false);
 
   const toggleTimePicker = () => {
@@ -30,7 +31,7 @@ const Settings = ({ changeSleepTime, sleepTime, selectRemindInterval, selectedRe
   return (
     <ScrollView >
       <View style={styles.container}>
-        <MaxDrinkCount />
+        <MaxDrinkCount maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={handleSetMaxDrinkCount} />
         <Reminder selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
         <SleepTime showClock={showClock} toggleTimePicker={toggleTimePicker} sleepTime={sleepTime} changeSleepTime={sleepTimeChangePitStop} />
         <BodySize />

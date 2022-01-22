@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     borderColor: colors.beige,
     borderWidth: 2,
     margin: 5,
+    color: colors.white,
   },
   inputText: {
     fontSize: 18,

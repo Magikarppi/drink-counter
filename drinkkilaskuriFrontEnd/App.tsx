@@ -68,6 +68,7 @@ const App = () => {
   const [favorites, setFavorites] = useState<FavDrinkType[] | null>(null);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
+  const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
   const [sleepTime, setSleepTime] = useState<Date>(new Date());
   const [message, setMessage] = useState<string | null>(null)
   const [remindInterval, setRemindInterval] = useState<RemindInterval>('afterMax');
@@ -166,7 +167,7 @@ const App = () => {
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>
-        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={remindInterval} />
+        <SettingsModal maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={setMaxDrinkCount} showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={remindInterval} />
         <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} removeFavorite={removeFavorite} />
         <View style={styles.section}>
           <AddDrink addDrink={addDrink} openFavorites={openFavorites} />

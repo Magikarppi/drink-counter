@@ -8,7 +8,7 @@ import MainHeader from "../HeaderMain";
 import SaveButton from "../Buttons/SaveButton";
 
 const styles = StyleSheet.create({
-  modalContainer: {
+  screenContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -17,25 +17,28 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.backgroundDark,
     // height: '100%',
   },
-  y: {
+  ghostElement: {
     height: '10%'
   },
-  x: {
+  modalContainer: {
     width: '90%',
     height: '80%',
     backgroundColor: colors.backgroundDark,
     borderColor: colors.beige,
     borderWidth: 1,
     borderRadius: 5,
-    padding: 20
+    padding: 5,
   },
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
+    // justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
   },
   buttonElement: {
-    width: '33%'
+    // justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '33%',
   }
 });
 
@@ -46,23 +49,25 @@ const SettingsModal = ({
   sleepTime,
   changeSleepTime,
   selectRemindInterval,
-  selectedRemindInterval
+  selectedRemindInterval,
+  handleSetMaxDrinkCount,
+  maxDrinkCount
 }: SettingsModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
-      <View style={styles.modalContainer}>
-        <View style={styles.y} />
-        <View style={styles.x}>
+      <View style={styles.screenContainer}>
+        <View style={styles.ghostElement} />
+        <View style={styles.modalContainer}>
           <View style={styles.buttonsContainer}>
             <View style={styles.buttonElement}>
               <CloseButton closeModal={closeModal} />
             </View>
-            <View>
+            <View style={styles.buttonElement}>
               <SaveButton saveSettings={saveSettings} />
             </View>
             <View style={styles.buttonElement} />
           </View>
-          <Settings sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
+          <Settings maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={handleSetMaxDrinkCount} sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
         </View>
       </View>
     </Modal>
