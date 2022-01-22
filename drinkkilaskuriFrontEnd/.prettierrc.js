@@ -5,4 +5,6 @@ module.exports = {
   trailingComma: 'all',
   arrowParens: 'allow',
   endOfLine: 'auto',
+  tabs: true,
+  semicolons: true,
 };

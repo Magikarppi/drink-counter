@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Settings = ({ changeSleepTime, sleepTime }: SettingsProps) => {
+const Settings = ({ changeSleepTime, sleepTime, selectRemindInterval, selectedRemindInterval }: SettingsProps) => {
   const [showClock, setShowClock] = useState<boolean>(false);
 
   const toggleTimePicker = () => {
@@ -31,7 +31,7 @@ const Settings = ({ changeSleepTime, sleepTime }: SettingsProps) => {
     <ScrollView >
       <View style={styles.container}>
         <MaxDrinkCount />
-        <Reminder />
+        <Reminder selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
         <SleepTime showClock={showClock} toggleTimePicker={toggleTimePicker} sleepTime={sleepTime} changeSleepTime={sleepTimeChangePitStop} />
         <BodySize />
         <View style={{ height: 50 }}>

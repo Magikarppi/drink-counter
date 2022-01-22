@@ -44,11 +44,15 @@ export interface SettingsModalProps {
   saveSettings: () => void;
   changeSleepTime: (time: Date) => void;
   sleepTime: Date;
+  selectedRemindInterval: RemindInterval;
+  selectRemindInterval: SelectRemindInterval;
 };
 
 export interface SettingsProps {
   changeSleepTime: (time: Date) => void;
   sleepTime: Date;
+  selectRemindInterval: SelectRemindInterval;
+  selectedRemindInterval: RemindInterval;
 }
 
 export interface FavoritesModalProps {
@@ -74,4 +78,16 @@ export interface SleepTimeProps {
 
 export interface MessageProps {
   message: string | null;
+}
+
+export interface CheckBoxProps {
+  selected: boolean;
+  handlePress: () => void;
+}
+
+export type RemindInterval = 'afterEvery' | 'afterMax';
+export type SelectRemindInterval = (intervall: RemindInterval) => void;
+export interface ReminderProps {
+  selectRemindInterval: SelectRemindInterval
+  selectedRemindInterval: RemindInterval;
 }

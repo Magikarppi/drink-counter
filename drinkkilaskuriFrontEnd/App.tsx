@@ -28,7 +28,7 @@ import HeaderMain from './src/HeaderMain';
 import Message from './src/Message';
 import SettingsModal from './src/Settings/SettingsModal';
 import { colors } from './src/themes';
-import { DrinkType, FavDrinkType } from './src/types';
+import { DrinkType, FavDrinkType, RemindInterval } from './src/types';
 import { randomId } from './src/utils';
 
 const styles = StyleSheet.create({
@@ -70,10 +70,9 @@ const App = () => {
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date>(new Date());
   const [message, setMessage] = useState<string | null>(null)
+  const [remindInterval, setRemindInterval] = useState<RemindInterval>('afterMax');
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
-
-  console.log('favorites:', favorites)
 
   //   useEffect(() => {
   //     setDarkMode(colorScheme === "dark");
@@ -158,12 +157,16 @@ const App = () => {
     }
   };
 
+  const selectRemindInterval = (interval: RemindInterval) => {
+    setRemindInterval(interval);
+  };
+
   return (
     <View style={backgroundStyle}>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>
-        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} sleepTime={sleepTime} changeSleepTime={changeSleepTime} />
+        <SettingsModal showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={remindInterval} />
         <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} removeFavorite={removeFavorite} />
         <View style={styles.section}>
           <AddDrink addDrink={addDrink} openFavorites={openFavorites} />

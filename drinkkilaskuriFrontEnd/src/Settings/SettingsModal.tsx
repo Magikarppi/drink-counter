@@ -44,7 +44,9 @@ const SettingsModal = ({
   closeModal,
   saveSettings,
   sleepTime,
-  changeSleepTime
+  changeSleepTime,
+  selectRemindInterval,
+  selectedRemindInterval
 }: SettingsModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
@@ -60,7 +62,7 @@ const SettingsModal = ({
             </View>
             <View style={styles.buttonElement} />
           </View>
-          <Settings sleepTime={sleepTime} changeSleepTime={changeSleepTime} />
+          <Settings sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
         </View>
       </View>
     </Modal>
