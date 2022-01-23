@@ -63,7 +63,7 @@ const SettingsModal = ({
               <CloseButton closeModal={closeModal} />
             </View>
             <View style={styles.buttonElement}>
-              <SaveButton saveSettings={saveSettings} />
+              {/* <SaveButton saveSettings={saveSettings} /> */}
             </View>
             <View style={styles.buttonElement} />
           </View>

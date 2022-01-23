@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
+import { colors } from '../themes';
 import { SettingsProps } from '../types';
 import BodySize from './BodySize';
 import MaxDrinkCount from './MaxDrinkCount';
@@ -12,6 +13,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-evenly",
     alignItems: 'center'
+  },
+  section: {
+    borderBottomColor: colors.violet,
+    borderBottomWidth: 1,
+    padding: 5
   }
 });
 
@@ -31,22 +37,16 @@ const Settings = ({ changeSleepTime, sleepTime, selectRemindInterval, selectedRe
   return (
     <ScrollView >
       <View style={styles.container}>
-        <MaxDrinkCount maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={handleSetMaxDrinkCount} />
-        <Reminder selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
+        <View style={styles.section}>
+          <MaxDrinkCount maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={handleSetMaxDrinkCount} />
+        </View>
+        <View style={styles.section}>
+          <Reminder selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
+        </View>
+        <View style={styles.section}>
+          <BodySize />
+        </View>
         <SleepTime showClock={showClock} toggleTimePicker={toggleTimePicker} sleepTime={sleepTime} changeSleepTime={sleepTimeChangePitStop} />
-        <BodySize />
-        <View style={{ height: 50 }}>
-          <Text>Haa</Text>
-        </View>
-        <View style={{ height: 50 }}>
-          <Text>Haa</Text>
-        </View>
-        <View style={{ height: 50 }}>
-          <Text>Haa</Text>
-        </View>
-        <View style={{ height: 50 }}>
-          <Text>Haa</Text>
-        </View>
         <View style={{ height: 50 }}>
           <Button title='Aseta nuk. men. aik.' onPress={toggleTimePicker} />
         </View>
