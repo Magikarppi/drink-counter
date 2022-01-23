@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
     margin: 5
   },
   inputText: {
-    fontSize: 18,
+    fontSize: 12,
     color: colors.white,
+    textAlign: 'center'
   },
 });
 
@@ -45,7 +46,6 @@ const SleepTime = ({ showClock, toggleTimePicker, changeSleepTime, sleepTime }: 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <Text style={styles.inputText}>Mihin aikaan olet mennyt viime aikoina nukkumaan?</Text>
         {
           showClock && (
             <View>
