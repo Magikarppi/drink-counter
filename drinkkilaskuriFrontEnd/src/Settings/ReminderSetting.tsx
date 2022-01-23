@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, } from 'react-native';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
 import CheckBox from '../Buttons/CheckBox';
 import { colors } from '../themes';
 import { ReminderProps } from '../types';
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   checkBoxElementsWrapper: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   mainInputText: {
     fontSize: 18,
@@ -59,11 +59,14 @@ const styles = StyleSheet.create({
   },
   checkBoxText: {
     fontSize: 10,
-    color: colors.beige
-  }
+    color: colors.beige,
+  },
 });
 
-const Reminder = ({ selectRemindInterval, selectedRemindInterval }: ReminderProps) => {
+const Reminder = ({
+  selectRemindInterval,
+  selectedRemindInterval,
+}: ReminderProps) => {
   const [reminder, setReminder] = useState<string>();
 
   return (
@@ -78,22 +81,28 @@ const Reminder = ({ selectRemindInterval, selectedRemindInterval }: ReminderProp
           placeholder="Oisko sittenkin vettä tähän väliin?"
           keyboardType="default"
           placeholderTextColor={'#d9d9d9'}
-          textAlign='center'
+          textAlign="center"
         />
         <Text style={styles.secondaryInputText}>Muistuta minua:</Text>
         <View style={styles.checkBoxContainer}>
           <View style={styles.checkBoxElementsWrapper}>
             <Text style={styles.checkBoxText}>Ennen jokaista juomaa</Text>
-            <CheckBox handlePress={() => selectRemindInterval('afterMax')} selected={selectedRemindInterval === 'afterMax'} />
+            <CheckBox
+              handlePress={() => selectRemindInterval('afterMax')}
+              selected={selectedRemindInterval === 'afterMax'}
+            />
           </View>
           <View style={styles.checkBoxElementsWrapper}>
-          <Text style={styles.checkBoxText}>Maxidrinkin jälkeen</Text>
-            <CheckBox handlePress={() => selectRemindInterval('afterEvery')} selected={selectedRemindInterval === 'afterEvery'} />
+            <Text style={styles.checkBoxText}>Maxidrinkin jälkeen</Text>
+            <CheckBox
+              handlePress={() => selectRemindInterval('afterEvery')}
+              selected={selectedRemindInterval === 'afterEvery'}
+            />
           </View>
         </View>
       </View>
     </View>
-  )
+  );
 };
 
 export default Reminder;

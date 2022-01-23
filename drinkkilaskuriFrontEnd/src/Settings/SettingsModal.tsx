@@ -1,11 +1,9 @@
-import React from "react";
-import { Modal, StyleSheet, Text, View } from "react-native";
-import CloseButton from "../Buttons/CloseButton";
+import React from 'react';
+import { Modal, StyleSheet, View } from 'react-native';
+import CloseButton from '../Buttons/CloseButton';
 import Settings from './Settings';
-import { SettingsModalProps } from "../types";
-import { colors } from "../themes";
-import MainHeader from "../HeaderMain";
-import SaveButton from "../Buttons/SaveButton";
+import { SettingsModalProps } from '../types';
+import { colors } from '../themes';
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -18,7 +16,7 @@ const styles = StyleSheet.create({
     // height: '100%',
   },
   ghostElement: {
-    height: '10%'
+    height: '10%',
   },
   modalContainer: {
     width: '90%',
@@ -39,19 +37,20 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '33%',
-  }
+  },
 });
 
 const SettingsModal = ({
   showModal,
   closeModal,
-  saveSettings,
   sleepTime,
   changeSleepTime,
   selectRemindInterval,
   selectedRemindInterval,
   handleSetMaxDrinkCount,
-  maxDrinkCount
+  maxDrinkCount,
+  bodyweight,
+  setBodyweight,
 }: SettingsModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
@@ -67,12 +66,20 @@ const SettingsModal = ({
             </View>
             <View style={styles.buttonElement} />
           </View>
-          <Settings maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={handleSetMaxDrinkCount} sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
+          <Settings
+            bodyweight={bodyweight}
+            setBodyweight={setBodyweight}
+            maxDrinkCount={maxDrinkCount}
+            handleSetMaxDrinkCount={handleSetMaxDrinkCount}
+            sleepTime={sleepTime}
+            changeSleepTime={changeSleepTime}
+            selectRemindInterval={selectRemindInterval}
+            selectedRemindInterval={selectedRemindInterval}
+          />
         </View>
       </View>
     </Modal>
   );
-
 };
 
 export default SettingsModal;

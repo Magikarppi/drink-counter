@@ -1,6 +1,11 @@
-
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Text, Button, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../themes';
@@ -12,9 +17,9 @@ import SleepTime from './SleepTime';
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: 'center'
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   section: {
     justifyContent: 'center',
@@ -22,12 +27,12 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.violet,
     borderBottomWidth: 1,
     padding: 5,
-    width: '90%'
+    width: '90%',
   },
   sleepTimeInfo: {
     fontSize: 12,
     color: colors.white,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   button: {
     width: 170,
@@ -39,57 +44,82 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: colors.beige,
     borderWidth: 1,
-    borderRadius: 4
+    borderRadius: 4,
   },
   buttonText: {
     color: colors.white,
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
 
-const Settings = ({ changeSleepTime, sleepTime, selectRemindInterval, selectedRemindInterval, handleSetMaxDrinkCount, maxDrinkCount }: SettingsProps) => {
+const Settings = ({
+  changeSleepTime,
+  sleepTime,
+  selectRemindInterval,
+  selectedRemindInterval,
+  handleSetMaxDrinkCount,
+  maxDrinkCount,
+  bodyweight,
+  setBodyweight,
+}: SettingsProps) => {
   const [showClock, setShowClock] = useState<boolean>(false);
 
   const toggleTimePicker = () => {
-    return setShowClock((prev) => !prev)
-  }
+    return setShowClock((prev) => !prev);
+  };
 
   const sleepTimeChangePitStop = (time: Date) => {
     changeSleepTime(time);
     toggleTimePicker();
     return;
-  }
+  };
 
   return (
-    <ScrollView >
+    <ScrollView>
       <View style={styles.container}>
         <View style={styles.section}>
-          <MaxDrinkCount maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={handleSetMaxDrinkCount} />
+          <MaxDrinkCount
+            maxDrinkCount={maxDrinkCount}
+            handleSetMaxDrinkCount={handleSetMaxDrinkCount}
+          />
         </View>
         <View style={styles.section}>
-          <Reminder selectRemindInterval={selectRemindInterval} selectedRemindInterval={selectedRemindInterval} />
+          <Reminder
+            selectRemindInterval={selectRemindInterval}
+            selectedRemindInterval={selectedRemindInterval}
+          />
         </View>
         <View style={styles.section}>
-          <BodySize />
+          <BodySize bodyweight={bodyweight} setBodyweight={setBodyweight} />
         </View>
-        <SleepTime showClock={showClock} toggleTimePicker={toggleTimePicker} sleepTime={sleepTime} changeSleepTime={sleepTimeChangePitStop} />
+        <SleepTime
+          showClock={showClock}
+          toggleTimePicker={toggleTimePicker}
+          sleepTime={sleepTime}
+          changeSleepTime={sleepTimeChangePitStop}
+        />
         <View style={styles.section}>
           <TouchableOpacity onPress={toggleTimePicker}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Aseta</Text>
-              <MaterialCommunityIcons name='sleep' size={30} color={colors.white} />
+              <MaterialCommunityIcons
+                name="sleep"
+                size={30}
+                color={colors.white}
+              />
               <Text style={styles.buttonText}>aika</Text>
             </View>
           </TouchableOpacity>
           <Text style={styles.sleepTimeInfo}>
-            Asettamalla keskimääräisen nukkumaanmenoaikasi viimeisiltä muutamalta päivältä,
-            luo sinulle suosituksen juomisen lopettamisesta myös kellonajan perusteella,
-            jotta alkoholin vaikutusta unirytmiisi voitaisi minimoida.
+            Asettamalla keskimääräisen nukkumaanmenoaikasi viimeisiltä
+            muutamalta päivältä, luo sinulle suosituksen juomisen lopettamisesta
+            myös kellonajan perusteella, jotta alkoholin vaikutusta unirytmiisi
+            voitaisi minimoida.
           </Text>
         </View>
       </View>
     </ScrollView>
-  )
+  );
 };
 
 export default Settings;

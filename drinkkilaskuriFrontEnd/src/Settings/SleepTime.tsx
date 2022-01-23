@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { colors } from '../themes';
 import { SleepTimeProps } from '../types';
 
 const styles = StyleSheet.create({
@@ -26,36 +25,39 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: 'grey',
     borderWidth: 2,
-    margin: 5
-  },
-  inputText: {
-    fontSize: 12,
-    color: colors.white,
-    textAlign: 'center'
+    margin: 5,
   },
 });
 
-const SleepTime = ({ showClock, toggleTimePicker, changeSleepTime, sleepTime }: SleepTimeProps) => {
-
+const SleepTime = ({
+  showClock,
+  changeSleepTime,
+  sleepTime,
+}: SleepTimeProps) => {
   const handleTimeSet = (_event: any, date: any) => {
-    console.log('date', typeof (date));
     // changeSleepTime(date);
-    changeSleepTime(date)
+    changeSleepTime(date);
+  };
+
+  if (!showClock) {
+    return null;
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        {
-          showClock && (
-            <View>
-              <DateTimePicker value={sleepTime} onChange={handleTimeSet} mode="time" is24Hour={true} minuteInterval={30} />
-            </View>
-          )
-        }
+        <View>
+          <DateTimePicker
+            value={sleepTime}
+            onChange={handleTimeSet}
+            mode="time"
+            is24Hour={true}
+            minuteInterval={30}
+          />
+        </View>
       </View>
     </View>
-  )
+  );
 };
 
 export default SleepTime;

@@ -8,16 +8,8 @@
  * @format
  */
 
-import React, { useEffect, useState } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, useColorScheme, View } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AddDrink from './src/AddDrink';
@@ -28,7 +20,12 @@ import HeaderMain from './src/HeaderMain';
 import Message from './src/Message';
 import SettingsModal from './src/Settings/SettingsModal';
 import { colors } from './src/themes';
-import { DrinkType, FavDrinkType, RemindInterval } from './src/types';
+import {
+  Bodyweight,
+  DrinkType,
+  FavDrinkType,
+  RemindInterval,
+} from './src/types';
 import { randomId } from './src/utils';
 
 const styles = StyleSheet.create({
@@ -38,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     // flexGrow: 4
-    height: '100%'
+    height: '100%',
   },
   section: {
     flexDirection: 'column',
@@ -48,7 +45,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 10,
     borderBottomColor: colors.violet,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
   },
 });
 
@@ -70,8 +67,10 @@ const App = () => {
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
   const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
   const [sleepTime, setSleepTime] = useState<Date>(new Date());
-  const [message, setMessage] = useState<string | null>(null)
-  const [remindInterval, setRemindInterval] = useState<RemindInterval>('afterMax');
+  const [message, setMessage] = useState<string | null>(null);
+  const [remindInterval, setRemindInterval] =
+    useState<RemindInterval>('afterMax');
+  const [bodyweight, setBodyweight] = useState<Bodyweight>();
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -83,12 +82,12 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const addDrink = (alcPercent: number, amount: number, name?: string) => {
+  const addDrink = (alcPercent: number, amount: number, _name?: string) => {
     const newDrink: DrinkType = {
       amount,
       alcPercent,
       timeConsumed: new Date(),
-      id: randomId()
+      id: randomId(),
     };
 
     if (drinklist) {
@@ -104,11 +103,11 @@ const App = () => {
 
   const openSettings = () => {
     setShowSettings(true);
-  }
+  };
 
   const closeSettings = () => {
     setShowSettings(false);
-  }
+  };
 
   const openFavorites = () => {
     if (favorites) {
@@ -141,7 +140,9 @@ const App = () => {
   };
 
   const removeFavorite = (drink: FavDrinkType) => {
-    if (!favorites) return;
+    if (!favorites) {
+      return;
+    }
     const favoritesCopy = [...favorites];
     const newFavorites = favoritesCopy.filter((f) => f.id !== drink.id);
     setFavorites(newFavorites);
@@ -149,12 +150,12 @@ const App = () => {
   };
 
   const saveSettings = () => {
-    console.log('save settings')
+    console.log('save settings');
   };
 
   const changeSleepTime = (time: Date) => {
     if (time) {
-      return setSleepTime(time)
+      return setSleepTime(time);
     }
   };
 
@@ -167,8 +168,26 @@ const App = () => {
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>
-        <SettingsModal maxDrinkCount={maxDrinkCount} handleSetMaxDrinkCount={setMaxDrinkCount} showModal={showSettings} closeModal={closeSettings} saveSettings={saveSettings} sleepTime={sleepTime} changeSleepTime={changeSleepTime} selectRemindInterval={selectRemindInterval} selectedRemindInterval={remindInterval} />
-        <FavoritesModal showModal={showFavorites} closeModal={closeFavorites} addDrink={addDrink} favorites={favorites} removeFavorite={removeFavorite} />
+        <SettingsModal
+          bodyweight={bodyweight}
+          setBodyweight={setBodyweight}
+          maxDrinkCount={maxDrinkCount}
+          handleSetMaxDrinkCount={setMaxDrinkCount}
+          showModal={showSettings}
+          closeModal={closeSettings}
+          saveSettings={saveSettings}
+          sleepTime={sleepTime}
+          changeSleepTime={changeSleepTime}
+          selectRemindInterval={selectRemindInterval}
+          selectedRemindInterval={remindInterval}
+        />
+        <FavoritesModal
+          showModal={showFavorites}
+          closeModal={closeFavorites}
+          addDrink={addDrink}
+          favorites={favorites}
+          removeFavorite={removeFavorite}
+        />
         <View style={styles.section}>
           <AddDrink addDrink={addDrink} openFavorites={openFavorites} />
         </View>

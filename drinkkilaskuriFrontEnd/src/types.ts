@@ -1,6 +1,10 @@
 export type RType = 0.68 | 0.55;
 
-export type AddDrinkFunc = (alcPercent: number, amount: number, name?: string) => void;
+export type AddDrinkFunc = (
+  alcPercent: number,
+  amount: number,
+  name?: string
+) => void;
 
 export interface AddDrinkProps {
   addDrink: AddDrinkFunc;
@@ -23,7 +27,7 @@ export interface FavDrinkType {
   timeConsumed?: Date;
 }
 export interface DrinkProps {
-  drink: DrinkType
+  drink: DrinkType;
   addToFavorites: (drink: DrinkType) => void;
 }
 
@@ -46,17 +50,21 @@ export interface SettingsModalProps {
   sleepTime: Date;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
-  handleSetMaxDrinkCount: HandleSetMaxDrinkCount,
+  handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
   maxDrinkCount: MaxDrinkCount;
-};
+  bodyweight: Bodyweight;
+  setBodyweight: SetBodyweight;
+}
 
 export interface SettingsProps {
   changeSleepTime: (time: Date) => void;
   sleepTime: Date;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
-  handleSetMaxDrinkCount: HandleSetMaxDrinkCount,
+  handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
   maxDrinkCount: MaxDrinkCount;
+  bodyweight: Bodyweight;
+  setBodyweight: SetBodyweight;
 }
 
 export interface FavoritesModalProps {
@@ -65,7 +73,7 @@ export interface FavoritesModalProps {
   addDrink: AddDrinkFunc;
   favorites: FavDrinkType[] | null;
   removeFavorite: (drink: FavDrinkType) => void;
-};
+}
 
 export interface FavoritesProps {
   addDrink: AddDrinkFunc;
@@ -92,7 +100,7 @@ export interface CheckBoxProps {
 export type RemindInterval = 'afterEvery' | 'afterMax';
 export type SelectRemindInterval = (intervall: RemindInterval) => void;
 export interface ReminderProps {
-  selectRemindInterval: SelectRemindInterval
+  selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
 }
 
@@ -100,5 +108,12 @@ export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
 export type MaxDrinkCount = string | undefined;
 export interface MaxDrinkCountProps {
   maxDrinkCount: MaxDrinkCount;
-  handleSetMaxDrinkCount: HandleSetMaxDrinkCount
+  handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
+}
+
+export type Bodyweight = string | undefined;
+export type SetBodyweight = (bw: Bodyweight) => void;
+export interface BodySizeProps {
+  bodyweight: Bodyweight;
+  setBodyweight: SetBodyweight;
 }
