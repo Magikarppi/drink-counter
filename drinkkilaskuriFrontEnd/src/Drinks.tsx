@@ -1,25 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import Drink from './Drink';
-import { DrinksProps, DrinkType } from './types';
-
-const styles = StyleSheet.create({
-  container: {
-    // flexGrow: 1
-  },
-  item: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 40,
-    width: '100%',
-    borderColor: 'grey',
-    borderWidth: 2,
-    paddingVertical: 5,
-  },
-  infoText: {
-    fontSize: 15,
-  },
-});
+import { DrinksProps } from './types';
 
 const Drinks = ({ drinkList, addToFavorites }: DrinksProps) => {
   if (!drinkList || drinkList.length < 1) {
@@ -28,7 +10,7 @@ const Drinks = ({ drinkList, addToFavorites }: DrinksProps) => {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View>
         {drinkList.map((drink, i) => {
           return (
             <Drink key={i} drink={drink} addToFavorites={addToFavorites} />

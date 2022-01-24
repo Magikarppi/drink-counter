@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '40%',
     width: '100%',
-    marginVertical: 10,
+    // marginVertical: 5,
     borderBottomColor: colors.violet,
     borderBottomWidth: 2,
   },
@@ -78,6 +78,8 @@ const App = () => {
   //     setDarkMode(colorScheme === "dark");
   // }, [colorScheme]);
 
+  console.log('favs', favorites);
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -110,7 +112,7 @@ const App = () => {
   };
 
   const openFavorites = () => {
-    if (favorites) {
+    if (favorites && favorites.length > 0) {
       setShowFavorites(true);
     } else {
       if (drinklist) {
@@ -146,6 +148,9 @@ const App = () => {
     const favoritesCopy = [...favorites];
     const newFavorites = favoritesCopy.filter((f) => f.id !== drink.id);
     setFavorites(newFavorites);
+    if (newFavorites.length < 1) {
+      closeFavorites();
+    }
     return;
   };
 

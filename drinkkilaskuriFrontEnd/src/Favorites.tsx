@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './themes';
@@ -11,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    // backgroundColor: 'black'
+    backgroundColor: 'cyan',
   },
   drinkWrapper: {
     flexDirection: 'row',
@@ -19,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '90%',
     height: 45,
+    backgroundColor: 'orange',
   },
   drinkContentWrapper: {
     flexDirection: 'row',
@@ -28,8 +35,8 @@ const styles = StyleSheet.create({
     height: '100%',
     borderWidth: 1,
     borderRadius: 2,
-    borderColor: colors.violet
-    // backgroundColor: 'dark-grey'
+    borderColor: colors.violet,
+    backgroundColor: 'dark-grey',
   },
   tableTitlesWrapper: {
     flexDirection: 'row',
@@ -37,26 +44,32 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '100%',
     height: 20,
-    backgroundColor: 'dark-green'
+    backgroundColor: 'dark-green',
   },
   tableTitleText: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: colors.white
+    color: colors.white,
   },
   section: {
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'dark-blue'
+    width: '33%',
+    height: '100%',
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: colors.violet,
   },
   text: {
     fontSize: 10,
-    color: colors.white
+    color: colors.white,
   },
 });
 
 const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
-  if (!favorites) return null;
+  if (!favorites) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
@@ -65,38 +78,53 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
         <Text style={styles.tableTitleText}>%</Text>
         <Text style={styles.tableTitleText}>Määrä</Text>
       </View>
-      <ScrollView decelerationRate='fast' contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView
+        decelerationRate="fast"
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         {favorites.map((drink) => {
           return (
             <View style={styles.drinkWrapper} key={Math.random()}>
-              <TouchableOpacity onPress={() => addDrink(drink.alcPercent, drink.amount, drink.name)}>
-                <View style={styles.drinkContentWrapper}>
-                  <View style={styles.section}>
-                    <Text style={styles.text}>
-                      {drink.name}
-                    </Text>
+              <View style={styles.drinkContentWrapper}>
+                <TouchableOpacity
+                  onPress={() =>
+                    addDrink(drink.alcPercent, drink.amount, drink.name)
+                  }
+                >
+                  <View
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      flexDirection: 'row',
+                      justifyContent: 'space-evenly',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <View style={styles.section}>
+                      <Text style={styles.text}>{drink.name}</Text>
+                    </View>
+                    <View style={styles.section}>
+                      <Text style={styles.text}>{drink.alcPercent}</Text>
+                    </View>
+                    <View>
+                      <Text style={styles.text}>{drink.amount}</Text>
+                    </View>
                   </View>
-                  <View style={styles.section}>
-                    <Text style={styles.text}>
-                      {drink.alcPercent}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text style={styles.text}>
-                      {drink.amount}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              </View>
               <TouchableOpacity onPress={() => removeFavorite(drink)}>
-                <Ionicons name='trash-outline' size={30} color={colors.violet} />
+                <Ionicons
+                  name="trash-outline"
+                  size={30}
+                  color={colors.violet}
+                />
               </TouchableOpacity>
             </View>
-          )
+          );
         })}
       </ScrollView>
     </View>
-  )
+  );
 };
 
 export default Favorites;

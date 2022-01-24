@@ -8,24 +8,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: '90%',
     height: 40,
-    backgroundColor: colors.beige
+    backgroundColor: colors.beige,
+    borderWidth: 1,
+    borderColor: colors.violet,
+    borderRadius: 10,
   },
   text: {
     fontSize: 15,
-    color: colors.backgroundDark
-  }
+    color: colors.backgroundDark,
+  },
 });
 
 const Message = ({ message }: MessageProps) => {
-  if (!message) return <View style={{ ...styles.container, backgroundColor: undefined }} />;
+  if (!message) {
+    return <View style={{ height: styles.container.height }} />;
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{message}</Text>
     </View>
-  )
+  );
 };
 
 export default Message;

@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Text, Button, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from './themes';
-import { AddDrinkProps, DrinkType } from './types';
-import { randomId } from './utils';
+import { AddDrinkProps } from './types';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   sectionContainer: {
     flexDirection: 'row',
@@ -57,12 +63,12 @@ const styles = StyleSheet.create({
     shadowColor: 'grey',
     textShadowColor: 'grey',
     textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2
+    textShadowRadius: 2,
   },
   titleText: {
     fontSize: 18,
-    color: colors.white
-  }
+    color: colors.white,
+  },
 });
 
 const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
@@ -73,7 +79,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
     if (alcPercent && amount) {
       const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
       const amountTrimmed = parseFloat(amount.replace(',', '.'));
-      addDrink(alcPercentTrimmed, amountTrimmed)
+      addDrink(alcPercentTrimmed, amountTrimmed);
       // const drink: DrinkType = {
       //   alcPercent: parseFloat(alcPercent.replace(',', '.')),
       //   amount: parseFloat(amount.replace(',', '.')),
@@ -103,6 +109,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
               keyboardType="decimal-pad"
               placeholderTextColor={'grey'}
               textAlign="center"
+              enablesReturnKeyAutomatically={true}
             />
           </View>
           <View style={styles.inputBox}>
@@ -115,16 +122,25 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
               keyboardType="decimal-pad"
               textAlign="center"
               placeholderTextColor={'grey'}
+              enablesReturnKeyAutomatically={true}
+              keyboardAppearance="dark"
+              maxLength={4}
             />
           </View>
         </View>
         <View style={{ ...styles.inputContainer, alignItems: 'center' }}>
           <TouchableOpacity onPress={openFavorites}>
-            <MaterialCommunityIcons name="folder-star-outline" size={50} color={colors.beige} />
+            <MaterialCommunityIcons
+              name="folder-star-outline"
+              size={50}
+              color={colors.beige}
+            />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.buttonContainer}><Button title="Lisää" onPress={handleSubmit} color={colors.violet} /></View>
+      <View style={styles.buttonContainer}>
+        <Button title="Lisää" onPress={handleSubmit} color={colors.violet} />
+      </View>
     </View>
   );
 };

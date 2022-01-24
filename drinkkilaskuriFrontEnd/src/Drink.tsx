@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './themes';
-import { DrinkProps, DrinkType } from './types';
+import { DrinkProps } from './types';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,20 +12,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: 50,
-    borderTopWidth: 1,
-    borderTopColor: colors.violet,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.violet,
   },
   property: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
-
   },
   text: {
     fontSize: 15,
-    color: colors.white
-  }
+    color: colors.white,
+  },
 });
 
 // turn favorite star to yellow "star" once user clicks it?
@@ -44,11 +43,11 @@ const Drink = ({ drink, addToFavorites }: DrinkProps) => {
       </View>
       <TouchableOpacity onPress={() => addToFavorites(drink)}>
         <View style={styles.property}>
-          <Ionicons name='star-outline' size={30} color={colors.beige} />
+          <Ionicons name="star-outline" size={30} color={colors.beige} />
         </View>
       </TouchableOpacity>
     </View>
-  )
+  );
 };
 
 export default Drink;
