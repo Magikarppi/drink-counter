@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
 const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
+  const [drinkName, setDrinkName] = useState<string>();
 
   const handleSubmit = () => {
     if (alcPercent && amount) {
@@ -98,7 +99,20 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
       <Text style={styles.titleText}>Lisää drinkki</Text>
       <View style={styles.sectionContainer}>
         <View style={{ ...styles.inputContainer }} />
-        <View style={{ ...styles.inputContainer, width: '70%' }}>
+        <View style={{ ...styles.inputContainer, width: '90%' }}>
+          <View style={styles.inputBox}>
+            <Text style={styles.inputText}>Nimi</Text>
+            <TextInput
+              style={{ ...styles.input, width: 100 }}
+              onChangeText={setDrinkName}
+              value={drinkName}
+              placeholder="4.7"
+              keyboardType="default"
+              placeholderTextColor={'grey'}
+              textAlign="center"
+              enablesReturnKeyAutomatically={true}
+            />
+          </View>
           <View style={styles.inputBox}>
             <Text style={styles.inputText}>%</Text>
             <TextInput

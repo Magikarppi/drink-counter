@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: 'cyan',
   },
   drinkWrapper: {
     flexDirection: 'row',
@@ -31,12 +30,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: '80%',
+    width: '100%',
     height: '100%',
     borderWidth: 1,
     borderRadius: 2,
     borderColor: colors.violet,
-    backgroundColor: 'dark-grey',
   },
   tableTitlesWrapper: {
     flexDirection: 'row',
@@ -44,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '100%',
     height: 20,
-    backgroundColor: 'dark-green',
   },
   tableTitleText: {
     fontSize: 10,
@@ -54,14 +51,21 @@ const styles = StyleSheet.create({
   section: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '33%',
+    width: '20%',
     height: '100%',
     borderWidth: 1,
     borderRadius: 2,
     borderColor: colors.violet,
   },
-  text: {
-    fontSize: 10,
+  trashContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    // backgroundColor: 'cyan',
+  },
+  drinkText: {
+    fontSize: 15,
     color: colors.white,
   },
 });
@@ -100,25 +104,27 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
                       alignItems: 'center',
                     }}
                   >
-                    <View style={styles.section}>
-                      <Text style={styles.text}>{drink.name}</Text>
+                    <View style={{ ...styles.section, width: '60%' }}>
+                      <Text style={styles.drinkText}>{drink.name}</Text>
                     </View>
                     <View style={styles.section}>
-                      <Text style={styles.text}>{drink.alcPercent}</Text>
+                      <Text style={styles.drinkText}>{drink.alcPercent}</Text>
                     </View>
-                    <View>
-                      <Text style={styles.text}>{drink.amount}</Text>
+                    <View style={styles.section}>
+                      <Text style={styles.drinkText}>{drink.amount}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => removeFavorite(drink)}>
+                  <View style={styles.trashContainer}>
+                    <Ionicons
+                      name="trash-outline"
+                      size={30}
+                      color={colors.violet}
+                    />
+                  </View>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity onPress={() => removeFavorite(drink)}>
-                <Ionicons
-                  name="trash-outline"
-                  size={30}
-                  color={colors.violet}
-                />
-              </TouchableOpacity>
             </View>
           );
         })}
