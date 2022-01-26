@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TextInput,
   Text,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -25,14 +24,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    height: '50%',
+    height: '35%',
   },
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: '15%',
+    width: '20%',
     height: '100%',
+    // backgroundColor: 'brown',
+    // borderWidth: 1,
+    // borderColor: 'black',
     // padding: 20,
     // marginHorizontal: 20,
   },
@@ -53,20 +55,41 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderColor: colors.beige,
+    borderTopColor: 'black',
     borderWidth: 2,
+    borderRadius: 2,
     margin: 5,
+    color: colors.white,
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.beige,
+    width: 70,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: colors.violet,
+  },
+  titleText: {
+    fontSize: 20,
     color: colors.white,
   },
   inputText: {
     fontSize: 18,
-    color: 'black',
-    shadowColor: 'grey',
-    textShadowColor: 'grey',
+    color: 'grey',
+    shadowColor: 'white',
+    textShadowColor: 'brown',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
   },
-  titleText: {
-    fontSize: 18,
+  buttonText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: colors.violet,
+  },
+  smallPrintText: {
+    fontSize: 10,
     color: colors.white,
   },
 });
@@ -99,20 +122,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
       <Text style={styles.titleText}>Lisää drinkki</Text>
       <View style={styles.sectionContainer}>
         <View style={{ ...styles.inputContainer }} />
-        <View style={{ ...styles.inputContainer, width: '90%' }}>
-          <View style={styles.inputBox}>
-            <Text style={styles.inputText}>Nimi</Text>
-            <TextInput
-              style={{ ...styles.input, width: 100 }}
-              onChangeText={setDrinkName}
-              value={drinkName}
-              placeholder="4.7"
-              keyboardType="default"
-              placeholderTextColor={'grey'}
-              textAlign="center"
-              enablesReturnKeyAutomatically={true}
-            />
-          </View>
+        <View style={{ ...styles.inputContainer, width: '60%' }}>
           <View style={styles.inputBox}>
             <Text style={styles.inputText}>%</Text>
             <TextInput
@@ -142,7 +152,13 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
             />
           </View>
         </View>
-        <View style={{ ...styles.inputContainer, alignItems: 'center' }}>
+        <View
+          style={{
+            ...styles.inputContainer,
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}
+        >
           <TouchableOpacity onPress={openFavorites}>
             <MaterialCommunityIcons
               name="folder-star-outline"
@@ -152,8 +168,34 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
           </TouchableOpacity>
         </View>
       </View>
+      <View
+        style={{
+          ...styles.inputBox,
+        }}
+      >
+        <Text style={styles.inputText}>Nimi</Text>
+        <Text style={styles.smallPrintText}>(valinnainen)</Text>
+        <TextInput
+          style={{
+            ...styles.input,
+            width: 150,
+            height: 40,
+          }}
+          onChangeText={setDrinkName}
+          value={drinkName}
+          placeholder=""
+          keyboardType="default"
+          placeholderTextColor={'grey'}
+          textAlign="center"
+          enablesReturnKeyAutomatically={true}
+        />
+      </View>
       <View style={styles.buttonContainer}>
-        <Button title="Lisää" onPress={handleSubmit} color={colors.violet} />
+        <TouchableOpacity onPress={handleSubmit}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Lisää</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
