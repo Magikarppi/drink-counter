@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native';
 import Drink from './Drink';
 import { DrinksProps } from './types';
 
-const Drinks = ({ drinkList, addToFavorites }: DrinksProps) => {
+const Drinks = ({ drinkList, addToFavorites, removeDrink }: DrinksProps) => {
   if (!drinkList || drinkList.length < 1) {
     return null;
   }
@@ -13,7 +13,12 @@ const Drinks = ({ drinkList, addToFavorites }: DrinksProps) => {
       <View>
         {drinkList.map((drink, i) => {
           return (
-            <Drink key={i} drink={drink} addToFavorites={addToFavorites} />
+            <Drink
+              key={i}
+              drink={drink}
+              addToFavorites={addToFavorites}
+              removeDrink={removeDrink}
+            />
           );
         })}
       </View>

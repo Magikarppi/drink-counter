@@ -84,12 +84,13 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const addDrink = (alcPercent: number, amount: number, _name?: string) => {
+  const addDrink = (alcPercent: number, amount: number, name?: string) => {
     const newDrink: DrinkType = {
       amount,
       alcPercent,
       timeConsumed: new Date(),
       id: randomId(),
+      name,
     };
 
     if (drinklist) {
@@ -101,6 +102,16 @@ const App = () => {
       setDrinkList([newDrink]);
       return;
     }
+  };
+
+  const removeDrink = (drink: DrinkType): void => {
+    if (!drinklist) {
+      return;
+    }
+    const drinkListCopy = [...drinklist];
+    const newDrinkList = drinkListCopy.filter((f) => f.id !== drink.id);
+    setDrinkList(newDrinkList);
+    return;
   };
 
   const openSettings = () => {
@@ -196,12 +207,16 @@ const App = () => {
         <View style={styles.section}>
           <AddDrink addDrink={addDrink} openFavorites={openFavorites} />
         </View>
-        <View style={{ ...styles.section, height: 20 }}>
-          <Goals drinkList={drinklist} />
+        <View style={{ ...styles.section, borderBottomWidth: 0, height: 30 }}>
+          <Goals drinkList={drinklist} drinkLimit={maxDrinkCount} />
         </View>
-        <View style={{ ...styles.section, height: 200 }}>
+        <View style={{ ...styles.section, borderBottomWidth: 0, height: 200 }}>
           <Message message={message} />
-          <Drinks drinkList={drinklist} addToFavorites={addToFavorites} />
+          <Drinks
+            drinkList={drinklist}
+            addToFavorites={addToFavorites}
+            removeDrink={removeDrink}
+          />
         </View>
       </View>
     </View>

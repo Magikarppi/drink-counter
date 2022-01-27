@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
 // turn favorite star to yellow "star" once user clicks it?
 
-const Drink = ({ drink, addToFavorites }: DrinkProps) => {
+const Drink = ({ drink, addToFavorites, removeDrink }: DrinkProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.property}>
@@ -44,6 +44,11 @@ const Drink = ({ drink, addToFavorites }: DrinkProps) => {
       <TouchableOpacity onPress={() => addToFavorites(drink)}>
         <View style={styles.property}>
           <Ionicons name="star-outline" size={30} color={colors.beige} />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => removeDrink(drink)}>
+        <View style={styles.property}>
+          <Ionicons name="trash-outline" size={30} color={colors.violet} />
         </View>
       </TouchableOpacity>
     </View>

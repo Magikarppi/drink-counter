@@ -103,7 +103,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
     if (alcPercent && amount) {
       const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
       const amountTrimmed = parseFloat(amount.replace(',', '.'));
-      addDrink(alcPercentTrimmed, amountTrimmed);
+      addDrink(alcPercentTrimmed, amountTrimmed, drinkName);
       // const drink: DrinkType = {
       //   alcPercent: parseFloat(alcPercent.replace(',', '.')),
       //   amount: parseFloat(amount.replace(',', '.')),
@@ -188,6 +188,7 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
           placeholderTextColor={'grey'}
           textAlign="center"
           enablesReturnKeyAutomatically={true}
+          maxLength={15}
         />
       </View>
       <View style={styles.buttonContainer}>

@@ -39,6 +39,8 @@ const SleepTime = ({
     changeSleepTime(date);
   };
 
+  console.log('showclock', showClock);
+
   if (!showClock) {
     return null;
   }

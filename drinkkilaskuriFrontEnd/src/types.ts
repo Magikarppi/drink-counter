@@ -29,6 +29,7 @@ export interface FavDrinkType {
 export interface DrinkProps {
   drink: DrinkType;
   addToFavorites: (drink: DrinkType) => void;
+  removeDrink: (drink: DrinkType) => void;
 }
 
 export type DrinkList = DrinkType[] | undefined;
@@ -36,10 +37,12 @@ export type DrinkList = DrinkType[] | undefined;
 export interface DrinksProps {
   drinkList: DrinkList;
   addToFavorites: (drink: DrinkType) => void;
+  removeDrink: (drink: DrinkType) => void;
 }
 
 export interface GoalsProps {
   drinkList: DrinkList;
+  drinkLimit: string | undefined;
 }
 
 export interface SettingsModalProps {
