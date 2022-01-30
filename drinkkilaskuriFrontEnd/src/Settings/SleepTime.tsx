@@ -35,7 +35,6 @@ const SleepTime = ({
   sleepTime,
 }: SleepTimeProps) => {
   const handleTimeSet = (_event: any, date: any) => {
-    // changeSleepTime(date);
     changeSleepTime(date);
   };
 
@@ -45,18 +44,18 @@ const SleepTime = ({
     return null;
   }
 
+  const sleepTimeVal = sleepTime === undefined ? new Date() : sleepTime;
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <View>
-          <DateTimePicker
-            value={sleepTime}
-            onChange={handleTimeSet}
-            mode="time"
-            is24Hour={true}
-            minuteInterval={30}
-          />
-        </View>
+        <DateTimePicker
+          value={sleepTimeVal}
+          onChange={handleTimeSet}
+          mode="time"
+          is24Hour={true}
+          minuteInterval={30}
+        />
       </View>
     </View>
   );

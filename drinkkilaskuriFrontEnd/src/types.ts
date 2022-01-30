@@ -50,7 +50,7 @@ export interface SettingsModalProps {
   closeModal: () => void;
   saveSettings: () => void;
   changeSleepTime: (time: Date) => void;
-  sleepTime: Date;
+  sleepTime: Date | undefined;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
   handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
@@ -61,7 +61,7 @@ export interface SettingsModalProps {
 
 export interface SettingsProps {
   changeSleepTime: (time: Date) => void;
-  sleepTime: Date;
+  sleepTime: Date | undefined;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
   handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
@@ -88,7 +88,7 @@ export interface SleepTimeProps {
   toggleTimePicker: () => void;
   showClock: boolean;
   changeSleepTime: (time: Date) => void;
-  sleepTime: Date;
+  sleepTime: Date | undefined;
 }
 
 export interface MessageProps {
@@ -114,7 +114,7 @@ export interface MaxDrinkCountProps {
   handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
 }
 
-export type Bodyweight = string | undefined;
+export type Bodyweight = string;
 export type SetBodyweight = (bw: Bodyweight) => void;
 export interface BodySizeProps {
   bodyweight: Bodyweight;

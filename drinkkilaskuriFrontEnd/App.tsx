@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, useColorScheme, View } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -66,11 +66,12 @@ const App = () => {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
   const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
-  const [sleepTime, setSleepTime] = useState<Date>(new Date());
+  const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [message, setMessage] = useState<string | null>(null);
+  const [reminderMessage, setReminderMessage] = useState<string>();
   const [remindInterval, setRemindInterval] =
     useState<RemindInterval>('afterMax');
-  const [bodyweight, setBodyweight] = useState<Bodyweight>();
+  const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -85,6 +86,20 @@ const App = () => {
   };
 
   const addDrink = (alcPercent: number, amount: number, name?: string) => {
+    if (sleepTime) {
+      const sleepTimeHMValue =
+        sleepTime.getHours() * 100 + sleepTime.getMinutes();
+      const currTimeHMValue =
+        new Date().getHours() * 100 + new Date().getMinutes();
+      const sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
+
+      if (sleepTimeExceeded) {
+        setReminderMessage(
+          'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.'
+        );
+      }
+    }
+
     const newDrink: DrinkType = {
       amount,
       alcPercent,

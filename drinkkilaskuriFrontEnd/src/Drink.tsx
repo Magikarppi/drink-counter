@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
+    // different flexes for star n trash 3 3 3 1 1 ?
   },
   text: {
     fontSize: 15,
