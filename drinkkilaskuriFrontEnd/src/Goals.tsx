@@ -7,16 +7,29 @@ import { GoalsProps } from './types';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '40%',
-    height: '100%',
-  },
-  textWrapper: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '100%',
+  },
+  contentWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '40%',
+  },
+  textWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    marginHorizontal: 5,
+  },
+  iconWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    marginHorizontal: 5,
   },
   text: {
     fontSize: 20,
@@ -40,18 +53,24 @@ const Goals = ({ drinkList, drinkLimit }: GoalsProps) => {
     return null;
   }
 
+  console.log('drinklimit', drinkLimit);
+
   return (
     <View style={styles.container}>
-      <View style={styles.textWrapper}>
-        <Text
-          style={styles.text}
-        >{`${drinkList?.length} / ${drinkLimit}`}</Text>
+      <View style={styles.contentWrapper}>
+        <View style={styles.textWrapper}>
+          <Text
+            style={styles.text}
+          >{`${drinkList?.length} / ${drinkLimit}`}</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          {noMoreDrinks ? (
+            <MaterialIcons name="no-drinks" size={20} color={colors.beige} />
+          ) : (
+            <Entypo name="drink" size={20} color={colors.beige} />
+          )}
+        </View>
       </View>
-      {noMoreDrinks ? (
-        <MaterialIcons name="no-drinks" size={20} color={colors.beige} />
-      ) : (
-        <Entypo name="drink" size={20} color={colors.beige} />
-      )}
     </View>
   );
 };

@@ -10,7 +10,7 @@ const Drinks = ({ drinkList, addToFavorites, removeDrink }: DrinksProps) => {
 
   return (
     <ScrollView>
-      <View>
+      <View style={{ flexDirection: 'column-reverse' }}>
         {drinkList.map((drink, i) => {
           return (
             <Drink
