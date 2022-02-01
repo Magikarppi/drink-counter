@@ -24,6 +24,7 @@ import {
   Bodyweight,
   DrinkType,
   FavDrinkType,
+  FavFolderIconStyle,
   RemindInterval,
 } from './src/types';
 import { randomId } from './src/utils';
@@ -60,11 +61,18 @@ const styles = StyleSheet.create({
 //   );
 // };
 
+const defaultFavFolderStyle = {
+  color: colors.beige,
+  size: 50,
+};
+
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
   const [favorites, setFavorites] = useState<FavDrinkType[] | null>(null);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
+  const [favFolderIconStyle, setFavFolderIconStyle] =
+    useState<FavFolderIconStyle>(defaultFavFolderStyle);
   const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [message, setMessage] = useState<string | null>(null);
@@ -148,12 +156,25 @@ const App = () => {
       }
       setTimeout(() => {
         setMessage(null);
+        return;
       }, 2400);
     }
   };
 
   const closeFavorites = () => {
     setShowFavorites(false);
+    return;
+  };
+
+  const flashFavFolderStyle = () => {
+    const tempStyle: FavFolderIconStyle = {
+      color: colors.white,
+      size: 55,
+    };
+    setFavFolderIconStyle(tempStyle);
+    setTimeout(() => {
+      setFavFolderIconStyle(defaultFavFolderStyle);
+    }, 200);
   };
 
   const addToFavorites = (drink: DrinkType) => {
@@ -165,6 +186,10 @@ const App = () => {
     } else {
       setFavorites([drink]);
     }
+    setTimeout(() => {
+      flashFavFolderStyle();
+    }, 200);
+    return;
   };
 
   const removeFavorite = (drink: FavDrinkType) => {
@@ -220,7 +245,11 @@ const App = () => {
           removeFavorite={removeFavorite}
         />
         <View style={styles.section}>
-          <AddDrink addDrink={addDrink} openFavorites={openFavorites} />
+          <AddDrink
+            addDrink={addDrink}
+            openFavorites={openFavorites}
+            favFolderIconStyle={favFolderIconStyle}
+          />
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 30 }}>
           <Goals drinkList={drinklist} drinkLimit={maxDrinkCount} />

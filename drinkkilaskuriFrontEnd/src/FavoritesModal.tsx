@@ -28,22 +28,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
-    overflow: 'hidden'
-
+    overflow: 'hidden',
   },
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-    height: 50
+    height: 50,
   },
   buttonElement: {
-    width: '33%'
-  }
+    width: '33%',
+  },
 });
 
-const FavoritesModal = ({closeModal, showModal, addDrink, favorites, removeFavorite}: FavoritesModalProps) => {
+const FavoritesModal = ({
+  closeModal,
+  showModal,
+  addDrink,
+  favorites,
+  removeFavorite,
+}: FavoritesModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -54,7 +59,11 @@ const FavoritesModal = ({closeModal, showModal, addDrink, favorites, removeFavor
               <CloseButton closeModal={closeModal} />
             </View>
           </View>
-          <Favorites favorites={favorites} addDrink={addDrink} removeFavorite={removeFavorite} />
+          <Favorites
+            favorites={favorites}
+            addDrink={addDrink}
+            removeFavorite={removeFavorite}
+          />
         </View>
       </View>
     </Modal>

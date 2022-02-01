@@ -9,6 +9,7 @@ export type AddDrinkFunc = (
 export interface AddDrinkProps {
   addDrink: AddDrinkFunc;
   openFavorites: () => void;
+  favFolderIconStyle: FavFolderIconStyle;
 }
 
 export interface DrinkType {
@@ -25,6 +26,11 @@ export interface FavDrinkType {
   amount: number;
   id: number;
   timeConsumed?: Date;
+}
+
+export interface FavFolderIconStyle {
+  color: string;
+  size: number;
 }
 export interface DrinkProps {
   drink: DrinkType;

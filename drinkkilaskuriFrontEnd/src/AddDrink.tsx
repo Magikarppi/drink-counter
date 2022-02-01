@@ -94,7 +94,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
+const AddDrink = ({
+  addDrink,
+  openFavorites,
+  favFolderIconStyle,
+}: AddDrinkProps) => {
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
   const [drinkName, setDrinkName] = useState<string>();
@@ -162,8 +166,8 @@ const AddDrink = ({ addDrink, openFavorites }: AddDrinkProps) => {
           <TouchableOpacity onPress={openFavorites}>
             <MaterialCommunityIcons
               name="folder-star-outline"
-              size={50}
-              color={colors.beige}
+              size={favFolderIconStyle.size}
+              color={favFolderIconStyle.color}
             />
           </TouchableOpacity>
         </View>
