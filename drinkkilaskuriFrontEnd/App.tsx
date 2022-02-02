@@ -18,6 +18,7 @@ import FavoritesModal from './src/FavoritesModal';
 import Goals from './src/Goals';
 import HeaderMain from './src/HeaderMain';
 import Message from './src/Message';
+import ReminderModal from './src/ReminderModal';
 import SettingsModal from './src/Settings/SettingsModal';
 import { colors } from './src/themes';
 import {
@@ -69,6 +70,7 @@ const defaultFavFolderStyle = {
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
   const [favorites, setFavorites] = useState<FavDrinkType[] | null>(null);
+  const [showReminder, setShowReminder] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
   const [favFolderIconStyle, setFavFolderIconStyle] =
@@ -105,6 +107,12 @@ const App = () => {
         setReminderMessage(
           'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.'
         );
+      }
+    }
+
+    if (maxDrinkCount && drinklist) {
+      if (drinklist?.length >= parseInt(maxDrinkCount, 10)) {
+        openReminder();
       }
     }
 
@@ -219,11 +227,20 @@ const App = () => {
     setRemindInterval(interval);
   };
 
+  const openReminder = () => {
+    setShowReminder(true);
+  };
+
+  const closeReminder = () => {
+    setShowReminder(false);
+  };
+
   return (
     <View style={backgroundStyle}>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>
+        <ReminderModal showModal={showReminder} closeModal={closeReminder} />
         <SettingsModal
           bodyweight={bodyweight}
           setBodyweight={setBodyweight}

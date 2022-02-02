@@ -126,3 +126,8 @@ export interface BodySizeProps {
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
 }
+
+export interface ReminderModalProps {
+  showModal: boolean;
+  closeModal: () => void;
+}
