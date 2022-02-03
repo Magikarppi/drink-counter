@@ -59,9 +59,9 @@ const Goals = ({ drinkList, drinkLimit }: GoalsProps) => {
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
         <View style={styles.textWrapper}>
-          <Text
-            style={styles.text}
-          >{`${drinkList?.length} / ${drinkLimit}`}</Text>
+          <Text style={styles.text}>{`${
+            drinkList ? drinkList?.length : '0'
+          } / ${drinkLimit}`}</Text>
         </View>
         <View style={styles.iconWrapper}>
           {noMoreDrinks ? (
