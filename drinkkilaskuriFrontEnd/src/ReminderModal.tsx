@@ -70,7 +70,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReminderModal = ({ showModal, closeModal }: ReminderModalProps) => {
+const ReminderModal = ({
+  showModal,
+  continueAdd,
+  cancelAdd,
+}: ReminderModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -85,12 +89,12 @@ const ReminderModal = ({ showModal, closeModal }: ReminderModalProps) => {
             </Text>
           </View>
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={closeModal}>
+            <TouchableOpacity onPress={cancelAdd}>
               <View style={{ ...styles.button, backgroundColor: '#7FFF00' }}>
                 <Text style={styles.buttonText}>Peruuta</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={closeModal}>
+            <TouchableOpacity onPress={continueAdd}>
               <View style={{ ...styles.button, backgroundColor: '#c74a63' }}>
                 <Text style={styles.buttonText}>Lisää</Text>
               </View>

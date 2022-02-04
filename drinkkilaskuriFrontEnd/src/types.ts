@@ -130,4 +130,6 @@ export interface BodySizeProps {
 export interface ReminderModalProps {
   showModal: boolean;
   closeModal: () => void;
+  cancelAdd: () => void;
+  continueAdd: () => void;
 }

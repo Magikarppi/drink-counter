@@ -79,6 +79,7 @@ const App = () => {
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [message, setMessage] = useState<string | null>(null);
   const [reminderMessage, setReminderMessage] = useState<string>();
+  const [continueAddDrink, setContinueAddDrink] = useState<boolean>(true);
   const [remindInterval, setRemindInterval] =
     useState<RemindInterval>('afterMax');
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
@@ -115,6 +116,10 @@ const App = () => {
         openReminder();
       }
     }
+
+    // if (!continueAddDrink) {
+    //   return;
+    // }
 
     const newDrink: DrinkType = {
       amount,
@@ -235,12 +240,27 @@ const App = () => {
     setShowReminder(false);
   };
 
+  const handleCancelAddDrink = () => {
+    setContinueAddDrink(false);
+    closeReminder();
+  };
+
+  const handleContinueAddDrink = () => {
+    setContinueAddDrink(true);
+    closeReminder();
+  };
+
   return (
     <View style={backgroundStyle}>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>
-        <ReminderModal showModal={showReminder} closeModal={closeReminder} />
+        <ReminderModal
+          showModal={showReminder}
+          closeModal={closeReminder}
+          cancelAdd={handleCancelAddDrink}
+          continueAdd={handleContinueAddDrink}
+        />
         <SettingsModal
           bodyweight={bodyweight}
           setBodyweight={setBodyweight}
