@@ -85,6 +85,7 @@ const App = () => {
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
+  const [actionCalled, setActionCalled] = useState<string | null>(null);
 
   //   useEffect(() => {
   //     setDarkMode(colorScheme === "dark");
@@ -96,7 +97,11 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const addDrink = (alcPercent: number, amount: number, name?: string) => {
+  const addDrink = async (
+    alcPercent: number,
+    amount: number,
+    name?: string
+  ) => {
     if (sleepTime) {
       const sleepTimeHMValue =
         sleepTime.getHours() * 100 + sleepTime.getMinutes();
@@ -113,7 +118,12 @@ const App = () => {
 
     if (maxDrinkCount && drinklist) {
       if (drinklist?.length >= parseInt(maxDrinkCount, 10)) {
-        openReminder();
+        // await handleReminderAction();
+        const action = await openReminder();
+        console.log('action:', action);
+        if (action === 'cancel') {
+          return;
+        }
       }
     }
 
@@ -137,6 +147,7 @@ const App = () => {
       setDrinkList([newDrink]);
     }
     Keyboard.dismiss();
+    setActionCalled(null);
     return;
   };
 
@@ -232,8 +243,17 @@ const App = () => {
     setRemindInterval(interval);
   };
 
-  const openReminder = () => {
+  const openReminder = async () => {
     setShowReminder(true);
+    if (!actionCalled) {
+      setInterval(() => {
+        console.log('setInterval runs with actionCalled:', actionCalled);
+        return new Promise((resolve) => {
+          closeReminder();
+          resolve(actionCalled);
+        });
+      }, 100);
+    }
   };
 
   const closeReminder = () => {
@@ -250,6 +270,11 @@ const App = () => {
     closeReminder();
   };
 
+  const handleAction = (action: string) => {
+    console.log('handleAction');
+    setActionCalled(action);
+  };
+
   return (
     <View style={backgroundStyle}>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
@@ -260,6 +285,7 @@ const App = () => {
           closeModal={closeReminder}
           cancelAdd={handleCancelAddDrink}
           continueAdd={handleContinueAddDrink}
+          actionHappened={handleAction}
         />
         <SettingsModal
           bodyweight={bodyweight}

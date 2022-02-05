@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity, Text } from 'react-native';
 import { colors } from './themes';
 import { ReminderModalProps } from './types';
@@ -70,11 +70,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReminderModal = ({
-  showModal,
-  continueAdd,
-  cancelAdd,
-}: ReminderModalProps) => {
+const ReminderModal = ({ showModal, actionHappened }: ReminderModalProps) => {
+  // useEffect(() => {
+  //   await handleAction()
+  // }, [])
+
+  const handleAction = (action: string) => {
+    switch (action) {
+      case 'cancel':
+        return actionHappened('cancel');
+      case 'continue':
+        return actionHappened('continue');
+    }
+  };
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -89,12 +97,12 @@ const ReminderModal = ({
             </Text>
           </View>
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={cancelAdd}>
+            <TouchableOpacity onPress={() => handleAction('cancel')}>
               <View style={{ ...styles.button, backgroundColor: '#7FFF00' }}>
                 <Text style={styles.buttonText}>Peruuta</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={continueAdd}>
+            <TouchableOpacity onPress={() => handleAction('continue')}>
               <View style={{ ...styles.button, backgroundColor: '#c74a63' }}>
                 <Text style={styles.buttonText}>Lisää</Text>
               </View>

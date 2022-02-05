@@ -132,4 +132,5 @@ export interface ReminderModalProps {
   closeModal: () => void;
   cancelAdd: () => void;
   continueAdd: () => void;
+  actionHappened: (action: string) => void;
 }

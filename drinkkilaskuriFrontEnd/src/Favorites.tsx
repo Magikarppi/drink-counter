@@ -14,7 +14,7 @@ import { FavoritesProps } from './types';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
   },
@@ -38,10 +38,19 @@ const styles = StyleSheet.create({
   },
   tableTitlesWrapper: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '100%',
     height: 20,
+    // backgroundColor: 'white',
+  },
+  titleTextElements: {
+    width: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: colors.violet,
   },
   tableTitleText: {
     fontSize: 10,
@@ -51,7 +60,7 @@ const styles = StyleSheet.create({
   section: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '20%',
+    width: '30%',
     height: '100%',
     borderWidth: 1,
     borderRadius: 2,
@@ -77,10 +86,27 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.tableTitlesWrapper}>
-        <Text style={styles.tableTitleText}>Nimi</Text>
-        <Text style={styles.tableTitleText}>%</Text>
-        <Text style={styles.tableTitleText}>Määrä</Text>
+      <View
+        style={{
+          width: '90%',
+          height: '10%',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          backgroundColor: 'green',
+        }}
+      >
+        <View style={styles.tableTitlesWrapper}>
+          <View style={{ ...styles.titleTextElements, width: '40%' }}>
+            <Text style={styles.tableTitleText}>Nimi</Text>
+          </View>
+          <View style={styles.titleTextElements}>
+            <Text style={styles.tableTitleText}>%</Text>
+          </View>
+          <View style={styles.titleTextElements}>
+            <Text style={styles.tableTitleText}>Määrä</Text>
+          </View>
+        </View>
       </View>
       <ScrollView
         decelerationRate="fast"
@@ -90,40 +116,42 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
           return (
             <View style={styles.drinkWrapper} key={Math.random()}>
               <View style={styles.drinkContentWrapper}>
-                <TouchableOpacity
-                  onPress={() =>
-                    addDrink(drink.alcPercent, drink.amount, drink.name)
-                  }
+                <View
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                  }}
                 >
-                  <View
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      flexDirection: 'row',
-                      justifyContent: 'space-evenly',
-                      alignItems: 'center',
-                    }}
+                  <TouchableOpacity
+                    onPress={() =>
+                      addDrink(drink.alcPercent, drink.amount, drink.name)
+                    }
                   >
-                    <View style={{ ...styles.section, width: '60%' }}>
-                      <Text style={styles.drinkText}>{drink.name}</Text>
+                    <View style={{ flexDirection: 'row', width: '80%' }}>
+                      <View style={{ ...styles.section, width: '40%' }}>
+                        <Text style={styles.drinkText}>{drink.name}</Text>
+                      </View>
+                      <View style={styles.section}>
+                        <Text style={styles.drinkText}>{drink.alcPercent}</Text>
+                      </View>
+                      <View style={styles.section}>
+                        <Text style={styles.drinkText}>{drink.amount}</Text>
+                      </View>
                     </View>
-                    <View style={styles.section}>
-                      <Text style={styles.drinkText}>{drink.alcPercent}</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => removeFavorite(drink)}>
+                    <View style={{ ...styles.section, width: 40 }}>
+                      <Ionicons
+                        name="trash-outline"
+                        size={30}
+                        color={colors.violet}
+                      />
                     </View>
-                    <View style={styles.section}>
-                      <Text style={styles.drinkText}>{drink.amount}</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => removeFavorite(drink)}>
-                  <View style={styles.trashContainer}>
-                    <Ionicons
-                      name="trash-outline"
-                      size={30}
-                      color={colors.violet}
-                    />
-                  </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           );

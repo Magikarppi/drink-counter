@@ -137,6 +137,7 @@ const AddDrink = ({
               keyboardType="decimal-pad"
               placeholderTextColor={'grey'}
               textAlign="center"
+              maxLength={4}
               enablesReturnKeyAutomatically={true}
             />
           </View>
