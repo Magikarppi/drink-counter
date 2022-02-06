@@ -1,5 +1,9 @@
 export type RType = 0.68 | 0.55;
 
+export interface CloseButtonProps {
+  closeModal: () => void;
+}
+
 export type AddDrinkFunc = (
   alcPercent: number,
   amount: number,
