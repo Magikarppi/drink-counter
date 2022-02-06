@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '90%',
     height: 45,
-    backgroundColor: 'orange',
+    // backgroundColor: 'orange',
   },
   drinkContentWrapper: {
     flexDirection: 'row',
@@ -63,16 +63,18 @@ const styles = StyleSheet.create({
     width: '30%',
     height: '100%',
     padding: 1,
-    borderWidth: 1,
-    borderRadius: 2,
+    borderRightWidth: 1,
+    borderRightRadius: 2,
     borderColor: colors.violet,
   },
   trashContainer: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: 40,
     height: '100%',
-    // backgroundColor: 'cyan',
+    padding: 1,
+    backgroundColor: 'white',
   },
   drinkText: {
     fontSize: 15,
@@ -102,50 +104,42 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
           return (
             <View style={styles.drinkWrapper} key={Math.random()}>
               <View style={styles.drinkContentWrapper}>
-                <View
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    flexDirection: 'row',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-                  }}
+                <TouchableOpacity
+                  onPress={() =>
+                    addDrink(drink.alcPercent, drink.amount, drink.name)
+                  }
                 >
-                  <TouchableOpacity
-                    onPress={() =>
-                      addDrink(drink.alcPercent, drink.amount, drink.name)
-                    }
-                  >
-                    <View style={{ flexDirection: 'row', width: '80%' }}>
-                      <View style={{ ...styles.section, width: '50%' }}>
-                        {drink.name ? (
-                          <Text style={styles.drinkText}>{drink.name}</Text>
-                        ) : (
-                          <Text style={styles.drinkTextNoName}>nimetön</Text>
-                        )}
-                      </View>
-                      <View style={styles.section}>
-                        <Text
-                          style={styles.drinkText}
-                        >{`${drink.alcPercent} %`}</Text>
-                      </View>
-                      <View style={styles.section}>
-                        <Text
-                          style={styles.drinkText}
-                        >{`${drink.amount} dl`}</Text>
-                      </View>
+                  <View style={{ flexDirection: 'row', width: '80%' }}>
+                    <View style={{ ...styles.section, width: '50%' }}>
+                      {drink.name ? (
+                        <Text style={styles.drinkText}>{drink.name}</Text>
+                      ) : (
+                        <Text style={styles.drinkTextNoName}>nimetön</Text>
+                      )}
                     </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => removeFavorite(drink)}>
-                    <View style={{ ...styles.section, width: 40 }}>
+                    <View style={styles.section}>
+                      <Text
+                        style={styles.drinkText}
+                      >{`${drink.alcPercent} %`}</Text>
+                    </View>
+                    <View style={styles.section}>
+                      <Text
+                        style={styles.drinkText}
+                      >{`${drink.amount} dl`}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => removeFavorite(drink)}>
+                  <View style={styles.trashContainer}>
+                    <View>
                       <Ionicons
                         name="trash-outline"
                         size={30}
                         color={colors.violet}
                       />
                     </View>
-                  </TouchableOpacity>
-                </View>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           );

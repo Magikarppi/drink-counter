@@ -212,7 +212,7 @@ const App = () => {
     }
     setTimeout(() => {
       flashFavFolderStyle();
-    }, 200);
+    }, 100);
     return;
   };
 
