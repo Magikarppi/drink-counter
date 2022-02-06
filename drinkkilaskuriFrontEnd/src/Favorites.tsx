@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '30%',
     height: '100%',
+    padding: 1,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: colors.violet,
@@ -76,6 +77,13 @@ const styles = StyleSheet.create({
   drinkText: {
     fontSize: 15,
     color: colors.white,
+    textAlign: 'center',
+  },
+  drinkTextNoName: {
+    fontSize: 15,
+    color: 'grey',
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
 });
 
@@ -109,8 +117,12 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
                     }
                   >
                     <View style={{ flexDirection: 'row', width: '80%' }}>
-                      <View style={{ ...styles.section, width: '40%' }}>
-                        <Text style={styles.drinkText}>{drink.name}</Text>
+                      <View style={{ ...styles.section, width: '50%' }}>
+                        {drink.name ? (
+                          <Text style={styles.drinkText}>{drink.name}</Text>
+                        ) : (
+                          <Text style={styles.drinkTextNoName}>nimetön</Text>
+                        )}
                       </View>
                       <View style={styles.section}>
                         <Text
