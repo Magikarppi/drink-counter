@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
 
 const Message = ({ message }: MessageProps) => {
   if (!message) {
-    return <View style={{ height: styles.container.height }} />;
+    // return <View style={{ height: styles.container.height }} />;
+    return null;
   }
 
   return (
