@@ -142,7 +142,7 @@ const AddDrink = ({
             />
           </View>
           <View style={styles.inputBox}>
-            <Text style={styles.inputText}>cl</Text>
+            <Text style={styles.inputText}>dl</Text>
             <TextInput
               style={styles.input}
               onChangeText={setAmount}

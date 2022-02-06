@@ -47,10 +47,10 @@ const Drink = ({ drink, addToFavorites, removeDrink }: DrinkProps) => {
           <Text style={styles.text}>{drink.name}</Text>
         </View>
         <View style={{ ...styles.property, flex: 2 }}>
-          <Text style={styles.text}>{`${drink.alcPercent}%`}</Text>
+          <Text style={styles.text}>{`${drink.alcPercent} %`}</Text>
         </View>
         <View style={{ ...styles.property, flex: 2 }}>
-          <Text style={styles.text}>{`${drink.amount}dl`}</Text>
+          <Text style={styles.text}>{`${drink.amount} dl`}</Text>
         </View>
         <TouchableOpacity onPress={() => addToFavorites(drink)}>
           <View style={{ ...styles.property, flex: 2 }}>
