@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React, { useState } from 'react';
 import { StyleSheet, useColorScheme, View, Keyboard } from 'react-native';
 
@@ -79,13 +69,11 @@ const App = () => {
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [message, setMessage] = useState<string | null>(null);
   const [reminderMessage, setReminderMessage] = useState<string>();
-  const [continueAddDrink, setContinueAddDrink] = useState<boolean>(true);
   const [remindInterval, setRemindInterval] =
     useState<RemindInterval>('afterMax');
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
-  const [actionCalled, setActionCalled] = useState<string | null>(null);
 
   //   useEffect(() => {
   //     setDarkMode(colorScheme === "dark");
@@ -102,6 +90,7 @@ const App = () => {
     amount: number,
     name?: string
   ) => {
+    console.log('sleeptme', sleepTime);
     if (sleepTime) {
       const sleepTimeHMValue =
         sleepTime.getHours() * 100 + sleepTime.getMinutes();
@@ -109,6 +98,7 @@ const App = () => {
         new Date().getHours() * 100 + new Date().getMinutes();
       const sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
 
+      // Tee sleeptimelle oma sleepTimeReminderMessage
       if (sleepTimeExceeded) {
         setReminderMessage(
           'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.'
@@ -118,12 +108,7 @@ const App = () => {
 
     if (maxDrinkCount && drinklist) {
       if (drinklist?.length >= parseInt(maxDrinkCount, 10)) {
-        // await handleReminderAction();
-        const action = await openReminder();
-        console.log('action:', action);
-        if (action === 'cancel') {
-          return;
-        }
+        openReminder();
       }
     }
 
@@ -147,7 +132,6 @@ const App = () => {
       setDrinkList([newDrink]);
     }
     Keyboard.dismiss();
-    setActionCalled(null);
     return;
   };
 
@@ -229,50 +213,45 @@ const App = () => {
     return;
   };
 
-  const saveSettings = () => {
-    console.log('save settings');
-  };
-
   const changeSleepTime = (time: Date) => {
     if (time) {
       return setSleepTime(time);
     }
   };
 
+  const handleSetReminder = (reminder: string) => {
+    setReminderMessage(reminder);
+  };
+
+  console.log('rm', reminderMessage?.length);
+
   const selectRemindInterval = (interval: RemindInterval) => {
     setRemindInterval(interval);
   };
 
-  const openReminder = async () => {
+  const openReminder = () => {
     setShowReminder(true);
-    if (!actionCalled) {
-      setInterval(() => {
-        console.log('setInterval runs with actionCalled:', actionCalled);
-        return new Promise((resolve) => {
-          closeReminder();
-          resolve(actionCalled);
-        });
-      }, 100);
-    }
   };
 
   const closeReminder = () => {
+    console.log('close');
     setShowReminder(false);
   };
 
   const handleCancelAddDrink = () => {
-    setContinueAddDrink(false);
-    closeReminder();
+    // setContinueAddDrink(false);
+    // closeReminder();
   };
 
   const handleContinueAddDrink = () => {
-    setContinueAddDrink(true);
-    closeReminder();
+    // setContinueAddDrink(true);
+    // closeReminder();
   };
 
   const handleAction = (action: string) => {
-    console.log('handleAction');
-    setActionCalled(action);
+    console.log('handleAction', action);
+    // setActionCalled(action);
+    closeReminder();
   };
 
   return (
@@ -286,6 +265,7 @@ const App = () => {
           cancelAdd={handleCancelAddDrink}
           continueAdd={handleContinueAddDrink}
           actionHappened={handleAction}
+          reminderMessage={reminderMessage}
         />
         <SettingsModal
           bodyweight={bodyweight}
@@ -294,11 +274,12 @@ const App = () => {
           handleSetMaxDrinkCount={setMaxDrinkCount}
           showModal={showSettings}
           closeModal={closeSettings}
-          saveSettings={saveSettings}
           sleepTime={sleepTime}
           changeSleepTime={changeSleepTime}
           selectRemindInterval={selectRemindInterval}
           selectedRemindInterval={remindInterval}
+          reminderMessage={reminderMessage}
+          setReminderMessage={setReminderMessage}
         />
         <FavoritesModal
           showModal={showFavorites}

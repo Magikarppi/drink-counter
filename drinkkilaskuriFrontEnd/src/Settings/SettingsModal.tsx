@@ -51,6 +51,8 @@ const SettingsModal = ({
   maxDrinkCount,
   bodyweight,
   setBodyweight,
+  reminderMessage,
+  setReminderMessage,
 }: SettingsModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
@@ -75,6 +77,8 @@ const SettingsModal = ({
             changeSleepTime={changeSleepTime}
             selectRemindInterval={selectRemindInterval}
             selectedRemindInterval={selectedRemindInterval}
+            reminderMessage={reminderMessage}
+            setReminderMessage={setReminderMessage}
           />
         </View>
       </View>

@@ -61,6 +61,8 @@ const Settings = ({
   maxDrinkCount,
   bodyweight,
   setBodyweight,
+  reminderMessage,
+  setReminderMessage,
 }: SettingsProps) => {
   const [showClock, setShowClock] = useState<boolean>(false);
 
@@ -87,6 +89,8 @@ const Settings = ({
           <Reminder
             selectRemindInterval={selectRemindInterval}
             selectedRemindInterval={selectedRemindInterval}
+            reminderMessage={reminderMessage}
+            setReminderMessage={setReminderMessage}
           />
         </View>
         <View style={styles.section}>

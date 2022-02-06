@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import CheckBox from '../Buttons/CheckBox';
 import { colors } from '../themes';
-import { ReminderProps } from '../types';
+import { ReminderSettingProps } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reminder = ({
+const ReminderSetting = ({
   selectRemindInterval,
   selectedRemindInterval,
-}: ReminderProps) => {
-  const [reminder, setReminder] = useState<string>();
-
+  setReminderMessage,
+  reminderMessage,
+}: ReminderSettingProps) => {
   return (
     //tarviiko containeria?
     <View style={styles.container}>
@@ -78,14 +78,13 @@ const Reminder = ({
         <View style={{ width: 250 }}>
           <TextInput
             style={styles.mainInput}
-            onChangeText={setReminder}
-            value={reminder}
+            onChangeText={setReminderMessage}
+            value={reminderMessage}
             placeholder="Oisko sittenkin vettä tähän väliin?"
             keyboardType="default"
             placeholderTextColor={'#d9d9d9'}
             textAlign="center"
-            // multiline={true}
-            // numberOfLines={2}
+            maxLength={100}
           />
         </View>
         <Text style={styles.secondaryInputText}>Muistuta minua:</Text>
@@ -110,4 +109,4 @@ const Reminder = ({
   );
 };
 
-export default Reminder;
+export default ReminderSetting;

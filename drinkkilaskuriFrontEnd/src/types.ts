@@ -58,7 +58,6 @@ export interface GoalsProps {
 export interface SettingsModalProps {
   showModal: boolean;
   closeModal: () => void;
-  saveSettings: () => void;
   changeSleepTime: (time: Date) => void;
   sleepTime: Date | undefined;
   selectedRemindInterval: RemindInterval;
@@ -67,6 +66,8 @@ export interface SettingsModalProps {
   maxDrinkCount: MaxDrinkCount;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
+  reminderMessage: string | undefined;
+  setReminderMessage: (message: string) => void;
 }
 
 export interface SettingsProps {
@@ -78,6 +79,8 @@ export interface SettingsProps {
   maxDrinkCount: MaxDrinkCount;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
+  reminderMessage: string | undefined;
+  setReminderMessage: (message: string) => void;
 }
 
 export interface FavoritesModalProps {
@@ -112,9 +115,11 @@ export interface CheckBoxProps {
 
 export type RemindInterval = 'afterEvery' | 'afterMax';
 export type SelectRemindInterval = (intervall: RemindInterval) => void;
-export interface ReminderProps {
+export interface ReminderSettingProps {
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
+  reminderMessage: string | undefined;
+  setReminderMessage: (message: string) => void;
 }
 
 export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
@@ -137,4 +142,5 @@ export interface ReminderModalProps {
   cancelAdd: () => void;
   continueAdd: () => void;
   actionHappened: (action: string) => void;
+  reminderMessage: string | undefined;
 }

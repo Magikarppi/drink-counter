@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity, Text } from 'react-native';
 import { colors } from './themes';
 import { ReminderModalProps } from './types';
@@ -70,7 +70,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReminderModal = ({ showModal, actionHappened }: ReminderModalProps) => {
+const ReminderModal = ({
+  showModal,
+  actionHappened,
+  reminderMessage,
+}: ReminderModalProps) => {
   // useEffect(() => {
   //   await handleAction()
   // }, [])
@@ -92,9 +96,13 @@ const ReminderModal = ({ showModal, actionHappened }: ReminderModalProps) => {
             <Text style={styles.mainText}>
               Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?
             </Text>
-            <Text style={styles.reminderText}>
-              "Et jaksa sitä krapulaa huomenna. Elä juo ennää."
-            </Text>
+            {reminderMessage ? (
+              <Text style={styles.reminderText}>{reminderMessage}</Text>
+            ) : (
+              <Text style={styles.reminderText}>
+                "Et jaksa sitä krapulaa huomenna. Elä juo ennää."
+              </Text>
+            )}
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity onPress={() => handleAction('cancel')}>
