@@ -86,28 +86,6 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          width: '90%',
-          height: '10%',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          backgroundColor: 'green',
-        }}
-      >
-        <View style={styles.tableTitlesWrapper}>
-          <View style={{ ...styles.titleTextElements, width: '40%' }}>
-            <Text style={styles.tableTitleText}>Nimi</Text>
-          </View>
-          <View style={styles.titleTextElements}>
-            <Text style={styles.tableTitleText}>%</Text>
-          </View>
-          <View style={styles.titleTextElements}>
-            <Text style={styles.tableTitleText}>Määrä</Text>
-          </View>
-        </View>
-      </View>
       <ScrollView
         decelerationRate="fast"
         contentContainerStyle={{ flexGrow: 1 }}
@@ -135,10 +113,14 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
                         <Text style={styles.drinkText}>{drink.name}</Text>
                       </View>
                       <View style={styles.section}>
-                        <Text style={styles.drinkText}>{drink.alcPercent}</Text>
+                        <Text
+                          style={styles.drinkText}
+                        >{`${drink.alcPercent} %`}</Text>
                       </View>
                       <View style={styles.section}>
-                        <Text style={styles.drinkText}>{drink.amount}</Text>
+                        <Text
+                          style={styles.drinkText}
+                        >{`${drink.amount} dl`}</Text>
                       </View>
                     </View>
                   </TouchableOpacity>
