@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderBottomColor: colors.violet,
     borderWidth: 2,
+    color: 'white',
   },
   secondaryInput: {
     justifyContent: 'center',
@@ -74,15 +75,19 @@ const Reminder = ({
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.mainInputText}>Muistutus itsellesi</Text>
-        <TextInput
-          style={styles.mainInput}
-          onChangeText={setReminder}
-          value={reminder}
-          placeholder="Oisko sittenkin vettä tähän väliin?"
-          keyboardType="default"
-          placeholderTextColor={'#d9d9d9'}
-          textAlign="center"
-        />
+        <View style={{ width: 250 }}>
+          <TextInput
+            style={styles.mainInput}
+            onChangeText={setReminder}
+            value={reminder}
+            placeholder="Oisko sittenkin vettä tähän väliin?"
+            keyboardType="default"
+            placeholderTextColor={'#d9d9d9'}
+            textAlign="center"
+            // multiline={true}
+            // numberOfLines={2}
+          />
+        </View>
         <Text style={styles.secondaryInputText}>Muistuta minua:</Text>
         <View style={styles.checkBoxContainer}>
           <View style={styles.checkBoxElementsWrapper}>
