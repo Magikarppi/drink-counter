@@ -79,6 +79,10 @@ const ReminderModal = ({
   //   await handleAction()
   // }, [])
 
+  const sleepTimeReminderOnly = reminderMessage?.startsWith(
+    'Viimeaikainen nukkumaanmenoaika'
+  );
+
   const handleAction = (action: string) => {
     switch (action) {
       case 'cancel':
@@ -94,7 +98,9 @@ const ReminderModal = ({
         <View style={styles.elementsContainer}>
           <View style={styles.mainTextWrapper}>
             <Text style={styles.mainText}>
-              Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?
+              {sleepTimeReminderOnly
+                ? 'Olet vaarassa sekoittaa unirytmiäsi'
+                : 'Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?'}
             </Text>
             {reminderMessage ? (
               <Text style={styles.reminderText}>{reminderMessage}</Text>

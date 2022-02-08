@@ -98,17 +98,24 @@ const App = () => {
         new Date().getHours() * 100 + new Date().getMinutes();
       const sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
 
-      // Tee sleeptimelle oma sleepTimeReminderMessage
-      if (sleepTimeExceeded) {
-        setReminderMessage(
-          'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.'
-        );
-      }
-    }
+      let drinkLimitReached = false;
 
-    if (maxDrinkCount && drinklist) {
-      if (drinklist?.length >= parseInt(maxDrinkCount, 10)) {
-        openReminder();
+      if (maxDrinkCount && drinklist) {
+        drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
+        if (drinkLimitReached) {
+          openReminder();
+        }
+      }
+
+      //
+      if (!drinkLimitReached && sleepTimeExceeded) {
+        const sleepReminderMessage =
+          'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.';
+        setReminderMessage((prevState) => {
+          return prevState
+            ? `${prevState} + ${sleepReminderMessage}`
+            : sleepReminderMessage;
+        });
       }
     }
 

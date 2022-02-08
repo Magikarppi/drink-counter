@@ -1,3 +1,5 @@
+import { SetStateAction } from 'react';
+
 export type RType = 0.68 | 0.55;
 
 export interface CloseButtonProps {
@@ -119,7 +121,7 @@ export interface ReminderSettingProps {
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
   reminderMessage: string | undefined;
-  setReminderMessage: (message: string) => void;
+  setReminderMessage: (message: string) => SetStateAction<string | undefined>;
 }
 
 export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
