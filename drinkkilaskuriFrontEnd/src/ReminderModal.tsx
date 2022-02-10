@@ -72,8 +72,9 @@ const styles = StyleSheet.create({
 
 const ReminderModal = ({
   showModal,
-  actionHappened,
   reminderMessage,
+  closeModal,
+  continueAdd,
 }: ReminderModalProps) => {
   // useEffect(() => {
   //   await handleAction()
@@ -83,14 +84,6 @@ const ReminderModal = ({
     'Viimeaikainen nukkumaanmenoaika'
   );
 
-  const handleAction = (action: string) => {
-    switch (action) {
-      case 'cancel':
-        return actionHappened('cancel');
-      case 'continue':
-        return actionHappened('continue');
-    }
-  };
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -111,12 +104,12 @@ const ReminderModal = ({
             )}
           </View>
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={() => handleAction('cancel')}>
+            <TouchableOpacity onPress={closeModal}>
               <View style={{ ...styles.button, backgroundColor: '#7FFF00' }}>
                 <Text style={styles.buttonText}>Peruuta</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleAction('continue')}>
+            <TouchableOpacity onPress={continueAdd}>
               <View style={{ ...styles.button, backgroundColor: '#c74a63' }}>
                 <Text style={styles.buttonText}>Lisää</Text>
               </View>

@@ -99,23 +99,20 @@ const AddDrink = ({
   addDrink,
   openFavorites,
   favFolderIconStyle,
+  openReminder,
+  drinkLimitReached,
+  alcPercent,
+  setAlcPercent,
+  amount,
+  setAmount,
+  drinkName,
+  setDrinkName,
 }: AddDrinkProps) => {
-  const [alcPercent, setAlcPercent] = useState<string>();
-  const [amount, setAmount] = useState<string>();
-  const [drinkName, setDrinkName] = useState<string>();
-
   const handleSubmit = () => {
-    if (alcPercent && amount) {
-      const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
-      const amountTrimmed = parseFloat(amount.replace(',', '.'));
-      addDrink(alcPercentTrimmed, amountTrimmed, drinkName);
-      // const drink: DrinkType = {
-      //   alcPercent: parseFloat(alcPercent.replace(',', '.')),
-      //   amount: parseFloat(amount.replace(',', '.')),
-      //   timeConsumed: new Date(),
-      //   id: randomId()
-      // };
-      // addDrink(drink);
+    if (drinkLimitReached) {
+      openReminder();
+    } else {
+      addDrink();
     }
     return;
   };

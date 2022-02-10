@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, useColorScheme, View, Keyboard } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -59,6 +59,11 @@ const defaultFavFolderStyle = {
 
 const App = () => {
   const [drinklist, setDrinkList] = useState<DrinkType[]>();
+  const [pendingDrink, setPendingDrink] = useState<DrinkType>();
+  const [continueAddDrink, setContinueAddDrink] = useState<boolean>(true);
+  const [alcPercent, setAlcPercent] = useState<string>();
+  const [amount, setAmount] = useState<string>();
+  const [drinkName, setDrinkName] = useState<string>();
   const [favorites, setFavorites] = useState<FavDrinkType[] | null>(null);
   const [showReminder, setShowReminder] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
@@ -66,6 +71,7 @@ const App = () => {
   const [favFolderIconStyle, setFavFolderIconStyle] =
     useState<FavFolderIconStyle>(defaultFavFolderStyle);
   const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
+  const [drinkLimitReached, setDrinkLimitReached] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [message, setMessage] = useState<string | null>(null);
   const [reminderMessage, setReminderMessage] = useState<string>();
@@ -79,17 +85,30 @@ const App = () => {
   //     setDarkMode(colorScheme === "dark");
   // }, [colorScheme]);
 
-  console.log('favs', favorites);
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const addDrink = async (
-    alcPercent: number,
-    amount: number,
-    name?: string
-  ) => {
+  useEffect(() => {
+    if (maxDrinkCount && drinklist) {
+      let drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
+      if (drinkLimitReached) {
+        setDrinkLimitReached(true);
+      }
+    }
+  }, [maxDrinkCount, drinklist])
+
+  const checkAndAddDrink = () => {
+    if (maxDrinkCount && drinklist) {
+      let drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
+      if (drinkLimitReached) {
+        setShowReminder(true);
+        return
+      }
+    }
+  }
+
+  const addDrink = () => {
     console.log('sleeptme', sleepTime);
     if (sleepTime) {
       const sleepTimeHMValue =
@@ -100,12 +119,28 @@ const App = () => {
 
       let drinkLimitReached = false;
 
-      if (maxDrinkCount && drinklist) {
-        drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
-        if (drinkLimitReached) {
-          openReminder();
-        }
+      if (!alcPercent || !amount) {
+        return
       }
+        const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
+        const amountTrimmed = parseFloat(amount.replace(',', '.'));
+
+      const newDrink: DrinkType = {
+        amount: amountTrimmed,
+        alcPercent: alcPercentTrimmed,
+        timeConsumed: new Date(),
+        id: randomId(),
+        name: drinkName,
+      };
+
+      // if (maxDrinkCount && drinklist) {
+      //   drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
+      //   if (drinkLimitReached) {
+      //     setPendingDrink(newDrink);
+      //     setShowReminder(true);
+      //     return
+      //   }
+      // }
 
       //
       if (!drinkLimitReached && sleepTimeExceeded) {
@@ -117,19 +152,6 @@ const App = () => {
             : sleepReminderMessage;
         });
       }
-    }
-
-    // if (!continueAddDrink) {
-    //   return;
-    // }
-
-    const newDrink: DrinkType = {
-      amount,
-      alcPercent,
-      timeConsumed: new Date(),
-      id: randomId(),
-      name,
-    };
 
     if (drinklist) {
       const newDrinkList = [...drinklist, newDrink];
@@ -253,12 +275,10 @@ const App = () => {
   const handleContinueAddDrink = () => {
     // setContinueAddDrink(true);
     // closeReminder();
-  };
-
-  const handleAction = (action: string) => {
-    console.log('handleAction', action);
-    // setActionCalled(action);
-    closeReminder();
+    setContinueAddDrink(true);
+    if (pendingDrink) {
+      addDrink();
+    }
   };
 
   return (
@@ -269,9 +289,7 @@ const App = () => {
         <ReminderModal
           showModal={showReminder}
           closeModal={closeReminder}
-          cancelAdd={handleCancelAddDrink}
           continueAdd={handleContinueAddDrink}
-          actionHappened={handleAction}
           reminderMessage={reminderMessage}
         />
         <SettingsModal
@@ -297,9 +315,17 @@ const App = () => {
         />
         <View style={styles.section}>
           <AddDrink
-            addDrink={addDrink}
+            alcPercent={alcPercent}
+            setAlcPercent={setAlcPercent}
+            amount={amount}
+            setAmount={setAmount}
+            drinkName={drinkName}
+            setDrinkName={setDrinkName}
+            addDrink={checkAndAddDrink}
             openFavorites={openFavorites}
             favFolderIconStyle={favFolderIconStyle}
+            openReminder={openReminder}
+            drinkLimitReached={drinkLimitReached}
           />
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 30 }}>

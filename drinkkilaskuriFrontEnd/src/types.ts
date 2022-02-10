@@ -13,9 +13,17 @@ export type AddDrinkFunc = (
 ) => void;
 
 export interface AddDrinkProps {
-  addDrink: AddDrinkFunc;
+  alcPercent: string | undefined;
+  setAlcPercent: (alcPercent: string | undefined) => void;
+  amount: string | undefined;
+  setAmount: (amount: string | undefined) => void;
+  drinkName: string | undefined;
+  setDrinkName: (name: string | undefined) => void;
+  addDrink: () => void;
   openFavorites: () => void;
   favFolderIconStyle: FavFolderIconStyle;
+  openReminder: () => void;
+  drinkLimitReached: boolean;
 }
 
 export interface DrinkType {
@@ -116,6 +124,7 @@ export interface CheckBoxProps {
 }
 
 export type RemindInterval = 'afterEvery' | 'afterMax';
+
 export type SelectRemindInterval = (intervall: RemindInterval) => void;
 export interface ReminderSettingProps {
   selectRemindInterval: SelectRemindInterval;
@@ -125,6 +134,7 @@ export interface ReminderSettingProps {
 }
 
 export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
+
 export type MaxDrinkCount = string | undefined;
 export interface MaxDrinkCountProps {
   maxDrinkCount: MaxDrinkCount;
@@ -132,6 +142,7 @@ export interface MaxDrinkCountProps {
 }
 
 export type Bodyweight = string;
+
 export type SetBodyweight = (bw: Bodyweight) => void;
 export interface BodySizeProps {
   bodyweight: Bodyweight;
@@ -141,8 +152,6 @@ export interface BodySizeProps {
 export interface ReminderModalProps {
   showModal: boolean;
   closeModal: () => void;
-  cancelAdd: () => void;
   continueAdd: () => void;
-  actionHappened: (action: string) => void;
   reminderMessage: string | undefined;
 }
