@@ -96,62 +96,68 @@ const App = () => {
         setDrinkLimitReached(true);
       }
     }
-  }, [maxDrinkCount, drinklist])
+  }, [maxDrinkCount, drinklist]);
 
   const checkAndAddDrink = () => {
     if (maxDrinkCount && drinklist) {
       let drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
       if (drinkLimitReached) {
         setShowReminder(true);
-        return
+        return;
+      } else {
+        addDrink();
       }
+    } else {
+      addDrink();
     }
-  }
+  };
 
   const addDrink = () => {
     console.log('sleeptme', sleepTime);
+    let sleepTimeExceeded = false;
     if (sleepTime) {
       const sleepTimeHMValue =
         sleepTime.getHours() * 100 + sleepTime.getMinutes();
       const currTimeHMValue =
         new Date().getHours() * 100 + new Date().getMinutes();
-      const sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
+      sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
+    }
 
-      let drinkLimitReached = false;
+    let drinkLimitReached = false;
 
-      if (!alcPercent || !amount) {
-        return
-      }
-        const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
-        const amountTrimmed = parseFloat(amount.replace(',', '.'));
+    if (!alcPercent || !amount) {
+      return;
+    }
+    const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
+    const amountTrimmed = parseFloat(amount.replace(',', '.'));
 
-      const newDrink: DrinkType = {
-        amount: amountTrimmed,
-        alcPercent: alcPercentTrimmed,
-        timeConsumed: new Date(),
-        id: randomId(),
-        name: drinkName,
-      };
+    const newDrink: DrinkType = {
+      amount: amountTrimmed,
+      alcPercent: alcPercentTrimmed,
+      timeConsumed: new Date(),
+      id: randomId(),
+      name: drinkName,
+    };
 
-      // if (maxDrinkCount && drinklist) {
-      //   drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
-      //   if (drinkLimitReached) {
-      //     setPendingDrink(newDrink);
-      //     setShowReminder(true);
-      //     return
-      //   }
-      // }
+    // if (maxDrinkCount && drinklist) {
+    //   drinkLimitReached = drinklist?.length >= parseInt(maxDrinkCount, 10);
+    //   if (drinkLimitReached) {
+    //     setPendingDrink(newDrink);
+    //     setShowReminder(true);
+    //     return
+    //   }
+    // }
 
-      //
-      if (!drinkLimitReached && sleepTimeExceeded) {
-        const sleepReminderMessage =
-          'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.';
-        setReminderMessage((prevState) => {
-          return prevState
-            ? `${prevState} + ${sleepReminderMessage}`
-            : sleepReminderMessage;
-        });
-      }
+    //
+    if (!drinkLimitReached && sleepTimeExceeded) {
+      const sleepReminderMessage =
+        'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.';
+      setReminderMessage((prevState) => {
+        return prevState
+          ? `${prevState} + ${sleepReminderMessage}`
+          : sleepReminderMessage;
+      });
+    }
 
     if (drinklist) {
       const newDrinkList = [...drinklist, newDrink];
