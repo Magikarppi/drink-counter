@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   tableTitleText: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: colors.white,
+    color: colors.beige,
   },
   section: {
     justifyContent: 'center',
@@ -71,14 +71,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 40,
+    width: '20%',
     height: '100%',
     padding: 1,
-    backgroundColor: 'white',
   },
   drinkText: {
     fontSize: 15,
-    color: colors.white,
+    color: colors.beige,
     textAlign: 'center',
   },
   drinkTextNoName: {
@@ -129,17 +128,15 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
                     </View>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => removeFavorite(drink)}>
-                  <View style={styles.trashContainer}>
-                    <View>
-                      <Ionicons
-                        name="trash-outline"
-                        size={30}
-                        color={colors.violet}
-                      />
-                    </View>
-                  </View>
-                </TouchableOpacity>
+                <View style={styles.trashContainer}>
+                  <TouchableOpacity onPress={() => removeFavorite(drink)}>
+                    <Ionicons
+                      name="trash-outline"
+                      size={30}
+                      color={colors.violet}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           );

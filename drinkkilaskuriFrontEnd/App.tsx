@@ -211,7 +211,7 @@ const App = () => {
 
   const flashFavFolderStyle = () => {
     const tempStyle: FavFolderIconStyle = {
-      color: colors.white,
+      color: 'brown',
       size: 55,
     };
     setFavFolderIconStyle(tempStyle);

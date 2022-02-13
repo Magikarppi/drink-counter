@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 2,
     margin: 5,
-    color: colors.white,
+    color: colors.beige,
   },
   button: {
     justifyContent: 'center',
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 20,
-    color: colors.white,
+    color: colors.beige,
   },
   inputText: {
     fontSize: 18,
     color: 'grey',
-    shadowColor: 'white',
+    shadowColor: colors.beige,
     textShadowColor: 'brown',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   smallPrintText: {
     fontSize: 10,
-    color: colors.white,
+    color: colors.beige,
   },
 });
 
