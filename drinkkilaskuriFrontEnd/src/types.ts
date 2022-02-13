@@ -76,6 +76,8 @@ export interface SettingsModalProps {
   setBodyweight: SetBodyweight;
   reminderMessage: string | undefined;
   setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
+  useSleepTime: boolean;
+  toggleUseSleepTime: () => void;
 }
 
 export interface SettingsProps {
@@ -89,6 +91,8 @@ export interface SettingsProps {
   setBodyweight: SetBodyweight;
   reminderMessage: string | undefined;
   setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
+  useSleepTime: boolean;
+  toggleUseSleepTime: () => void;
 }
 
 export interface FavoritesModalProps {
@@ -106,6 +110,13 @@ export interface FavoritesProps {
 }
 
 export interface SleepTimeProps {
+  sleepTime: Date | undefined;
+  changeSleepTime: (time: Date) => void;
+  useSleepTime: boolean;
+  toggleUseSleepTime: () => void;
+}
+
+export interface ClockProps {
   toggleTimePicker: () => void;
   showClock: boolean;
   changeSleepTime: (time: Date) => void;

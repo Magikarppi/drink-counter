@@ -1,63 +1,107 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CheckBox from '../Buttons/CheckBox';
+import { colors } from '../themes';
 import { SleepTimeProps } from '../types';
+import Clock from './Clock';
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  section: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    borderBottomColor: colors.violet,
+    borderBottomWidth: 1,
+    padding: 5,
+    width: '90%',
   },
-  inputContainer: {
+  checkBoxElementsWrapper: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    marginHorizontal: 20,
   },
-  input: {
-    justifyContent: 'center',
+  sleepTimeInfo: {
+    fontSize: 12,
+    color: colors.beige,
+    textAlign: 'center',
+  },
+  button: {
+    width: 170,
+    height: 40,
+    marginVertical: 5,
+    backgroundColor: colors.violet,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: 50,
-    height: 50,
-    borderColor: 'grey',
-    borderWidth: 2,
-    margin: 5,
+    borderColor: colors.beige,
+    borderWidth: 1,
+    borderRadius: 4,
+  },
+  buttonText: {
+    color: colors.beige,
+    fontSize: 15,
+  },
+  checkBoxText: {
+    fontSize: 10,
+    color: colors.beige,
   },
 });
 
 const SleepTime = ({
-  showClock,
-  changeSleepTime,
   sleepTime,
+  changeSleepTime,
+  useSleepTime,
+  toggleUseSleepTime,
 }: SleepTimeProps) => {
-  const handleTimeSet = (_event: any, date: any) => {
-    changeSleepTime(date);
+  const [showClock, setShowClock] = useState<boolean>(false);
+
+  const toggleTimePicker = () => {
+    return setShowClock((prev) => !prev);
   };
 
-  console.log('showclock', showClock);
-
-  if (!showClock) {
-    return null;
-  }
-
-  const sleepTimeVal = sleepTime === undefined ? new Date() : sleepTime;
-
+  const sleepTimeChangePitStop = (time: Date) => {
+    changeSleepTime(time);
+    toggleTimePicker();
+    return;
+  };
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <DateTimePicker
-          value={sleepTimeVal}
-          onChange={handleTimeSet}
-          mode="time"
-          is24Hour={true}
-          minuteInterval={30}
-        />
+    <>
+      <Clock
+        showClock={showClock}
+        toggleTimePicker={toggleTimePicker}
+        sleepTime={sleepTime}
+        changeSleepTime={sleepTimeChangePitStop}
+      />
+      <View style={styles.section}>
+        <View style={styles.checkBoxElementsWrapper}>
+          <Text style={styles.checkBoxText}>Käytössä</Text>
+          <CheckBox handlePress={toggleUseSleepTime} selected={useSleepTime} />
+        </View>
+        <TouchableOpacity onPress={toggleTimePicker}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Aseta</Text>
+            <MaterialCommunityIcons
+              name="sleep"
+              size={30}
+              color={colors.beige}
+            />
+            <Text style={styles.buttonText}>aika</Text>
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.sleepTimeInfo}>
+          Asettamalla keskimääräisen nukkumaanmenoaikasi viimeisiltä muutamalta
+          päivältä, luo sinulle suosituksen juomisen lopettamisesta myös
+          kellonajan perusteella, jotta alkoholin vaikutusta unirytmiisi
+          voitaisi minimoida.
+        </Text>
       </View>
-    </View>
+    </>
   );
 };
 

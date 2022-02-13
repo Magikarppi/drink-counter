@@ -71,6 +71,7 @@ const App = () => {
   const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
   const [drinkLimitReached, setDrinkLimitReached] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
+  const [useSleepTime, setUseSleepTime] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
   const [reminderMessage, setReminderMessage] = useState<string>();
   const [sleepTimeReminderMsg, setSleepTimeReminderMsg] = useState<string>();
@@ -239,17 +240,25 @@ const App = () => {
     }
   };
 
+  const toggleUseSleepTime = () => {
+    setUseSleepTime((prev) => !prev);
+    return;
+  };
+
   const selectRemindInterval = (interval: RemindInterval) => {
     setRemindInterval(interval);
+    return;
   };
 
   const closeReminder = () => {
     setShowReminder(false);
+    return;
   };
 
   const handleContinueAddDrink = () => {
     setShowReminder(false);
     addDrink();
+    return;
   };
 
   return (
@@ -278,6 +287,8 @@ const App = () => {
           selectedRemindInterval={remindInterval}
           reminderMessage={reminderMessage}
           setReminderMessage={setReminderMessage}
+          useSleepTime={useSleepTime}
+          toggleUseSleepTime={toggleUseSleepTime}
         />
         <FavoritesModal
           showModal={showFavorites}

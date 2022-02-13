@@ -1,12 +1,5 @@
-import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import { colors } from '../themes';
 import { SettingsProps } from '../types';
@@ -63,19 +56,9 @@ const Settings = ({
   setBodyweight,
   reminderMessage,
   setReminderMessage,
+  useSleepTime,
+  toggleUseSleepTime,
 }: SettingsProps) => {
-  const [showClock, setShowClock] = useState<boolean>(false);
-
-  const toggleTimePicker = () => {
-    return setShowClock((prev) => !prev);
-  };
-
-  const sleepTimeChangePitStop = (time: Date) => {
-    changeSleepTime(time);
-    toggleTimePicker();
-    return;
-  };
-
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -97,30 +80,11 @@ const Settings = ({
           <BodySize bodyweight={bodyweight} setBodyweight={setBodyweight} />
         </View>
         <SleepTime
-          showClock={showClock}
-          toggleTimePicker={toggleTimePicker}
           sleepTime={sleepTime}
-          changeSleepTime={sleepTimeChangePitStop}
+          changeSleepTime={changeSleepTime}
+          useSleepTime={useSleepTime}
+          toggleUseSleepTime={toggleUseSleepTime}
         />
-        <View style={styles.section}>
-          <TouchableOpacity onPress={toggleTimePicker}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Aseta</Text>
-              <MaterialCommunityIcons
-                name="sleep"
-                size={30}
-                color={colors.beige}
-              />
-              <Text style={styles.buttonText}>aika</Text>
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.sleepTimeInfo}>
-            Asettamalla keskimääräisen nukkumaanmenoaikasi viimeisiltä
-            muutamalta päivältä, luo sinulle suosituksen juomisen lopettamisesta
-            myös kellonajan perusteella, jotta alkoholin vaikutusta unirytmiisi
-            voitaisi minimoida.
-          </Text>
-        </View>
       </View>
     </ScrollView>
   );
