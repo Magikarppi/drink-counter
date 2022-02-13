@@ -73,16 +73,31 @@ const styles = StyleSheet.create({
 const ReminderModal = ({
   showModal,
   reminderMessage,
+  sleepTimeReminderMsg,
   closeModal,
   continueAdd,
+  drinkLimitReached,
 }: ReminderModalProps) => {
-  // useEffect(() => {
-  //   await handleAction()
-  // }, [])
+  const drinkLimitWarnTitle =
+    'Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?';
+  const sleepTimeWarnTitle =
+    'Olet vaarassa sekoittaa unirytmiäsi. Haluatko silti lisätä drinkin?';
 
-  const sleepTimeReminderOnly = reminderMessage?.startsWith(
-    'Viimeaikainen nukkumaanmenoaika'
-  );
+  const showSleepTimeWarnTitle = () => {
+    if (!drinkLimitReached && sleepTimeReminderMsg) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const showSleepTimeWarnInfo = () => {
+    if (!drinkLimitReached && sleepTimeReminderMsg) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
@@ -91,17 +106,13 @@ const ReminderModal = ({
         <View style={styles.elementsContainer}>
           <View style={styles.mainTextWrapper}>
             <Text style={styles.mainText}>
-              {sleepTimeReminderOnly
-                ? 'Olet vaarassa sekoittaa unirytmiäsi'
-                : 'Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?'}
+              {showSleepTimeWarnTitle()
+                ? sleepTimeWarnTitle
+                : drinkLimitWarnTitle}
             </Text>
-            {reminderMessage ? (
+            {!showSleepTimeWarnInfo() ? (
               <Text style={styles.reminderText}>{reminderMessage}</Text>
-            ) : (
-              <Text style={styles.reminderText}>
-                "Et jaksa sitä krapulaa huomenna. Elä juo ennää."
-              </Text>
-            )}
+            ) : null}
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity onPress={closeModal}>

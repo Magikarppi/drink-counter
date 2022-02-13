@@ -43,7 +43,7 @@ const MaxDrinkCount = ({
       <View style={styles.elementWrapper}>
         <View style={styles.input}>
           <TextInput
-            style={{ color: colors.white }}
+            style={{ color: colors.beige }}
             value={maxDrinkCount}
             onChangeText={handleSetMaxDrinkCount}
             placeholder="4"

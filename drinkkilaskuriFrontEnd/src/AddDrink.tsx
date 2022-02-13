@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -99,8 +99,6 @@ const AddDrink = ({
   addDrink,
   openFavorites,
   favFolderIconStyle,
-  openReminder,
-  drinkLimitReached,
   alcPercent,
   setAlcPercent,
   amount,
@@ -108,17 +106,6 @@ const AddDrink = ({
   drinkName,
   setDrinkName,
 }: AddDrinkProps) => {
-  const handleSubmit = () => {
-    if (drinkLimitReached) {
-      openReminder();
-    } else {
-      addDrink();
-    }
-    return;
-  };
-
-  // change , to . input
-
   return (
     <View style={{ flexGrow: 1 }}>
       <ScrollView contentContainerStyle={{ flex: 1 }}>
@@ -197,7 +184,7 @@ const AddDrink = ({
             />
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={handleSubmit}>
+            <TouchableOpacity onPress={addDrink}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Lisää</Text>
               </View>

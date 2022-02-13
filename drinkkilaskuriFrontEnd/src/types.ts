@@ -22,8 +22,6 @@ export interface AddDrinkProps {
   addDrink: () => void;
   openFavorites: () => void;
   favFolderIconStyle: FavFolderIconStyle;
-  openReminder: () => void;
-  drinkLimitReached: boolean;
 }
 
 export interface DrinkType {
@@ -154,4 +152,6 @@ export interface ReminderModalProps {
   closeModal: () => void;
   continueAdd: () => void;
   reminderMessage: string | undefined;
+  sleepTimeReminderMsg: string | undefined;
+  drinkLimitReached: boolean;
 }
