@@ -112,7 +112,11 @@ const ReminderModal = ({
             </Text>
             {!showSleepTimeWarnInfo() ? (
               <Text style={styles.reminderText}>{reminderMessage}</Text>
-            ) : null}
+            ) : (
+              <Text style={styles.reminderText}>
+                (Voit ottaa tämän pois asetuksista)
+              </Text>
+            )}
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity onPress={closeModal}>
