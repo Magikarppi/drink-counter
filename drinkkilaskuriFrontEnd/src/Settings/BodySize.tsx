@@ -21,13 +21,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 50,
     height: 50,
-    borderColor: colors.beige,
+    backgroundColor: colors.violet,
+    borderColor: 'black',
     borderWidth: 2,
+    borderBottomColor: colors.backgroundDark,
     marginHorizontal: 10,
   },
   text: {
     fontSize: 15,
-    color: colors.white,
+    color: colors.beige,
   },
 });
 
@@ -38,7 +40,7 @@ const BodySize = ({ bodyweight, setBodyweight }: BodySizeProps) => {
         <Text style={styles.text}>Kehonpaino kg</Text>
         <View style={styles.input}>
           <TextInput
-            style={{ color: colors.white }}
+            style={{ color: colors.beige }}
             value={bodyweight}
             onChangeText={setBodyweight}
             // placeholder="70"

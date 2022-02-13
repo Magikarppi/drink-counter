@@ -20,12 +20,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 50,
     height: 50,
-    borderColor: colors.beige,
+    backgroundColor: colors.violet,
+    borderColor: 'black',
     borderWidth: 2,
+    borderBottomColor: colors.backgroundDark,
   },
   text: {
     fontSize: 15,
-    color: colors.white,
+    color: colors.beige,
   },
 });
 

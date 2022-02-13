@@ -211,7 +211,7 @@ const App = () => {
 
   const flashFavFolderStyle = () => {
     const tempStyle: FavFolderIconStyle = {
-      color: 'brown',
+      color: colors.violet,
       size: 55,
     };
     setFavFolderIconStyle(tempStyle);
@@ -258,8 +258,6 @@ const App = () => {
     setReminderMessage(reminder);
   };
 
-  console.log('rm', reminderMessage?.length);
-
   const selectRemindInterval = (interval: RemindInterval) => {
     setRemindInterval(interval);
   };
@@ -271,11 +269,6 @@ const App = () => {
   const closeReminder = () => {
     console.log('close');
     setShowReminder(false);
-  };
-
-  const handleCancelAddDrink = () => {
-    // setContinueAddDrink(false);
-    // closeReminder();
   };
 
   const handleContinueAddDrink = () => {

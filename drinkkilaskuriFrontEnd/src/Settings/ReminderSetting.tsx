@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderBottomColor: colors.violet,
     borderWidth: 2,
-    color: 'white',
+    color: colors.beige,
   },
   secondaryInput: {
     justifyContent: 'center',
@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
   },
   mainInputText: {
     fontSize: 18,
-    color: colors.white,
+    color: colors.beige,
   },
   secondaryInputText: {
     fontSize: 15,
-    color: colors.white,
+    color: colors.beige,
   },
   checkBoxText: {
     fontSize: 10,
@@ -87,7 +87,6 @@ const ReminderSetting = ({
             maxLength={100}
           />
         </View>
-        <Text style={styles.secondaryInputText}>Muistuta minua:</Text>
         <View style={styles.checkBoxContainer}>
           <View style={styles.checkBoxElementsWrapper}>
             <Text style={styles.checkBoxText}>Ennen jokaista juomaa</Text>

@@ -1,4 +1,4 @@
-import { SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 export type RType = 0.68 | 0.55;
 
@@ -77,7 +77,7 @@ export interface SettingsModalProps {
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
   reminderMessage: string | undefined;
-  setReminderMessage: (message: string) => void;
+  setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export interface SettingsProps {
@@ -90,7 +90,7 @@ export interface SettingsProps {
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
   reminderMessage: string | undefined;
-  setReminderMessage: (message: string) => void;
+  setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export interface FavoritesModalProps {
@@ -130,7 +130,7 @@ export interface ReminderSettingProps {
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
   reminderMessage: string | undefined;
-  setReminderMessage: (message: string) => SetStateAction<string | undefined>;
+  setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;

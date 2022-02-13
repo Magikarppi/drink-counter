@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   sleepTimeInfo: {
     fontSize: 12,
-    color: colors.white,
+    color: colors.beige,
     textAlign: 'center',
   },
   button: {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonText: {
-    color: colors.white,
+    color: colors.beige,
     fontSize: 15,
   },
 });
@@ -109,7 +109,7 @@ const Settings = ({
               <MaterialCommunityIcons
                 name="sleep"
                 size={30}
-                color={colors.white}
+                color={colors.beige}
               />
               <Text style={styles.buttonText}>aika</Text>
             </View>
