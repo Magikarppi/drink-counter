@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Modal } from 'react-native';
+import { View, StyleSheet, Modal, Text } from 'react-native';
 import CloseButton from './Buttons/CloseButton';
 import Favorites from './Favorites';
 import { colors } from './themes';
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     borderColor: colors.beige,
     borderWidth: 1,
     borderRadius: 5,
-    padding: 5,
     overflow: 'hidden',
   },
   buttonsContainer: {
@@ -38,7 +37,13 @@ const styles = StyleSheet.create({
     height: '15%',
   },
   buttonElement: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '33%',
+  },
+  titleText: {
+    fontSize: 20,
+    color: colors.beige,
   },
 });
 
@@ -58,6 +63,10 @@ const FavoritesModal = ({
             <View style={styles.buttonElement}>
               <CloseButton closeModal={closeModal} />
             </View>
+            <View style={styles.buttonElement}>
+              <Text style={styles.titleText}>Suosikit</Text>
+            </View>
+            <View style={styles.buttonElement} />
           </View>
           <Favorites
             favorites={favorites}

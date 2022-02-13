@@ -16,64 +16,74 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-  },
-  drinkWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     width: '90%',
-    height: 45,
-    // backgroundColor: 'orange',
   },
-  drinkContentWrapper: {
+  // drinkWrapper: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: '90%',
+  //   height: 45,
+  //   // backgroundColor: 'orange',
+  // },
+  drinkContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    height: '100%',
+    height: 50,
     borderWidth: 1,
     borderRadius: 2,
     borderColor: colors.violet,
+    // backgroundColor: '#FAFAD2',
   },
-  tableTitlesWrapper: {
+  drinkInfoWrapper: {
+    flexDirection: 'row',
+    width: '95%',
+    height: '100%',
+    // flex: 5,
+  },
+  // tableTitlesWrapper: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: '100%',
+  //   height: 20,
+  //   // backgroundColor: 'white',
+  // },
+  // titleTextElements: {
+  //   width: '30%',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   borderWidth: 1,
+  //   borderRadius: 2,
+  //   borderColor: colors.violet,
+  // },
+  // tableTitleText: {
+  //   fontSize: 10,
+  //   fontWeight: 'bold',
+  //   color: colors.beige,
+  // },
+  section: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    height: 20,
-    // backgroundColor: 'white',
-  },
-  titleTextElements: {
-    width: '30%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: colors.violet,
-  },
-  tableTitleText: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: colors.beige,
-  },
-  section: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '30%',
+    width: '25%',
     height: '100%',
-    padding: 1,
-    borderRightWidth: 1,
-    borderRightRadius: 2,
-    borderColor: colors.violet,
+    // padding: 1,
+    // borderRightWidth: 1,
+    // borderRightRadius: 2,
+    // borderColor: colors.violet,
+    // backgroundColor: 'orange',
   },
   trashContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '20%',
+    width: 60,
     height: '100%',
     padding: 1,
+    // backgroundColor: 'white',
   },
   drinkText: {
     fontSize: 15,
@@ -101,42 +111,43 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
       >
         {favorites.map((drink) => {
           return (
-            <View style={styles.drinkWrapper} key={Math.random()}>
-              <View style={styles.drinkContentWrapper}>
-                <TouchableOpacity
-                  onPress={() =>
-                    addDrink(drink.alcPercent, drink.amount, drink.name)
-                  }
-                >
-                  <View style={{ flexDirection: 'row', width: '80%' }}>
-                    <View style={{ ...styles.section, width: '50%' }}>
-                      {drink.name ? (
-                        <Text style={styles.drinkText}>{drink.name}</Text>
-                      ) : (
-                        <Text style={styles.drinkTextNoName}>nimetön</Text>
-                      )}
-                    </View>
-                    <View style={styles.section}>
-                      <Text
-                        style={styles.drinkText}
-                      >{`${drink.alcPercent} %`}</Text>
-                    </View>
-                    <View style={styles.section}>
-                      <Text
-                        style={styles.drinkText}
-                      >{`${drink.amount} dl`}</Text>
-                    </View>
+            <View style={styles.drinkContainer} key={Math.random()}>
+              <TouchableOpacity
+                onPress={() =>
+                  addDrink(drink.alcPercent, drink.amount, drink.name)
+                }
+              >
+                <View style={styles.drinkInfoWrapper}>
+                  <View
+                    style={{
+                      ...styles.section,
+                      width: '50%',
+                    }}
+                  >
+                    {drink.name ? (
+                      <Text style={styles.drinkText}>{drink.name}</Text>
+                    ) : (
+                      <Text style={styles.drinkTextNoName}>nimetön</Text>
+                    )}
                   </View>
-                </TouchableOpacity>
-                <View style={styles.trashContainer}>
-                  <TouchableOpacity onPress={() => removeFavorite(drink)}>
-                    <Ionicons
-                      name="trash-outline"
-                      size={30}
-                      color={colors.violet}
-                    />
-                  </TouchableOpacity>
+                  <View style={styles.section}>
+                    <Text
+                      style={styles.drinkText}
+                    >{`${drink.alcPercent} %`}</Text>
+                  </View>
+                  <View style={styles.section}>
+                    <Text style={styles.drinkText}>{`${drink.amount} dl`}</Text>
+                  </View>
                 </View>
+              </TouchableOpacity>
+              <View style={styles.trashContainer}>
+                <TouchableOpacity onPress={() => removeFavorite(drink)}>
+                  <Ionicons
+                    name="trash-outline"
+                    size={30}
+                    color={colors.violet}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           );
