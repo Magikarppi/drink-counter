@@ -117,7 +117,6 @@ export interface SleepTimeProps {
 }
 
 export interface ClockProps {
-  toggleTimePicker: () => void;
   showClock: boolean;
   changeSleepTime: (time: Date) => void;
   sleepTime: Date | undefined;

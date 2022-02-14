@@ -61,20 +61,20 @@ const SleepTime = ({
 }: SleepTimeProps) => {
   const [showClock, setShowClock] = useState<boolean>(false);
 
-  const toggleTimePicker = () => {
-    return setShowClock((prev) => !prev);
+  const openClock = () => {
+    return setShowClock(true);
   };
 
   const sleepTimeChangePitStop = (time: Date) => {
     changeSleepTime(time);
-    toggleTimePicker();
+    // toggleTimePicker();
+    setShowClock(false);
     return;
   };
   return (
     <>
       <Clock
         showClock={showClock}
-        toggleTimePicker={toggleTimePicker}
         sleepTime={sleepTime}
         changeSleepTime={sleepTimeChangePitStop}
       />
@@ -83,7 +83,7 @@ const SleepTime = ({
           <Text style={styles.checkBoxText}>Käytössä</Text>
           <CheckBox handlePress={toggleUseSleepTime} selected={useSleepTime} />
         </View>
-        <TouchableOpacity onPress={toggleTimePicker}>
+        <TouchableOpacity onPress={openClock}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Aseta</Text>
             <MaterialCommunityIcons
