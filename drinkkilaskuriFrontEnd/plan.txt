@@ -1,4 +1,7 @@
 
+MaxiDrinkki
+Drinkki- ja promillelaskuri
+
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"

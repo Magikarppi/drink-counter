@@ -18,7 +18,7 @@ import {
   FavFolderIconStyle,
   RemindInterval,
 } from './src/types';
-import { randomId } from './src/utils';
+import { calculateBAC, randomId } from './src/utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -144,6 +144,8 @@ const App = () => {
       id: randomId(),
       name: drinkName,
     };
+
+    calculateBAC(newDrink, 'male');
 
     if (drinklist) {
       const newDrinkList = [...drinklist, newDrink];
