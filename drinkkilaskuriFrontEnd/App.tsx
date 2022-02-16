@@ -58,7 +58,7 @@ const defaultFavFolderStyle = {
 };
 
 const App = () => {
-  const [drinklist, setDrinkList] = useState<DrinkType[]>();
+  const [drinklist, setDrinkList] = useState<DrinkType[]>([]);
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
   const [drinkName, setDrinkName] = useState<string>();
@@ -78,16 +78,33 @@ const App = () => {
   const [remindInterval, setRemindInterval] =
     useState<RemindInterval>('afterMax');
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
+  const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
   // const [darkMode, setDarkMode] = useState<boolean>(false);
-  const isDarkMode = useColorScheme() === 'dark';
+  // const isDarkMode = useColorScheme() === 'dark';
 
   //   useEffect(() => {
   //     setDarkMode(colorScheme === "dark");
   // }, [colorScheme]);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  // const backgroundStyle = {
+  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  // };
+
+  useEffect(() => {
+    const calcTotalBac = () => {
+      let total = 0;
+      drinklist.forEach((drink) => {
+        total += calculateBAC(drink);
+      });
+      return total;
+    };
+    if (drinklist.length > 0) {
+      const totalBac = calcTotalBac();
+      setTotalBloodAlc(totalBac);
+    }
+  }, [drinklist]);
+
+  console.log('totalBac', totalBloodAlc);
 
   useEffect(() => {
     if (maxDrinkCount && drinklist) {
@@ -264,7 +281,7 @@ const App = () => {
   };
 
   return (
-    <View style={backgroundStyle}>
+    <View>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
       <HeaderMain openModal={openSettings} />
       <View style={styles.container}>

@@ -1,24 +1,28 @@
 import { DrinkType, FavDrinkType, RType } from './types';
 
-export const calculateBAC = (drink: DrinkType, gender: 'male' | 'female') => {
+export const calculateBAC = (drink: DrinkType, gender?: 'male' | 'female') => {
   const rType: RType = gender === 'male' ? 0.68 : 0.55;
   const { alcPercent, amount } = drink;
   const personsWeight = 80;
   const b = 0.017;
-  const timeInH = drink.timeConsumed.getMinutes() / 60;
+  const nowInMinutes = new Date().getTime() / 1000 / 60;
+  const timeConsumedMinutes = drink.timeConsumed.getTime() / 1000 / 60;
+  const timeElapsedInH = (nowInMinutes - timeConsumedMinutes) / 60;
+
+  console.log('timeInH', timeElapsedInH);
 
   // Every drink has it's own state for how much it contributes to the total BAC
   // Add all drinks BAC for the total BAC?
   // Compare how many millis have passed since the drinks consumption and current time
   const amountInCl = amount * 100;
   const alcInGrams = ((amountInCl * alcPercent) / 100 / 1.5) * 12;
-  const eBAC = alcInGrams / (rType * personsWeight) - b * timeInH;
+  const eBAC = alcInGrams / (rType * personsWeight) - b * timeElapsedInH;
   const alcInGrams2 = 0.079 * amountInCl * alcPercent;
-  const eBAC2 = alcInGrams2 / (rType * personsWeight) - b * timeInH;
+  const eBAC2 = alcInGrams2 / (rType * personsWeight) - b * timeElapsedInH;
 
   console.log('eBAC', eBAC);
   console.log('eBAC2', eBAC2);
-  return eBAC;
+  return parseFloat(eBAC.toFixed(2));
 };
 
 export const randomId = () => {
