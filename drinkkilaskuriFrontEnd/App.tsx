@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, useColorScheme, View, Keyboard } from 'react-native';
+import { StyleSheet, View, Keyboard } from 'react-native';
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AddDrink from './src/AddDrink';
 import Drinks from './src/Drinks';
 import FavoritesModal from './src/FavoritesModal';
@@ -330,7 +329,11 @@ const App = () => {
           />
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 30 }}>
-          <Goals drinkList={drinklist} drinkLimit={maxDrinkCount} />
+          <Goals
+            drinkList={drinklist}
+            drinkLimit={maxDrinkCount}
+            totalBloodAlc={totalBloodAlc}
+          />
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}>
           <Message message={message} />

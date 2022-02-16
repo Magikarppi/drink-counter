@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Goals = ({ drinkList, drinkLimit }: GoalsProps) => {
+const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
   const [noMoreDrinks, setNoMoreDrinks] = useState<boolean>(false);
   useEffect(() => {
     if (drinkList && drinkLimit) {
@@ -49,7 +49,7 @@ const Goals = ({ drinkList, drinkLimit }: GoalsProps) => {
     }
   }, [drinkLimit, drinkList]);
 
-  if (!drinkLimit) {
+  if (!drinkLimit && !totalBloodAlc) {
     return null;
   }
 
@@ -59,9 +59,9 @@ const Goals = ({ drinkList, drinkLimit }: GoalsProps) => {
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
         <View style={styles.textWrapper}>
-          <Text style={styles.text}>{`${
-            drinkList ? drinkList?.length : '0'
-          } / ${drinkLimit}`}</Text>
+          <Text style={styles.text}>{`${drinkList ? drinkList?.length : '0'} ${
+            drinkLimit ? '/' + drinkLimit : ''
+          }`}</Text>
         </View>
         <View style={styles.iconWrapper}>
           {noMoreDrinks ? (
@@ -69,6 +69,11 @@ const Goals = ({ drinkList, drinkLimit }: GoalsProps) => {
           ) : (
             <Entypo name="drink" size={20} color={colors.beige} />
           )}
+        </View>
+        <View style={styles.textWrapper}>
+          <Text style={styles.text}>{`${
+            totalBloodAlc ? '= ' + totalBloodAlc : '=' + null
+          } promillea`}</Text>
         </View>
       </View>
     </View>

@@ -61,6 +61,7 @@ export interface DrinksProps {
 export interface GoalsProps {
   drinkList: DrinkList;
   drinkLimit: string | undefined;
+  totalBloodAlc: number;
 }
 
 export interface SettingsModalProps {
