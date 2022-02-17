@@ -12,13 +12,46 @@ export type AddDrinkFunc = (
   name?: string
 ) => void;
 
+type SetAlcPercentFunc = (alcPercent: string | undefined) => void;
+
+type SetAmountFunc = (amount: string | undefined) => void;
+
+type SetDrinkNameFunc = (name: string | undefined) => void;
+
+type AddToFavoritesFunc = (drink: DrinkType) => void;
+
+type RemoveFavoriteFunc = (drink: FavDrinkType) => void;
+
+type RemoveDrinkFunc = (drink: DrinkType) => void;
+
+type ChangeSleepTimeFunc = (time: Date) => void;
+
+type CloseModalFunc = () => void;
+
+type SleepTime = Date | undefined;
+
+type ReminderMessage = string | undefined;
+
+type SetReminderMessageFunc = Dispatch<SetStateAction<string | undefined>>;
+
+export type SelectRemindInterval = (intervall: RemindInterval) => void;
+
+export type RemindInterval = 'afterEvery' | 'afterMax';
+
+export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
+
+export type MaxDrinkCount = string | undefined;
+
+export type Bodyweight = string;
+
+export type SetBodyweight = (bw: Bodyweight) => void;
 export interface AddDrinkProps {
   alcPercent: string | undefined;
-  setAlcPercent: (alcPercent: string | undefined) => void;
+  setAlcPercent: SetAlcPercentFunc;
   amount: string | undefined;
-  setAmount: (amount: string | undefined) => void;
+  setAmount: SetAmountFunc;
   drinkName: string | undefined;
-  setDrinkName: (name: string | undefined) => void;
+  setDrinkName: SetDrinkNameFunc;
   addDrink: () => void;
   openFavorites: () => void;
   favFolderIconStyle: FavFolderIconStyle;
@@ -46,16 +79,16 @@ export interface FavFolderIconStyle {
 }
 export interface DrinkProps {
   drink: DrinkType;
-  addToFavorites: (drink: DrinkType) => void;
-  removeDrink: (drink: DrinkType) => void;
+  addToFavorites: AddToFavoritesFunc;
+  removeDrink: RemoveDrinkFunc;
 }
 
 export type DrinkList = DrinkType[] | undefined;
 
 export interface DrinksProps {
   drinkList: DrinkList;
-  addToFavorites: (drink: DrinkType) => void;
-  removeDrink: (drink: DrinkType) => void;
+  addToFavorites: AddToFavoritesFunc;
+  removeDrink: RemoveDrinkFunc;
 }
 
 export interface GoalsProps {
@@ -66,61 +99,61 @@ export interface GoalsProps {
 
 export interface SettingsModalProps {
   showModal: boolean;
-  closeModal: () => void;
-  changeSleepTime: (time: Date) => void;
-  sleepTime: Date | undefined;
+  closeModal: CloseModalFunc;
+  changeSleepTime: ChangeSleepTimeFunc;
+  sleepTime: SleepTime;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
   handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
   maxDrinkCount: MaxDrinkCount;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
-  reminderMessage: string | undefined;
-  setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
+  reminderMessage: ReminderMessage;
+  setReminderMessage: SetReminderMessageFunc;
   useSleepTime: boolean;
   toggleUseSleepTime: () => void;
 }
 
 export interface SettingsProps {
-  changeSleepTime: (time: Date) => void;
-  sleepTime: Date | undefined;
+  changeSleepTime: ChangeSleepTimeFunc;
+  sleepTime: SleepTime;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
   handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
   maxDrinkCount: MaxDrinkCount;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
-  reminderMessage: string | undefined;
-  setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
+  reminderMessage: ReminderMessage;
+  setReminderMessage: SetReminderMessageFunc;
   useSleepTime: boolean;
   toggleUseSleepTime: () => void;
 }
 
 export interface FavoritesModalProps {
   showModal: boolean;
-  closeModal: () => void;
+  closeModal: CloseModalFunc;
   addDrink: AddDrinkFunc;
   favorites: FavDrinkType[] | null;
-  removeFavorite: (drink: FavDrinkType) => void;
+  removeFavorite: RemoveFavoriteFunc;
 }
 
 export interface FavoritesProps {
   addDrink: AddDrinkFunc;
   favorites: FavDrinkType[] | null;
-  removeFavorite: (drink: FavDrinkType) => void;
+  removeFavorite: RemoveFavoriteFunc;
 }
 
 export interface SleepTimeProps {
-  sleepTime: Date | undefined;
-  changeSleepTime: (time: Date) => void;
+  sleepTime: SleepTime;
+  changeSleepTime: ChangeSleepTimeFunc;
   useSleepTime: boolean;
   toggleUseSleepTime: () => void;
 }
 
 export interface ClockProps {
   showClock: boolean;
-  changeSleepTime: (time: Date) => void;
-  sleepTime: Date | undefined;
+  changeSleepTime: ChangeSleepTimeFunc;
+  sleepTime: SleepTime;
 }
 
 export interface MessageProps {
@@ -131,28 +164,18 @@ export interface CheckBoxProps {
   selected: boolean;
   handlePress: () => void;
 }
-
-export type RemindInterval = 'afterEvery' | 'afterMax';
-
-export type SelectRemindInterval = (intervall: RemindInterval) => void;
 export interface ReminderSettingProps {
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
-  reminderMessage: string | undefined;
-  setReminderMessage: Dispatch<SetStateAction<string | undefined>>;
+  reminderMessage: ReminderMessage;
+  setReminderMessage: SetReminderMessageFunc;
 }
 
-export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
-
-export type MaxDrinkCount = string | undefined;
 export interface MaxDrinkCountProps {
   maxDrinkCount: MaxDrinkCount;
   handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
 }
 
-export type Bodyweight = string;
-
-export type SetBodyweight = (bw: Bodyweight) => void;
 export interface BodySizeProps {
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
@@ -160,9 +183,9 @@ export interface BodySizeProps {
 
 export interface ReminderModalProps {
   showModal: boolean;
-  closeModal: () => void;
+  closeModal: CloseModalFunc;
   continueAdd: () => void;
-  reminderMessage: string | undefined;
+  reminderMessage: ReminderMessage;
   sleepTimeReminderMsg: string | undefined;
   drinkLimitReached: boolean;
 }
