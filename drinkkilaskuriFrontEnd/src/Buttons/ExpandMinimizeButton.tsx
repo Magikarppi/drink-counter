@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../themes';
 import { ExpandMinimizeBtnProps } from '../types';
 
@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 30,
     height: 30,
+    backgroundColor: 'cyan',
   },
 });
 
@@ -24,21 +25,13 @@ const ExpandMinimizeButton = ({
   if (mode === 'expand') {
     button = (
       <TouchableOpacity onPress={() => buttonPress('expand')}>
-        <MaterialCommunityIcon
-          name="expand-more"
-          size={iconSize}
-          color={iconColor}
-        />
+        <MaterialIcon name="expand-more" size={iconSize} color={iconColor} />
       </TouchableOpacity>
     );
   } else if (mode === 'minimize') {
     button = (
       <TouchableOpacity onPress={() => buttonPress('minimize')}>
-        <MaterialCommunityIcon
-          name="expand-less"
-          size={iconSize}
-          color={iconColor}
-        />
+        <MaterialIcon name="expand-less" size={iconSize} color={iconColor} />
       </TouchableOpacity>
     );
   }

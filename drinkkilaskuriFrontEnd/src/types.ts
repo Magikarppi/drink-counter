@@ -45,6 +45,9 @@ export type MaxDrinkCount = string | undefined;
 export type Bodyweight = string;
 
 export type SetBodyweight = (bw: Bodyweight) => void;
+
+export type ExpOrMin = 'expand' | 'minimize';
+
 export interface AddDrinkProps {
   alcPercent: string | undefined;
   setAlcPercent: SetAlcPercentFunc;
@@ -188,4 +191,9 @@ export interface ReminderModalProps {
   reminderMessage: ReminderMessage;
   sleepTimeReminderMsg: string | undefined;
   drinkLimitReached: boolean;
+}
+
+export interface ExpandMinimizeBtnProps {
+  mode: ExpOrMin;
+  buttonPress: (action: ExpOrMin) => void;
 }

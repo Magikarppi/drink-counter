@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Keyboard } from 'react-native';
 
 import AddDrink from './src/AddDrink';
+import ExpandMinimizeButton from './src/Buttons/ExpandMinimizeButton';
 import Drinks from './src/Drinks';
 import FavoritesModal from './src/FavoritesModal';
 import Goals from './src/Goals';
@@ -13,6 +14,7 @@ import { colors } from './src/themes';
 import {
   Bodyweight,
   DrinkType,
+  ExpOrMin,
   FavDrinkType,
   FavFolderIconStyle,
   RemindInterval,
@@ -78,6 +80,8 @@ const App = () => {
     useState<RemindInterval>('afterMax');
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
+  const [expandOrMinimize, setExpandOrMinimize] = useState<ExpOrMin>('expand');
+
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   // const isDarkMode = useColorScheme() === 'dark';
 
@@ -279,6 +283,10 @@ const App = () => {
     return;
   };
 
+  const handleExpandOrMinimizeButtonPress = (action: ExpOrMin) => {
+    setExpandOrMinimize(action);
+  };
+
   return (
     <View>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
@@ -328,7 +336,18 @@ const App = () => {
             favFolderIconStyle={favFolderIconStyle}
           />
         </View>
-        <View style={{ ...styles.section, borderBottomWidth: 0, height: 30 }}>
+        <View
+          style={{
+            ...styles.section,
+            flexDirection: 'row',
+            height: 35,
+            backgroundColor: 'grey',
+          }}
+        >
+          <ExpandMinimizeButton
+            mode={expandOrMinimize}
+            buttonPress={handleExpandOrMinimizeButtonPress}
+          />
           <Goals
             drinkList={drinklist}
             drinkLimit={maxDrinkCount}
