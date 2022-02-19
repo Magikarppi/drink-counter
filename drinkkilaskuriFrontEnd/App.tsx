@@ -234,14 +234,20 @@ const App = () => {
   };
 
   const addToFavorites = (drink: DrinkType) => {
-    const drinkCopy: FavDrinkType = { ...drink };
-    delete drinkCopy.timeConsumed;
-    if (favorites) {
-      const newFavoritesList = [...favorites, drink];
-      setFavorites(newFavoritesList);
-    } else {
-      setFavorites([drink]);
+    const favoritedDrink = { ...drink, favorited: true };
+
+    if (!drinkList) {
+      return;
     }
+    const drinkListCopy = [...drinkList];
+    const newDrinkList = drinkListCopy.map((d) => {
+      if (d.id !== favoritedDrink.id) {
+        return d;
+      } else {
+        return favoritedDrink;
+      }
+    });
+    setDrinkList(newDrinkList);
     setTimeout(() => {
       flashFavFolderStyle();
     }, 100);

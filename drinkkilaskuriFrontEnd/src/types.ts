@@ -68,6 +68,7 @@ export interface DrinkType {
   amount: number;
   timeConsumed: Date;
   id: number;
+  favorited: boolean;
 }
 
 export interface FavDrinkType {

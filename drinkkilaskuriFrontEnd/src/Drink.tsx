@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './themes';
-import { DrinkProps } from './types';
+import { DrinkProps, DrinkType } from './types';
 import { calculateBAC } from './utils';
 
 const styles = StyleSheet.create({
@@ -71,7 +71,11 @@ const Drink = ({ drink, addToFavorites, removeDrink }: DrinkProps) => {
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
         <TouchableOpacity onPress={() => addToFavorites(drink)}>
-          <Ionicons name="star-outline" size={30} color={colors.beige} />
+          {drink.favorited ? (
+            <Ionicons name="star-sharp" size={30} color={colors.beige} />
+          ) : (
+            <Ionicons name="star-outline" size={30} color={colors.beige} />
+          )}
         </TouchableOpacity>
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
