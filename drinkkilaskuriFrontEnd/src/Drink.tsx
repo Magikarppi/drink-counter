@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './themes';
 import { DrinkProps } from './types';
+import { calculateBAC } from './utils';
 
 const styles = StyleSheet.create({
   cont: {
@@ -36,6 +37,21 @@ const styles = StyleSheet.create({
 // turn favorite star to yellow "star" once user clicks it?
 
 const Drink = ({ drink, addToFavorites, removeDrink }: DrinkProps) => {
+  const [drinkBAC, setDrinkBAC] = useState<number>(0);
+
+  // Calculate and update drink's blood alcohol content every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (drink) {
+        const bac = calculateBAC(drink);
+        setDrinkBAC(bac);
+      }
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [drink]);
+
+  console.log('drinkBAC: ', drinkBAC);
+
   return (
     <View style={styles.container}>
       <View
