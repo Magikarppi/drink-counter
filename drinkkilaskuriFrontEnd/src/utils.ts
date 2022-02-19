@@ -25,6 +25,14 @@ export const calculateBAC = (drink: DrinkType, gender?: 'male' | 'female') => {
   return parseFloat(eBAC.toFixed(2));
 };
 
+export const calcTotalBAC = (drinkList: DrinkType[]) => {
+  let total = 0;
+  drinkList.forEach((drink) => {
+    total += calculateBAC(drink);
+  });
+  return total;
+};
+
 export const randomId = () => {
   const r = Math.floor(Math.random() * 100000);
   return r;

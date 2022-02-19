@@ -20,7 +20,7 @@ import {
   FavFolderIconStyle,
   RemindInterval,
 } from './src/types';
-import { calculateBAC, randomId } from './src/utils';
+import { calcTotalBAC, calculateBAC, randomId } from './src/utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,7 +60,7 @@ const defaultFavFolderStyle = {
 };
 
 const App = () => {
-  const [drinklist, setDrinkList] = useState<DrinkType[]>([]);
+  const [drinkList, setDrinkList] = useState<DrinkType[]>([]);
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
   const [drinkName, setDrinkName] = useState<string>();
@@ -95,33 +95,36 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
 
+  // update total blood alcohol content when a new drink is added
   useEffect(() => {
-    const calcTotalBac = () => {
-      let total = 0;
-      drinklist.forEach((drink) => {
-        total += calculateBAC(drink);
-      });
-      return total;
-    };
-    if (drinklist.length > 0) {
-      const totalBac = calcTotalBac();
+    if (drinkList.length > 0) {
+      const totalBac = calcTotalBAC(drinkList);
       setTotalBloodAlc(totalBac);
     }
-  }, [drinklist]);
+  }, [drinkList]);
 
-  console.log('totalBac', totalBloodAlc);
+  // Calculate and update total blood alcohol content every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (drinkList.length > 0) {
+        const totalBac = calcTotalBAC(drinkList);
+        setTotalBloodAlc(totalBac);
+      }
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [drinkList]);
 
   useEffect(() => {
-    if (maxDrinkCount && drinklist) {
+    if (maxDrinkCount && drinkList) {
       const drinkLimitExceeded =
-        drinklist?.length >= parseInt(maxDrinkCount, 10);
+        drinkList?.length >= parseInt(maxDrinkCount, 10);
       if (drinkLimitExceeded) {
         setDrinkLimitReached(true);
       } else {
         setDrinkLimitReached(false);
       }
     }
-  }, [maxDrinkCount, drinklist]);
+  }, [maxDrinkCount, drinkList]);
 
   const checkAndAddDrink = () => {
     if (drinkLimitReached) {
@@ -169,8 +172,8 @@ const App = () => {
 
     calculateBAC(newDrink, 'male');
 
-    if (drinklist) {
-      const newDrinkList = [...drinklist, newDrink];
+    if (drinkList) {
+      const newDrinkList = [...drinkList, newDrink];
       setDrinkList(newDrinkList);
       setShowFavorites(false);
     } else {
@@ -181,10 +184,10 @@ const App = () => {
   };
 
   const removeDrink = (drink: DrinkType): void => {
-    if (!drinklist) {
+    if (!drinkList) {
       return;
     }
-    const drinkListCopy = [...drinklist];
+    const drinkListCopy = [...drinkList];
     const newDrinkList = drinkListCopy.filter((f) => f.id !== drink.id);
     setDrinkList(newDrinkList);
     return;
@@ -202,7 +205,7 @@ const App = () => {
     if (favorites && favorites.length > 0) {
       setShowFavorites(true);
     } else {
-      if (drinklist) {
+      if (drinkList) {
         setMessage('Paina tähteä lisätäksesi suosikin');
       } else {
         setMessage('Lisää drinkki ja paina tähteä lisätäksesi suosikin');
@@ -354,14 +357,14 @@ const App = () => {
             height: 35,
           }}
         >
-          {drinklist.length > 0 ? (
+          {drinkList.length > 0 ? (
             <ExpandMinimizeButton
               mode={expandOrMinimize}
               buttonPress={handleExpandOrMinimizeButtonPress}
             />
           ) : null}
           <Goals
-            drinkList={drinklist}
+            drinkList={drinkList}
             drinkLimit={maxDrinkCount}
             totalBloodAlc={totalBloodAlc}
           />
@@ -369,7 +372,7 @@ const App = () => {
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}>
           <Message message={message} />
           <Drinks
-            drinkList={drinklist}
+            drinkList={drinkList}
             addToFavorites={addToFavorites}
             removeDrink={removeDrink}
           />
