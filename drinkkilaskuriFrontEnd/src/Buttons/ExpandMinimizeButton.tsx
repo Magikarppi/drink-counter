@@ -8,9 +8,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 30,
+    width: '10%',
     height: 30,
-    backgroundColor: 'cyan',
   },
 });
 
@@ -21,17 +20,18 @@ const ExpandMinimizeButton = ({
   mode,
   buttonPress,
 }: ExpandMinimizeBtnProps) => {
+  console.log('mode: ', mode);
   let button = null;
-  if (mode === 'expand') {
-    button = (
-      <TouchableOpacity onPress={() => buttonPress('expand')}>
-        <MaterialIcon name="expand-more" size={iconSize} color={iconColor} />
-      </TouchableOpacity>
-    );
-  } else if (mode === 'minimize') {
+  if (mode === 'expanded') {
     button = (
       <TouchableOpacity onPress={() => buttonPress('minimize')}>
         <MaterialIcon name="expand-less" size={iconSize} color={iconColor} />
+      </TouchableOpacity>
+    );
+  } else if (mode === 'minimized') {
+    button = (
+      <TouchableOpacity onPress={() => buttonPress('expand')}>
+        <MaterialIcon name="expand-more" size={iconSize} color={iconColor} />
       </TouchableOpacity>
     );
   }

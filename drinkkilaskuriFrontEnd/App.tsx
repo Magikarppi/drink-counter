@@ -14,7 +14,8 @@ import { colors } from './src/themes';
 import {
   Bodyweight,
   DrinkType,
-  ExpOrMin,
+  ExpOrMinAction,
+  ExpOrMinState,
   FavDrinkType,
   FavFolderIconStyle,
   RemindInterval,
@@ -80,7 +81,8 @@ const App = () => {
     useState<RemindInterval>('afterMax');
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
-  const [expandOrMinimize, setExpandOrMinimize] = useState<ExpOrMin>('expand');
+  const [expandOrMinimize, setExpandOrMinimize] =
+    useState<ExpOrMinState>('minimized');
 
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   // const isDarkMode = useColorScheme() === 'dark';
@@ -283,8 +285,17 @@ const App = () => {
     return;
   };
 
-  const handleExpandOrMinimizeButtonPress = (action: ExpOrMin) => {
-    setExpandOrMinimize(action);
+  const handleExpandOrMinimizeButtonPress = (action: ExpOrMinAction) => {
+    switch (action) {
+      case 'expand':
+        setExpandOrMinimize('expanded');
+        break;
+      case 'minimize':
+        setExpandOrMinimize('minimized');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -341,13 +352,14 @@ const App = () => {
             ...styles.section,
             flexDirection: 'row',
             height: 35,
-            backgroundColor: 'grey',
           }}
         >
-          <ExpandMinimizeButton
-            mode={expandOrMinimize}
-            buttonPress={handleExpandOrMinimizeButtonPress}
-          />
+          {drinklist.length > 0 ? (
+            <ExpandMinimizeButton
+              mode={expandOrMinimize}
+              buttonPress={handleExpandOrMinimizeButtonPress}
+            />
+          ) : null}
           <Goals
             drinkList={drinklist}
             drinkLimit={maxDrinkCount}

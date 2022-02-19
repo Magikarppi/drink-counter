@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 import { colors } from './themes';
 import { GoalsProps } from './types';
 
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
     width: '40%',
   },
   textWrapper: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
@@ -60,7 +62,7 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
       <View style={styles.contentWrapper}>
         <View style={styles.textWrapper}>
           <Text style={styles.text}>{`${drinkList ? drinkList?.length : '0'} ${
-            drinkLimit ? '/' + drinkLimit : ''
+            drinkLimit ? '/ ' + drinkLimit : ''
           }`}</Text>
         </View>
         <View style={styles.iconWrapper}>
@@ -73,7 +75,9 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
         <View style={styles.textWrapper}>
           <Text style={styles.text}>{`${
             totalBloodAlc ? '= ' + totalBloodAlc : '=' + null
-          } promillea`}</Text>
+          }`}</Text>
+          <Text style={styles.text}>{'% '}</Text>
+          <Ionicon name="body-outline" size={20} color={colors.beige} />
         </View>
       </View>
     </View>
