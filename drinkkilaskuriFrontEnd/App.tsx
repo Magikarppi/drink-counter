@@ -269,9 +269,23 @@ const App = () => {
     if (!favorites) {
       return;
     }
+
+    // remove drink from favorites
     const favoritesCopy = [...favorites];
     const newFavorites = favoritesCopy.filter((f) => f.id !== drink.id);
     setFavorites(newFavorites);
+
+    // update drink in drinkList
+    const drinkListCopy = [...drinkList];
+    const newDrinkList = drinkListCopy.map((d) => {
+      if (d.id === drink.id) {
+        return { ...d, favorited: false };
+      } else {
+        return d;
+      }
+    });
+    setDrinkList(newDrinkList);
+
     if (newFavorites.length < 1) {
       closeFavorites();
     }
