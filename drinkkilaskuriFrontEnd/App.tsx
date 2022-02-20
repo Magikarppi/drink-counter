@@ -95,16 +95,20 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
 
-  // update total blood alcohol content when a new drink is added
+  // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
+    // if user removes all added drinks, reset total BAC
+    if (drinkList.length < 1) {
+      setTotalBloodAlc(0);
+    }
+
+    // Refresh total BAC immediately when new drink added
     if (drinkList.length > 0) {
       const totalBac = calcTotalBAC(drinkList);
       setTotalBloodAlc(totalBac);
     }
-  }, [drinkList]);
 
-  // Calculate and update total blood alcohol content every minute
-  useEffect(() => {
+    // Refresh total BAC every minute
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
         const totalBac = calcTotalBAC(drinkList);
