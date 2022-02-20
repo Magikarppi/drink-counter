@@ -3,7 +3,12 @@ import { View, ScrollView } from 'react-native';
 import Drink from './Drink';
 import { DrinksProps } from './types';
 
-const Drinks = ({ drinkList, addToFavorites, removeDrink }: DrinksProps) => {
+const Drinks = ({
+  drinkList,
+  addToFavorites,
+  removeDrink,
+  removeFavorite,
+}: DrinksProps) => {
   if (!drinkList || drinkList.length < 1) {
     return null;
   }
@@ -18,6 +23,7 @@ const Drinks = ({ drinkList, addToFavorites, removeDrink }: DrinksProps) => {
               drink={drink}
               addToFavorites={addToFavorites}
               removeDrink={removeDrink}
+              removeFavorite={removeFavorite}
             />
           );
         })}

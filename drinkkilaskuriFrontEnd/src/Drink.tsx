@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { colors } from './themes';
-import { DrinkProps, DrinkType } from './types';
+import { DrinkProps } from './types';
 import { calculateBAC } from './utils';
 
 const styles = StyleSheet.create({
@@ -36,7 +36,12 @@ const styles = StyleSheet.create({
 
 // turn favorite star to yellow "star" once user clicks it?
 
-const Drink = ({ drink, addToFavorites, removeDrink }: DrinkProps) => {
+const Drink = ({
+  drink,
+  addToFavorites,
+  removeDrink,
+  removeFavorite,
+}: DrinkProps) => {
   const [drinkBAC, setDrinkBAC] = useState<number>(0);
 
   // Calculate and update drink's blood alcohol content every minute
@@ -70,13 +75,15 @@ const Drink = ({ drink, addToFavorites, removeDrink }: DrinkProps) => {
         <Text style={styles.text}>{`${drink.amount} dl`}</Text>
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
-        <TouchableOpacity onPress={() => addToFavorites(drink)}>
-          {drink.favorited ? (
+        {drink.favorited ? (
+          <TouchableOpacity onPress={() => removeFavorite(drink)}>
             <Ionicons name="star-sharp" size={30} color={colors.beige} />
-          ) : (
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => addToFavorites(drink)}>
             <Ionicons name="star-outline" size={30} color={colors.beige} />
-          )}
-        </TouchableOpacity>
+          </TouchableOpacity>
+        )}
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
         <TouchableOpacity onPress={() => removeDrink(drink)}>

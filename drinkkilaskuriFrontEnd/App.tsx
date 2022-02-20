@@ -168,6 +168,7 @@ const App = () => {
       timeConsumed: new Date(),
       id: randomId(),
       name: drinkName,
+      favorited: false,
     };
 
     calculateBAC(newDrink, 'male');
@@ -406,6 +407,7 @@ const App = () => {
             drinkList={drinkList}
             addToFavorites={addToFavorites}
             removeDrink={removeDrink}
+            removeFavorite={removeFavorite}
           />
         </View>
       </View>

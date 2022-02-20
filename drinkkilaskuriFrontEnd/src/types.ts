@@ -87,6 +87,7 @@ export interface DrinkProps {
   drink: DrinkType;
   addToFavorites: AddToFavoritesFunc;
   removeDrink: RemoveDrinkFunc;
+  removeFavorite: RemoveFavoriteFunc;
 }
 
 export type DrinkList = DrinkType[] | undefined;
@@ -95,6 +96,7 @@ export interface DrinksProps {
   drinkList: DrinkList;
   addToFavorites: AddToFavoritesFunc;
   removeDrink: RemoveDrinkFunc;
+  removeFavorite: RemoveFavoriteFunc;
 }
 
 export interface GoalsProps {
