@@ -239,6 +239,8 @@ const App = () => {
     if (!drinkList) {
       return;
     }
+
+    // update/add drink to drinkList
     const drinkListCopy = [...drinkList];
     const newDrinkList = drinkListCopy.map((d) => {
       if (d.id !== favoritedDrink.id) {
@@ -248,6 +250,15 @@ const App = () => {
       }
     });
     setDrinkList(newDrinkList);
+
+    // update/add drink to favorites
+    if (favorites) {
+      const favoritesCopy = [...favorites];
+      setFavorites([...favoritesCopy, favoritedDrink]);
+    } else {
+      setFavorites([favoritedDrink]);
+    }
+
     setTimeout(() => {
       flashFavFolderStyle();
     }, 100);
