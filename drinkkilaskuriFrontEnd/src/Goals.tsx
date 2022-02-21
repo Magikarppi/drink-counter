@@ -74,7 +74,7 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
         </View>
         <View style={styles.textWrapper}>
           <Text style={styles.text}>{`${
-            totalBloodAlc ? '= ' + totalBloodAlc : '=' + null
+            totalBloodAlc ? '= ' + totalBloodAlc.toFixed(2) : '=' + null
           }`}</Text>
           <Text style={styles.text}>{'% '}</Text>
           <Ionicon name="body-outline" size={20} color={colors.beige} />
