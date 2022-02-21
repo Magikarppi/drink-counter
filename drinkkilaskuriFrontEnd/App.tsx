@@ -136,22 +136,23 @@ const App = () => {
       return;
     }
 
-    let sleepTimeExceeded = false;
-    if (sleepTime) {
-      const sleepTimeHMValue =
-        sleepTime.getHours() * 100 + sleepTime.getMinutes();
-      const currTimeHMValue =
-        new Date().getHours() * 100 + new Date().getMinutes();
-      sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
-    }
-    console.log('sleepTimeExc', sleepTimeExceeded);
+    if (useSleepTime) {
+      let sleepTimeExceeded = false;
+      if (sleepTime) {
+        const sleepTimeHMValue =
+          sleepTime.getHours() * 100 + sleepTime.getMinutes();
+        const currTimeHMValue =
+          new Date().getHours() * 100 + new Date().getMinutes();
+        sleepTimeExceeded = sleepTimeHMValue - currTimeHMValue <= 0;
+      }
 
-    if (sleepTimeExceeded) {
-      const sleepReminderMsg =
-        'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.';
-      setSleepTimeReminderMsg(sleepReminderMsg);
-      setShowReminder(true);
-      return;
+      if (sleepTimeExceeded) {
+        const sleepReminderMsg =
+          'Viimeaikainen nukkumaanmenoaika ylitetty. Ei suositella juomaan lisää.';
+        setSleepTimeReminderMsg(sleepReminderMsg);
+        setShowReminder(true);
+        return;
+      }
     }
 
     addDrink();
