@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Svg, { Circle } from 'react-native-svg';
 
 import { colors } from './themes';
 import { DrinkProps } from './types';
@@ -73,6 +74,17 @@ const Drink = ({
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
         <Text style={styles.text}>{`${drink.amount} dl`}</Text>
+      </View>
+      <View
+        style={{
+          ...styles.property,
+          flex: 2,
+          height: '100%',
+        }}
+      >
+        <Svg height={20} width={20} viewBox="0 0 100 100">
+          <Circle cx="50" cy="50" r="50" fill={colors.beige} />
+        </Svg>
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
         {drink.favorited ? (
