@@ -3,6 +3,8 @@ import { View, StyleSheet, Text } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicon from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { colors } from './themes';
 import { GoalsProps } from './types';
 
@@ -40,6 +42,8 @@ const styles = StyleSheet.create({
   },
 });
 
+const iconSize = 20;
+
 const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
   const [noMoreDrinks, setNoMoreDrinks] = useState<boolean>(false);
   useEffect(() => {
@@ -67,9 +71,13 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
         </View>
         <View style={styles.iconWrapper}>
           {noMoreDrinks ? (
-            <MaterialIcons name="no-drinks" size={20} color={colors.beige} />
+            <MaterialIcons
+              name="no-drinks"
+              size={iconSize}
+              color={colors.beige}
+            />
           ) : (
-            <Entypo name="drink" size={20} color={colors.beige} />
+            <Entypo name="drink" size={iconSize} color={colors.beige} />
           )}
         </View>
         <View style={styles.textWrapper}>
@@ -77,7 +85,12 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
             totalBloodAlc ? '= ' + totalBloodAlc.toFixed(2) : '=' + null
           }`}</Text>
           <Text style={styles.text}>{'% '}</Text>
-          <Ionicon name="body-outline" size={20} color={colors.beige} />
+          <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
+        </View>
+        <View style={styles.iconWrapper}>
+          {totalBloodAlc >= 0.5 ? (
+            <MaterialCommunityIcon name="car-off" size={25} color={'#ff401f'} />
+          ) : null}
         </View>
       </View>
     </View>
