@@ -22,9 +22,10 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   checkBoxElementsWrapper: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    width: 80,
   },
   sleepTimeInfo: {
     fontSize: 12,
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    width: 170,
+    width: 150,
     height: 40,
     marginVertical: 5,
     backgroundColor: colors.violet,
@@ -79,10 +80,6 @@ const SleepTime = ({
         changeSleepTime={sleepTimeChangePitStop}
       />
       <View style={styles.section}>
-        <View style={styles.checkBoxElementsWrapper}>
-          <Text style={styles.checkBoxText}>Käytössä</Text>
-          <CheckBox handlePress={toggleUseSleepTime} selected={useSleepTime} />
-        </View>
         <TouchableOpacity onPress={openClock}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Aseta</Text>
@@ -94,6 +91,10 @@ const SleepTime = ({
             <Text style={styles.buttonText}>aika</Text>
           </View>
         </TouchableOpacity>
+        <View style={styles.checkBoxElementsWrapper}>
+          <Text style={styles.checkBoxText}>Käytössä</Text>
+          <CheckBox handlePress={toggleUseSleepTime} selected={useSleepTime} />
+        </View>
         <Text style={styles.sleepTimeInfo}>
           Asettamalla keskimääräisen nukkumaanmenoaikasi viimeisiltä muutamalta
           päivältä, luo sinulle suosituksen juomisen lopettamisesta myös
