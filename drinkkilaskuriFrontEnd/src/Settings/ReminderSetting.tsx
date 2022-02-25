@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
   },
   checkBoxContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     width: '80%',
+    // backgroundColor: 'gray',
   },
   mainInput: {
     justifyContent: 'center',
@@ -89,17 +90,17 @@ const ReminderSetting = ({
         </View>
         <View style={styles.checkBoxContainer}>
           <View style={styles.checkBoxElementsWrapper}>
-            <Text style={styles.checkBoxText}>Ennen jokaista juomaa</Text>
+            <Text style={styles.checkBoxText}>Aina</Text>
             <CheckBox
-              handlePress={() => selectRemindInterval('afterMax')}
-              selected={selectedRemindInterval === 'afterMax'}
+              handlePress={() => selectRemindInterval('always')}
+              selected={selectedRemindInterval === 'always'}
             />
           </View>
           <View style={styles.checkBoxElementsWrapper}>
             <Text style={styles.checkBoxText}>Maxidrinkin jälkeen</Text>
             <CheckBox
-              handlePress={() => selectRemindInterval('afterEvery')}
-              selected={selectedRemindInterval === 'afterEvery'}
+              handlePress={() => selectRemindInterval('afterMax')}
+              selected={selectedRemindInterval === 'afterMax'}
             />
           </View>
         </View>

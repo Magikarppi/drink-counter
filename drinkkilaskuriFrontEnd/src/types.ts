@@ -36,7 +36,7 @@ type SetReminderMessageFunc = Dispatch<SetStateAction<string | undefined>>;
 
 export type SelectRemindInterval = (intervall: RemindInterval) => void;
 
-export type RemindInterval = 'afterEvery' | 'afterMax';
+export type RemindInterval = 'always' | 'afterMax';
 
 export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
 

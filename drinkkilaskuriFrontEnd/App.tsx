@@ -84,6 +84,9 @@ const App = () => {
   const [expandOrMinimize, setExpandOrMinimize] =
     useState<ExpOrMinState>('minimized');
 
+  console.log('remindermsg:', reminderMessage);
+  console.log('remindInt', remindInterval);
+
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   // const isDarkMode = useColorScheme() === 'dark';
 
@@ -132,6 +135,11 @@ const App = () => {
 
   const checkAndAddDrink = () => {
     if (drinkLimitReached) {
+      setShowReminder(true);
+      return;
+    }
+
+    if (remindInterval === 'always') {
       setShowReminder(true);
       return;
     }
