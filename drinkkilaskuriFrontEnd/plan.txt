@@ -2,6 +2,8 @@
 MaxiDrinkki
 Drinkki- ja promillelaskuri
 
+Tarkista että drinkki input arvot pitää olla oikein että voi lisätä juoman / ettei esim muistuta aina- modaali aukea vaikka drinkki ei lisääkkään
+
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"

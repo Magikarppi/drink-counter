@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   reminderText: {
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: 'italic',
     color: colors.white,
     textAlign: 'center',
@@ -78,12 +78,13 @@ const ReminderModal = ({
   continueAdd,
   drinkLimitReached,
 }: ReminderModalProps) => {
-  const drinkLimitWarnTitle =
+  const drinkLimitRemindTitle =
     'Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?';
-  const sleepTimeWarnTitle =
+  const sleepTimeRemindTitle =
     'Olet vaarassa sekoittaa unirytmiäsi. Haluatko silti lisätä drinkin?';
+  const customRemindTitle = 'Haluatko lisätä juoman? Muistutus itsellesi:';
 
-  const showSleepTimeWarnTitle = () => {
+  const showSleepTimeRemindInfo = () => {
     if (!drinkLimitReached && sleepTimeReminderMsg) {
       return true;
     } else {
@@ -91,11 +92,13 @@ const ReminderModal = ({
     }
   };
 
-  const showSleepTimeWarnInfo = () => {
-    if (!drinkLimitReached && sleepTimeReminderMsg) {
-      return true;
+  const getReminderTitle = () => {
+    if (!drinkLimitReached && !sleepTimeReminderMsg) {
+      return customRemindTitle;
+    } else if (!drinkLimitReached && sleepTimeReminderMsg) {
+      return sleepTimeRemindTitle;
     } else {
-      return false;
+      return drinkLimitRemindTitle;
     }
   };
 
@@ -105,12 +108,8 @@ const ReminderModal = ({
         <View style={styles.filler} />
         <View style={styles.elementsContainer}>
           <View style={styles.mainTextWrapper}>
-            <Text style={styles.mainText}>
-              {showSleepTimeWarnTitle()
-                ? sleepTimeWarnTitle
-                : drinkLimitWarnTitle}
-            </Text>
-            {!showSleepTimeWarnInfo() ? (
+            <Text style={styles.mainText}>{getReminderTitle()}</Text>
+            {!showSleepTimeRemindInfo() ? (
               <Text style={styles.reminderText}>{reminderMessage}</Text>
             ) : (
               <Text style={styles.reminderText}>
