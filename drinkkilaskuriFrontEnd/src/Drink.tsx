@@ -58,6 +58,9 @@ const Drink = ({
 
   console.log('drinkBAC: ', drinkBAC);
 
+  // 125 = 100% juomasta poltettu
+  // 63 ~= 50%
+
   return (
     <View style={styles.container}>
       <View
@@ -83,7 +86,18 @@ const Drink = ({
         }}
       >
         <Svg height={20} width={20} viewBox="0 0 100 100">
-          <Circle cx="50" cy="50" r="50" fill={colors.beige} />
+          <Circle cx="50" cy="50" r="40" fill="#ddd" />
+          <Circle
+            origin="50, 50"
+            rotation="50"
+            cx="50"
+            cy="50"
+            r="20"
+            stroke={colors.backgroundDark}
+            strokeWidth="40"
+            fill="none"
+            strokeDasharray="100, 160"
+          />
         </Svg>
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
