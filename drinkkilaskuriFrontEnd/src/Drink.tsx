@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Svg, { Circle } from 'react-native-svg';
@@ -43,23 +43,42 @@ const Drink = ({
   removeDrink,
   removeFavorite,
 }: DrinkProps) => {
-  const [drinkBAC, setDrinkBAC] = useState<number>(calculateBAC(drink));
+  const initialDrinkBAC = calculateBAC(drink);
+  const [drinkBAC, setDrinkBAC] = useState<number>(initialDrinkBAC);
+  const [consumedSvgValue, setConsumedSvgValue] = useState<number>(125);
+
+  const getConsumedValueForSvg = useCallback(
+    (bac: number) => {
+      const multiplier = 125 / initialDrinkBAC; // yx = 125 |||| e.g with 0.44 drinkBAC => 0.44x = 125 => x = 125 / 0.44
+      const consumedValue = multiplier * bac;
+      return consumedValue;
+    },
+    [initialDrinkBAC]
+  );
 
   // Calculate and update drink's blood alcohol content every minute
   useEffect(() => {
     const interval = setInterval(() => {
       if (drink) {
         const bac = calculateBAC(drink);
+        console.log('setdrinkbac');
         setDrinkBAC(bac);
+
+        const value = getConsumedValueForSvg(bac);
+        setConsumedSvgValue(value);
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, [drink]);
+  }, [drink, getConsumedValueForSvg]);
 
   console.log('drinkBAC: ', drinkBAC);
 
   // 125 = 100% juomasta poltettu
   // 63 ~= 50%
+  // ...
+  // 0 = 0% juomasta poltettu
+  // => kerroin 1.25
+  console.log('consumedSVG', consumedSvgValue);
 
   return (
     <View style={styles.container}>
@@ -86,17 +105,18 @@ const Drink = ({
         }}
       >
         <Svg height={20} width={20} viewBox="0 0 100 100">
-          <Circle cx="50" cy="50" r="40" fill="#ddd" />
+          <Circle cx="50" cy="50" r="40" fill={colors.backgroundDark} />
           <Circle
             origin="50, 50"
             rotation="50"
             cx="50"
             cy="50"
             r="20"
-            stroke={colors.backgroundDark}
+            stroke={colors.beige}
             strokeWidth="40"
             fill="none"
-            strokeDasharray="100, 160"
+            // strokeDasharray="10, 160"
+            strokeDasharray={`${consumedSvgValue}, 160`}
           />
         </Svg>
       </View>
