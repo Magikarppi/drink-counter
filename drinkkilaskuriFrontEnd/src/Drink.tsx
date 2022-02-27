@@ -43,7 +43,7 @@ const Drink = ({
   removeDrink,
   removeFavorite,
 }: DrinkProps) => {
-  const [drinkBAC, setDrinkBAC] = useState<number>(0);
+  const [drinkBAC, setDrinkBAC] = useState<number>(calculateBAC(drink));
 
   // Calculate and update drink's blood alcohol content every minute
   useEffect(() => {
