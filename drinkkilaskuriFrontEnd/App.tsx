@@ -134,6 +134,10 @@ const App = () => {
   }, [maxDrinkCount, drinkList]);
 
   const checkAndAddDrink = () => {
+    if (!alcPercent || !amount) {
+      return;
+    }
+
     if (drinkLimitReached) {
       setShowReminder(true);
       return;
