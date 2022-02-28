@@ -133,7 +133,7 @@ const App = () => {
     }
   }, [maxDrinkCount, drinkList]);
 
-  const checkAndAddDrink = () => {
+  const validateDrinkAddition = () => {
     if (!alcPercent || !amount) {
       return;
     }
@@ -394,7 +394,7 @@ const App = () => {
             setAmount={setAmount}
             drinkName={drinkName}
             setDrinkName={setDrinkName}
-            addDrink={checkAndAddDrink}
+            addDrink={validateDrinkAddition}
             openFavorites={openFavorites}
             favFolderIconStyle={favFolderIconStyle}
           />
