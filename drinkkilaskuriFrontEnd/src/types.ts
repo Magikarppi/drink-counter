@@ -202,3 +202,8 @@ export interface ExpandMinimizeBtnProps {
   mode: ExpOrMinState;
   buttonPress: (action: ExpOrMinAction) => void;
 }
+
+export interface MessageModalProps {
+  message: string | null;
+  showModal: boolean;
+}

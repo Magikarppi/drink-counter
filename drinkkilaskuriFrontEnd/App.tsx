@@ -7,7 +7,7 @@ import Drinks from './src/Drinks';
 import FavoritesModal from './src/FavoritesModal';
 import Goals from './src/Goals';
 import HeaderMain from './src/HeaderMain';
-import Message from './src/Message';
+import MessageModal from './src/MessageModal';
 import ReminderModal from './src/ReminderModal';
 import SettingsModal from './src/Settings/SettingsModal';
 import { colors } from './src/themes';
@@ -68,6 +68,7 @@ const App = () => {
   const [showReminder, setShowReminder] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
+  const [showMessage, setShowMessage] = useState<boolean>(false);
   const [favFolderIconStyle, setFavFolderIconStyle] =
     useState<FavFolderIconStyle>(defaultFavFolderStyle);
   const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
@@ -83,9 +84,6 @@ const App = () => {
   const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
   const [expandOrMinimize, setExpandOrMinimize] =
     useState<ExpOrMinState>('minimized');
-
-  console.log('remindermsg:', reminderMessage);
-  console.log('remindInt', remindInterval);
 
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   // const isDarkMode = useColorScheme() === 'dark';
@@ -223,15 +221,17 @@ const App = () => {
     if (favorites && favorites.length > 0) {
       setShowFavorites(true);
     } else {
-      if (drinkList) {
+      if (drinkList.length > 0) {
         setMessage('Paina tähteä lisätäksesi suosikin');
       } else {
         setMessage('Lisää drinkki ja paina tähteä lisätäksesi suosikin');
       }
+      setShowMessage(true);
       setTimeout(() => {
         setMessage(null);
+        setShowMessage(false);
         return;
-      }, 2400);
+      }, 2500);
     }
   };
 
@@ -386,6 +386,7 @@ const App = () => {
           favorites={favorites}
           removeFavorite={removeFavorite}
         />
+        <MessageModal message={message} showModal={showMessage} />
         <View style={styles.section}>
           <AddDrink
             alcPercent={alcPercent}
@@ -419,7 +420,6 @@ const App = () => {
           />
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}>
-          <Message message={message} />
           <Drinks
             drinkList={drinkList}
             addToFavorites={addToFavorites}

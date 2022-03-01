@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Svg, { Circle } from 'react-native-svg';
@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// turn favorite star to yellow "star" once user clicks it?
-
 const Drink = ({
   drink,
   addToFavorites,
@@ -47,17 +45,17 @@ const Drink = ({
   const [drinkBAC, setDrinkBAC] = useState<number>(initialDrinkBAC);
   const [consumedSvgValue, setConsumedSvgValue] = useState<number>(125);
 
-  const getConsumedValueForSvg = useCallback(
-    (bac: number) => {
-      const multiplier = 125 / initialDrinkBAC; // yx = 125 |||| e.g with 0.44 drinkBAC => 0.44x = 125 => x = 125 / 0.44
-      const consumedValue = multiplier * bac;
-      return consumedValue;
-    },
-    [initialDrinkBAC]
-  );
+  console.log('Drink renders');
+  console.log('consumedSvgValue', consumedSvgValue);
 
   // Calculate and update drink's blood alcohol content every minute
   useEffect(() => {
+    const getConsumedValueForSvg = (bac: number) => {
+      const multiplier = 125 / initialDrinkBAC; // yx = 125 |||| e.g with 0.44 drinkBAC => 0.44x = 125 => x = 125 / 0.44
+      const consumedValue = multiplier * bac;
+      return consumedValue;
+    };
+
     const interval = setInterval(() => {
       if (drink) {
         const bac = calculateBAC(drink);
@@ -69,7 +67,7 @@ const Drink = ({
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, [drink, getConsumedValueForSvg]);
+  }, [drink, initialDrinkBAC]);
 
   console.log('drinkBAC: ', drinkBAC);
 
@@ -115,7 +113,6 @@ const Drink = ({
             stroke={colors.beige}
             strokeWidth="40"
             fill="none"
-            // strokeDasharray="10, 160"
             strokeDasharray={`${consumedSvgValue}, 160`}
           />
         </Svg>
