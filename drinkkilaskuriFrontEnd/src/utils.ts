@@ -20,9 +20,7 @@ export const calculateBAC = (drink: DrinkType, gender?: 'male' | 'female') => {
   const alcInGrams2 = 0.079 * amountInCl * alcPercent;
   const eBAC2 = alcInGrams2 / (rType * personsWeight) - b * timeElapsedInH;
 
-  console.log('eBAC', eBAC);
-  console.log('eBAC2', eBAC2);
-  return parseFloat(eBAC.toFixed(2));
+  return eBAC;
 };
 
 export const calcTotalBAC = (drinkList: DrinkType[]) => {
