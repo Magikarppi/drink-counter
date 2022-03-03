@@ -49,7 +49,7 @@ const Drink = ({
   }, [drink]);
 
   useEffect(() => {
-    setConsumedSvgValue(125);
+    setConsumedSvgValue(0.1);
   }, []);
 
   // Calculate and update drink's blood alcohol content every minute
@@ -64,9 +64,12 @@ const Drink = ({
       // ...
       // 0 = 0% juomasta poltettu
       // => kerroin 1.25
-      const multiplier = 125 / initialDrinkBAC; // yx = 125 |||| e.g with 0.44 drinkBAC => 0.44x = 125 => x = 125 / 0.44
+      // yx = 125 |||| e.g with 0.44 drinkBAC: 0.44x = 125 => x = 125 / 0.44
+      const multiplier = 125 / initialDrinkBAC;
       const consumedValue = multiplier * bac;
-      return consumedValue;
+      // "reversed" so that the consumptions circle's "pie-burning" starts from 12 o'clock and continues clock wise
+      const consumedValueReversed = 125 - consumedValue;
+      return consumedValueReversed;
     };
 
     const interval = setInterval(() => {
@@ -106,17 +109,17 @@ const Drink = ({
       >
         {consumedSvgValue ? (
           <Svg height={20} width={20} viewBox="0 0 100 100">
-            <Circle cx="50" cy="50" r="40" fill={colors.backgroundDark} />
+            <Circle cx="50" cy="50" r="40" fill={colors.beige} />
             <Circle
               origin="50, 50"
-              rotation="50"
+              rotation="270"
               cx="50"
               cy="50"
               r="20"
-              stroke={colors.beige}
+              stroke={colors.backgroundDark}
               strokeWidth="40"
               fill="none"
-              strokeDasharray={`${consumedSvgValue}, 160`}
+              strokeDasharray={`${consumedSvgValue}, 125`}
             />
           </Svg>
         ) : null}

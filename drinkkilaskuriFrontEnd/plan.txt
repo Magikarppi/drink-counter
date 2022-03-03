@@ -2,7 +2,7 @@
 MaxiDrinkki
 Drinkki- ja promillelaskuri
 
-Ainakin suosikit kansion painaminen ilman suosikkeja nollaa yksittäisten juomien bac visuaalin
+lisää (pieni) liekki-icon drinnki consumption ympyrän viereen
 
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
