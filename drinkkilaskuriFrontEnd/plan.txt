@@ -4,6 +4,8 @@ Drinkki- ja promillelaskuri
 
 lisää (pieni) liekki-icon drinnki consumption ympyrän viereen
 
+make the flame icon animate and flash colors "burning"?
+
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"

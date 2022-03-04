@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  flameContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: '70%',
+  },
   text: {
     fontSize: 15,
     color: colors.beige,
@@ -107,22 +112,31 @@ const Drink = ({
           height: '100%',
         }}
       >
-        {consumedSvgValue ? (
-          <Svg height={20} width={20} viewBox="0 0 100 100">
-            <Circle cx="50" cy="50" r="40" fill={colors.beige} />
-            <Circle
-              origin="50, 50"
-              rotation="270"
-              cx="50"
-              cy="50"
-              r="20"
-              stroke={colors.backgroundDark}
-              strokeWidth="40"
-              fill="none"
-              strokeDasharray={`${consumedSvgValue}, 125`}
-            />
-          </Svg>
-        ) : null}
+        <View
+          style={{
+            height: '100%',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+          }}
+        >
+          {consumedSvgValue ? (
+            <Svg height={20} width={20} viewBox="0 0 100 100">
+              <Circle cx="50" cy="50" r="40" fill={colors.beige} />
+              <Circle
+                origin="50, 50"
+                rotation="270"
+                cx="50"
+                cy="50"
+                r="20"
+                stroke={colors.backgroundDark}
+                strokeWidth="40"
+                fill="none"
+                strokeDasharray={`${consumedSvgValue}, 125`}
+              />
+            </Svg>
+          ) : null}
+          <Ionicons name="flame-outline" size={15} color={colors.brown} />
+        </View>
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
         {drink.favorited ? (
