@@ -72,6 +72,12 @@ const Drink = ({
       return;
     }
 
+    if (consumedSvgValue) {
+      if (consumedSvgValue >= 125) {
+        return;
+      }
+    }
+
     // calculate value to match Svg circle requirements
     const getConsumedValueForSvg = (bac: number) => {
       // 125 = 100% juomasta poltettu
