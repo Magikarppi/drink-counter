@@ -8,11 +8,6 @@ import { DrinkProps } from './types';
 import { calculateBAC } from './utils';
 
 const styles = StyleSheet.create({
-  cont: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    width: '100%',
-  },
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -48,14 +43,28 @@ const Drink = ({
 }: DrinkProps) => {
   const [initialDrinkBAC, setInitialDrinkBAC] = useState<number>();
   const [consumedSvgValue, setConsumedSvgValue] = useState<number>();
+  const [opacity, setOpacity] = useState<number>();
 
   useEffect(() => {
     setInitialDrinkBAC(calculateBAC(drink));
   }, [drink]);
 
+  // initialize state for consumption circle and opacity
   useEffect(() => {
     setConsumedSvgValue(0.1);
+    setOpacity(1);
   }, []);
+
+  // make the drink "faded out" if consumed
+  useEffect(() => {
+    if (consumedSvgValue && opacity) {
+      console.log('consumaedSvg val:', consumedSvgValue);
+      console.log('opacity', opacity);
+      if (consumedSvgValue >= 125) {
+        setOpacity(0.6);
+      }
+    }
+  }, [consumedSvgValue, opacity]);
 
   // Calculate and update drink's blood alcohol content every minute
   useEffect(() => {
@@ -63,6 +72,7 @@ const Drink = ({
       return;
     }
 
+    // calculate value to match Svg circle requirements
     const getConsumedValueForSvg = (bac: number) => {
       // 125 = 100% juomasta poltettu
       // 63 ~= 50%
@@ -70,8 +80,10 @@ const Drink = ({
       // 0 = 0% juomasta poltettu
       // => kerroin 1.25
       // yx = 125 |||| e.g with 0.44 drinkBAC: 0.44x = 125 => x = 125 / 0.44
+      console.log('bac: ', bac);
       const multiplier = 125 / initialDrinkBAC;
       const consumedValue = multiplier * bac;
+      console.log('consumedValue: ', consumedValue);
       // "reversed" so that the consumptions circle's "pie-burning" starts from 12 o'clock and continues clock wise
       const consumedValueReversed = 125 - consumedValue;
       return consumedValueReversed;
@@ -89,7 +101,7 @@ const Drink = ({
   }, [drink, initialDrinkBAC]);
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, opacity }}>
       <View
         style={{
           ...styles.property,

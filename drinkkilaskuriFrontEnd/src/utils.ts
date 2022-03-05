@@ -9,8 +9,6 @@ export const calculateBAC = (drink: DrinkType, gender?: 'male' | 'female') => {
   const timeConsumedMinutes = drink.timeConsumed.getTime() / 1000 / 60;
   const timeElapsedInH = (nowInMinutes - timeConsumedMinutes) / 60;
 
-  console.log('timeInH', timeElapsedInH);
-
   // Every drink has it's own state for how much it contributes to the total BAC
   // Add all drinks BAC for the total BAC?
   // Compare how many millis have passed since the drinks consumption and current time

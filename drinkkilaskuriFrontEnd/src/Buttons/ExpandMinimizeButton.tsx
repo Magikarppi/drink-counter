@@ -20,7 +20,6 @@ const ExpandMinimizeButton = ({
   mode,
   buttonPress,
 }: ExpandMinimizeBtnProps) => {
-  console.log('mode: ', mode);
   let button = null;
   if (mode === 'expanded') {
     button = (
