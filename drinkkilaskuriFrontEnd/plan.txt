@@ -12,6 +12,9 @@ kun yli 6-7 drinkkii viimeinen jäää vähän piiloon scrollviewiin
 
 drinklimit jää päälle addcheckkiin kun laittaa ja ottaa ppois
 
+jos inputin (drinkLimitin) arvon asettaa nollaksi inputti "nollaantuu", "0" ei jäää
+vaan tulee default placeholder
+
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"

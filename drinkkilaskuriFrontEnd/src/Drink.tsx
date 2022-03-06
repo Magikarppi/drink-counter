@@ -86,10 +86,8 @@ const Drink = ({
       // 0 = 0% juomasta poltettu
       // => kerroin 1.25
       // yx = 125 |||| e.g with 0.44 drinkBAC: 0.44x = 125 => x = 125 / 0.44
-      console.log('bac: ', bac);
       const multiplier = 125 / initialDrinkBAC;
       const consumedValue = multiplier * bac;
-      console.log('consumedValue: ', consumedValue);
       // "reversed" so that the consumptions circle's "pie-burning" starts from 12 o'clock and continues clock wise
       const consumedValueReversed = 125 - consumedValue;
       return consumedValueReversed;
@@ -104,7 +102,7 @@ const Drink = ({
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, [drink, initialDrinkBAC]);
+  }, [drink, initialDrinkBAC, consumedSvgValue]);
 
   return (
     <View style={{ ...styles.container, opacity }}>

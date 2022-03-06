@@ -4,7 +4,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { colors } from '../themes';
 import { SettingsProps } from '../types';
 import BodySize from './BodySize';
-import MaxDrinkCount from './MaxDrinkCount';
+import DrinkLimit from './DrinkLimit';
 import Reminder from './ReminderSetting';
 import SleepTime from './SleepTime';
 
@@ -50,8 +50,8 @@ const Settings = ({
   sleepTime,
   selectRemindInterval,
   selectedRemindInterval,
-  handleSetMaxDrinkCount,
-  maxDrinkCount,
+  handleSetDrinkLimit,
+  drinkLimit,
   bodyweight,
   setBodyweight,
   reminderMessage,
@@ -63,9 +63,9 @@ const Settings = ({
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.section}>
-          <MaxDrinkCount
-            maxDrinkCount={maxDrinkCount}
-            handleSetMaxDrinkCount={handleSetMaxDrinkCount}
+          <DrinkLimit
+            drinkLimit={drinkLimit}
+            handleSetDrinkLimit={handleSetDrinkLimit}
           />
         </View>
         <View style={styles.section}>

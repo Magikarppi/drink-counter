@@ -38,9 +38,9 @@ export type SelectRemindInterval = (intervall: RemindInterval) => void;
 
 export type RemindInterval = 'always' | 'afterMax';
 
-export type HandleSetMaxDrinkCount = (count: MaxDrinkCount) => void;
+export type HandleSetDrinkLimit = (count: DrinkLimit) => void;
 
-export type MaxDrinkCount = string | undefined;
+export type DrinkLimit = string | undefined;
 
 export type Bodyweight = string;
 
@@ -112,8 +112,8 @@ export interface SettingsModalProps {
   sleepTime: SleepTime;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
-  handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
-  maxDrinkCount: MaxDrinkCount;
+  handleSetDrinkLimit: HandleSetDrinkLimit;
+  drinkLimit: DrinkLimit;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
   reminderMessage: ReminderMessage;
@@ -127,8 +127,8 @@ export interface SettingsProps {
   sleepTime: SleepTime;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
-  handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
-  maxDrinkCount: MaxDrinkCount;
+  handleSetDrinkLimit: HandleSetDrinkLimit;
+  drinkLimit: DrinkLimit;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
   reminderMessage: ReminderMessage;
@@ -179,9 +179,9 @@ export interface ReminderSettingProps {
   setReminderMessage: SetReminderMessageFunc;
 }
 
-export interface MaxDrinkCountProps {
-  maxDrinkCount: MaxDrinkCount;
-  handleSetMaxDrinkCount: HandleSetMaxDrinkCount;
+export interface DrinkLimitProps {
+  drinkLimit: DrinkLimit;
+  handleSetDrinkLimit: HandleSetDrinkLimit;
 }
 
 export interface BodySizeProps {

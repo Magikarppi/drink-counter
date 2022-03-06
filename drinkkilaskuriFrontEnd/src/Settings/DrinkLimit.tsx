@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TextInput, Text } from 'react-native';
 import { colors } from '../themes';
-import { MaxDrinkCountProps } from '../types';
+import { DrinkLimitProps } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,10 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MaxDrinkCount = ({
-  maxDrinkCount,
-  handleSetMaxDrinkCount,
-}: MaxDrinkCountProps) => {
+const DrinkLimit = ({ drinkLimit, handleSetDrinkLimit }: DrinkLimitProps) => {
   return (
     <View style={styles.container}>
       <View style={{ ...styles.elementWrapper, alignItems: 'flex-end' }}>
@@ -44,8 +41,8 @@ const MaxDrinkCount = ({
         <View style={styles.input}>
           <TextInput
             style={{ color: colors.beige }}
-            value={maxDrinkCount}
-            onChangeText={handleSetMaxDrinkCount}
+            value={drinkLimit}
+            onChangeText={handleSetDrinkLimit}
             placeholder="4"
             keyboardType="number-pad"
             placeholderTextColor={'grey'}
@@ -60,4 +57,4 @@ const MaxDrinkCount = ({
   );
 };
 
-export default MaxDrinkCount;
+export default DrinkLimit;

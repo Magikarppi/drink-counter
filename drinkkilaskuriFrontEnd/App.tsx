@@ -71,7 +71,7 @@ const App = () => {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [favFolderIconStyle, setFavFolderIconStyle] =
     useState<FavFolderIconStyle>(defaultFavFolderStyle);
-  const [maxDrinkCount, setMaxDrinkCount] = useState<string>();
+  const [drinkLimit, setDrinkLimit] = useState<string>();
   const [drinkLimitReached, setDrinkLimitReached] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [useSleepTime, setUseSleepTime] = useState<boolean>(false);
@@ -120,16 +120,16 @@ const App = () => {
   }, [drinkList]);
 
   useEffect(() => {
-    if (maxDrinkCount && drinkList) {
-      const drinkLimitExceeded =
-        drinkList?.length >= parseInt(maxDrinkCount, 10);
-      if (drinkLimitExceeded) {
+    if (drinkLimit && drinkList) {
+      const drinkLimitExceeded = drinkList?.length >= parseInt(drinkLimit, 10);
+      const drinkLimitNumber = parseInt(drinkLimit, 10);
+      if (drinkLimitNumber > 0 && drinkLimitExceeded) {
         setDrinkLimitReached(true);
       } else {
         setDrinkLimitReached(false);
       }
     }
-  }, [maxDrinkCount, drinkList]);
+  }, [drinkLimit, drinkList]);
 
   const validateDrinkAddition = () => {
     if (!alcPercent || !amount) {
@@ -137,6 +137,7 @@ const App = () => {
     }
 
     if (drinkLimitReached) {
+      console.log('drinkLimit reached');
       setShowReminder(true);
       return;
     }
@@ -366,8 +367,8 @@ const App = () => {
         <SettingsModal
           bodyweight={bodyweight}
           setBodyweight={setBodyweight}
-          maxDrinkCount={maxDrinkCount}
-          handleSetMaxDrinkCount={setMaxDrinkCount}
+          drinkLimit={drinkLimit}
+          handleSetDrinkLimit={setDrinkLimit}
           showModal={showSettings}
           closeModal={closeSettings}
           sleepTime={sleepTime}
@@ -415,7 +416,7 @@ const App = () => {
           ) : null}
           <Goals
             drinkList={drinkList}
-            drinkLimit={maxDrinkCount}
+            drinkLimit={drinkLimit}
             totalBloodAlc={totalBloodAlc}
           />
         </View>
