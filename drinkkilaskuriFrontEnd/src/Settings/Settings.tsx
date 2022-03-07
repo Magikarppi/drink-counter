@@ -50,7 +50,7 @@ const Settings = ({
   sleepTime,
   selectRemindInterval,
   selectedRemindInterval,
-  handleSetDrinkLimit,
+  setDrinkLimit,
   drinkLimit,
   bodyweight,
   setBodyweight,
@@ -63,10 +63,7 @@ const Settings = ({
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.section}>
-          <DrinkLimit
-            drinkLimit={drinkLimit}
-            handleSetDrinkLimit={handleSetDrinkLimit}
-          />
+          <DrinkLimit drinkLimit={drinkLimit} setDrinkLimit={setDrinkLimit} />
         </View>
         <View style={styles.section}>
           <Reminder

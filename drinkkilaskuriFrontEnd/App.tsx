@@ -368,7 +368,7 @@ const App = () => {
           bodyweight={bodyweight}
           setBodyweight={setBodyweight}
           drinkLimit={drinkLimit}
-          handleSetDrinkLimit={setDrinkLimit}
+          setDrinkLimit={setDrinkLimit}
           showModal={showSettings}
           closeModal={closeSettings}
           sleepTime={sleepTime}

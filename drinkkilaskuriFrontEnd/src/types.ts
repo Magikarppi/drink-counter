@@ -38,7 +38,7 @@ export type SelectRemindInterval = (intervall: RemindInterval) => void;
 
 export type RemindInterval = 'always' | 'afterMax';
 
-export type HandleSetDrinkLimit = (count: DrinkLimit) => void;
+export type SetDrinkLimit = (count: DrinkLimit) => void;
 
 export type DrinkLimit = string | undefined;
 
@@ -112,7 +112,7 @@ export interface SettingsModalProps {
   sleepTime: SleepTime;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
-  handleSetDrinkLimit: HandleSetDrinkLimit;
+  setDrinkLimit: SetDrinkLimit;
   drinkLimit: DrinkLimit;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
@@ -127,7 +127,7 @@ export interface SettingsProps {
   sleepTime: SleepTime;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
-  handleSetDrinkLimit: HandleSetDrinkLimit;
+  setDrinkLimit: SetDrinkLimit;
   drinkLimit: DrinkLimit;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
@@ -181,7 +181,7 @@ export interface ReminderSettingProps {
 
 export interface DrinkLimitProps {
   drinkLimit: DrinkLimit;
-  handleSetDrinkLimit: HandleSetDrinkLimit;
+  setDrinkLimit: SetDrinkLimit;
 }
 
 export interface BodySizeProps {

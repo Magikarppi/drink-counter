@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const DrinkLimit = ({ drinkLimit, handleSetDrinkLimit }: DrinkLimitProps) => {
+const DrinkLimit = ({ drinkLimit, setDrinkLimit }: DrinkLimitProps) => {
   return (
     <View style={styles.container}>
       <View style={{ ...styles.elementWrapper, alignItems: 'flex-end' }}>
@@ -42,7 +42,7 @@ const DrinkLimit = ({ drinkLimit, handleSetDrinkLimit }: DrinkLimitProps) => {
           <TextInput
             style={{ color: colors.beige }}
             value={drinkLimit}
-            onChangeText={handleSetDrinkLimit}
+            onChangeText={setDrinkLimit}
             placeholder="4"
             keyboardType="number-pad"
             placeholderTextColor={'grey'}
