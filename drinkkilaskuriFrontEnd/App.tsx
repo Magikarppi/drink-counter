@@ -96,6 +96,13 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
 
+  // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
+  useEffect(() => {
+    if (drinkLimit === '0') {
+      setDrinkLimit(undefined);
+    }
+  }, [drinkLimit]);
+
   // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
     // if user removes all added drinks, reset total BAC
