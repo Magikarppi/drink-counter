@@ -10,15 +10,12 @@ utils bac laskentoihin henkilön paino state mukaan
 
 kun yli 6-7 drinkkii viimeinen jäää vähän piiloon scrollviewiin
 
-drinklimit jää päälle addcheckkiin kun laittaa ja ottaa ppois
-
-jos inputin (drinkLimitin) arvon asettaa nollaksi inputti "nollaantuu", "0" ei jäää
-vaan tulee default placeholder
-
 drinklimit total bac näyttää nullia jos drinkit esim 0/2 = null%
+
+lisää laskuri + komponentti milloin on taas ajokunnossa "4tunnin päästä olet ajokunnossa / olet polttanut kaiken
+alkoholin verestäsi. + Kello milloin selvänä, joka siirtyy kauemmaksi kun lisää drinkkejä + uniaika häiriö overlap
 
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"
 
-unirytmin ottaminen huomioon viimeisen drinkin kohdalla? Muistutus alkoholin vaikutuksesta uneen

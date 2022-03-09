@@ -59,8 +59,6 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
     return null;
   }
 
-  console.log('drinklimit', drinkLimit);
-
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
@@ -80,13 +78,13 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
             <Entypo name="drink" size={iconSize} color={colors.beige} />
           )}
         </View>
-        <View style={styles.textWrapper}>
-          <Text style={styles.text}>{`${
-            totalBloodAlc ? '= ' + totalBloodAlc.toFixed(2) : '=' + null
-          }`}</Text>
-          <Text style={styles.text}>{'% '}</Text>
-          <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
-        </View>
+        {totalBloodAlc ? (
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>{`= ${totalBloodAlc.toFixed(2)}`}</Text>
+            <Text style={styles.text}>{'% '}</Text>
+            <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
+          </View>
+        ) : null}
         <View style={styles.iconWrapper}>
           {totalBloodAlc >= 0.5 ? (
             <MaterialCommunityIcon name="car-off" size={25} color={'#ff401f'} />
