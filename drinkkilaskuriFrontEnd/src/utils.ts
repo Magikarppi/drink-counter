@@ -29,6 +29,14 @@ export const calcTotalBAC = (drinkList: DrinkType[]) => {
   return total;
 };
 
+// Your burnoff rate is measured by how fast your body can decrease your BAC percentage.
+// The rate for everyone is about .016% per hour https://www.losangelesduiattorney.com/glossary/alcohol-burnoff-rate/
+export const calculateWhenSober = (totalBAC: number) => {
+  const burntimeInH = totalBAC / 0.016;
+  console.log('burnLeft:', burntimeInH);
+  return burntimeInH;
+};
+
 export const randomId = () => {
   const r = Math.floor(Math.random() * 100000);
   return r;
