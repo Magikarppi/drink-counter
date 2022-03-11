@@ -78,7 +78,7 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
             <Entypo name="drink" size={iconSize} color={colors.beige} />
           )}
         </View>
-        {totalBloodAlc ? (
+        {totalBloodAlc >= 0 ? (
           <View style={styles.textWrapper}>
             <Text style={styles.text}>{`= ${totalBloodAlc.toFixed(2)}`}</Text>
             <Text style={styles.text}>{'% '}</Text>
