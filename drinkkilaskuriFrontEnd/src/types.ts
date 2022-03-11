@@ -99,7 +99,7 @@ export interface DrinksProps {
   removeFavorite: RemoveFavoriteFunc;
 }
 
-export interface GoalsProps {
+export interface StatusProps {
   drinkList: DrinkList;
   drinkLimit: string | undefined;
   totalBloodAlc: number;

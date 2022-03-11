@@ -5,7 +5,7 @@ import AddDrink from './src/AddDrink';
 import ExpandMinimizeButton from './src/Buttons/ExpandMinimizeButton';
 import Drinks from './src/Drinks';
 import FavoritesModal from './src/FavoritesModal';
-import Goals from './src/Goals';
+import Status from './src/Status';
 import HeaderMain from './src/HeaderMain';
 import MessageModal from './src/MessageModal';
 import ReminderModal from './src/ReminderModal';
@@ -421,7 +421,7 @@ const App = () => {
               buttonPress={handleExpandOrMinimizeButtonPress}
             />
           ) : null}
-          <Goals
+          <Status
             drinkList={drinkList}
             drinkLimit={drinkLimit}
             totalBloodAlc={totalBloodAlc}

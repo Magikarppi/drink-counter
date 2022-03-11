@@ -6,7 +6,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from './themes';
-import { GoalsProps } from './types';
+import { StatusProps } from './types';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
 const iconSize = 20;
 
-const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
+const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
   const [noMoreDrinks, setNoMoreDrinks] = useState<boolean>(false);
   useEffect(() => {
     if (drinkList && drinkLimit) {
@@ -95,4 +95,4 @@ const Goals = ({ drinkList, drinkLimit, totalBloodAlc }: GoalsProps) => {
   );
 };
 
-export default Goals;
+export default Status;
