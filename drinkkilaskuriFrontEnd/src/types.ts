@@ -207,3 +207,7 @@ export interface MessageModalProps {
   message: string | null;
   showModal: boolean;
 }
+
+export interface StatusMoreInfoProps {
+  totalBac: number;
+}

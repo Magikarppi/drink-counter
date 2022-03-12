@@ -21,6 +21,7 @@ import {
   RemindInterval,
 } from './src/types';
 import { calcTotalBAC, calculateBAC, randomId } from './src/utils';
+import StatusMoreInfo from './src/StatusMoreInfo';
 
 const styles = StyleSheet.create({
   container: {
@@ -458,6 +459,9 @@ const App = () => {
               totalBloodAlc={totalBloodAlc}
             />
           </View>
+          {expandOrMinimize === 'expanded' ? (
+            <StatusMoreInfo totalBac={totalBloodAlc} />
+          ) : null}
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}>
           <Drinks
