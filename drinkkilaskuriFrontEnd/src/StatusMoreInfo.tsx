@@ -7,12 +7,18 @@ import { calculateWhenSober } from './utils';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: '5%',
   },
   soberText: {
     color: colors.beige,
     fontSize: 20,
+    textAlign: 'center',
+  },
+  soberHourText: {
+    color: colors.brown,
+    fontSize: 30,
   },
 });
 
@@ -22,7 +28,9 @@ const StatusMoreInfo = ({ totalBac }: StatusMoreInfoProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.soberText}>
-        Olet taas selvänä n. {whenSoberInH} tunnin kuluttua.
+        Olet taas selvänä {'\n'} n.
+        <Text style={styles.soberHourText}>{whenSoberInH}</Text> tunnin {'\n'}
+        kuluttua.
       </Text>
     </View>
   );
