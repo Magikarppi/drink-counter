@@ -59,6 +59,19 @@ const defaultFavFolderStyle = {
   size: 50,
 };
 
+const statusMinimizedStyle = {
+  width: '100%',
+};
+
+const statusExpandedStyle = {
+  height: 170,
+  width: '100%',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  borderBottomColor: colors.violet,
+  borderBottomWidth: 1,
+};
+
 const App = () => {
   const [drinkList, setDrinkList] = useState<DrinkType[]>([]);
   const [alcPercent, setAlcPercent] = useState<string>();
@@ -84,6 +97,8 @@ const App = () => {
   const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
   const [expandOrMinimize, setExpandOrMinimize] =
     useState<ExpOrMinState>('minimized');
+  const [statusContainerStyle, setStatusContainerStyle] =
+    useState<any>(statusMinimizedStyle);
 
   // const [darkMode, setDarkMode] = useState<boolean>(false);
   // const isDarkMode = useColorScheme() === 'dark';
@@ -95,6 +110,14 @@ const App = () => {
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
+
+  useEffect(() => {
+    if (expandOrMinimize === 'expanded') {
+      setStatusContainerStyle(statusExpandedStyle);
+    } else {
+      setStatusContainerStyle(statusMinimizedStyle);
+    }
+  }, [expandOrMinimize]);
 
   // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
   useEffect(() => {
@@ -358,6 +381,8 @@ const App = () => {
     }
   };
 
+  console.log('drinkList.length > 0', drinkList.length > 0);
+  console.log('expandOrMinimize: ', expandOrMinimize);
   return (
     <View>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
@@ -408,24 +433,31 @@ const App = () => {
             favFolderIconStyle={favFolderIconStyle}
           />
         </View>
-        <View
-          style={{
-            ...styles.section,
-            flexDirection: 'row',
-            height: 35,
-          }}
-        >
-          {drinkList.length > 0 ? (
-            <ExpandMinimizeButton
-              mode={expandOrMinimize}
-              buttonPress={handleExpandOrMinimizeButtonPress}
+        <View style={statusContainerStyle}>
+          <View
+            style={{
+              ...styles.section,
+              flexDirection: 'row',
+              height: 35,
+              borderBottomColor:
+                expandOrMinimize === 'expanded'
+                  ? colors.backgroundDark
+                  : colors.violet,
+              // width: '100%',
+            }}
+          >
+            {drinkList.length > 0 ? (
+              <ExpandMinimizeButton
+                mode={expandOrMinimize}
+                buttonPress={handleExpandOrMinimizeButtonPress}
+              />
+            ) : null}
+            <Status
+              drinkList={drinkList}
+              drinkLimit={drinkLimit}
+              totalBloodAlc={totalBloodAlc}
             />
-          ) : null}
-          <Status
-            drinkList={drinkList}
-            drinkLimit={drinkLimit}
-            totalBloodAlc={totalBloodAlc}
-          />
+          </View>
         </View>
         <View style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}>
           <Drinks

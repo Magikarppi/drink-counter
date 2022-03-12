@@ -11,6 +11,8 @@ kun yli 6-7 drinkkii viimeinen jäää vähän piiloon scrollviewiin
 lisää laskuri + komponentti milloin on taas ajokunnossa "4tunnin päästä olet ajokunnossa / olet polttanut kaiken
 alkoholin verestäsi. + Kello milloin selvänä, joka siirtyy kauemmaksi kun lisää drinkkejä + uniaika häiriö overlap
 
+Animoi statuksen expand/minimizointi
+
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"
