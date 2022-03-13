@@ -140,6 +140,11 @@ const App = () => {
       setTotalBloodAlc(totalBac);
     }
 
+    // Minimize status-more-info view if no drink's have added
+    if (drinkList.length <= 0) {
+      setExpandOrMinimize('minimized');
+    }
+
     // Refresh total BAC every minute
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
