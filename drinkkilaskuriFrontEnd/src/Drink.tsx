@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    height: 50,
+    height: 55,
     // marginRight: 15,
     borderBottomWidth: 1,
     borderBottomColor: colors.violet,
