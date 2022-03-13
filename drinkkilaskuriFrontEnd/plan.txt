@@ -13,6 +13,10 @@ alkoholin verestäsi. + Kello milloin selvänä, joka siirtyy kauemmaksi kun lis
 
 Animoi statuksen expand/minimizointi
 
+Drinkkilistan scrollaus näyttää olevan disabled kun StatusMoreInfo on expanded
+
+0.1g per painokilo alkoholia palaa tunnissa => 70kg polttais 7g alkoholia tunnissa.
+
 "teit toiveen itsellesi -pvm- olla juomatta -pvm- saakka"
 
 "lisää drinkki ennen avaamista"
