@@ -23,13 +23,23 @@ const styles = StyleSheet.create({
 });
 
 const StatusMoreInfo = ({ totalBac }: StatusMoreInfoProps) => {
-  const whenSoberInH = calculateWhenSober(totalBac).toFixed(2);
+  const whenSober = calculateWhenSober(totalBac).toFixed(2);
+
+  // Turn into 60min format
+  const indexOfDot = whenSober.indexOf('.');
+  const whenSoberHours = parseInt(whenSober.slice(0, indexOfDot), 10);
+  const whenSoberMinutes = Math.round(
+    parseInt(whenSober.slice(indexOfDot + 1), 10) * 0.6
+  );
 
   return (
     <View style={styles.container}>
       <Text style={styles.soberText}>
         Olet taas selvänä {'\n'} n.
-        <Text style={styles.soberHourText}>{whenSoberInH}</Text> tunnin {'\n'}
+        <Text
+          style={styles.soberHourText}
+        >{`${whenSoberHours} t ${whenSoberMinutes} min`}</Text>{' '}
+        {'\n'}
         kuluttua.
       </Text>
     </View>
