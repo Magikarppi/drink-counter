@@ -14,8 +14,6 @@ import { colors } from './src/themes';
 import {
   Bodyweight,
   DrinkType,
-  ExpOrMinAction,
-  ExpOrMinState,
   FavDrinkType,
   FavFolderIconStyle,
   RemindInterval,
@@ -96,8 +94,7 @@ const App = () => {
     useState<RemindInterval>('afterMax');
   const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
-  const [expandOrMinimize, setExpandOrMinimize] =
-    useState<ExpOrMinState>('minimized');
+  const [statusIsExpanded, setStatusIsExpanded] = useState<boolean>(false);
   const [statusContainerStyle, setStatusContainerStyle] =
     useState<any>(statusMinimizedStyle);
 
@@ -113,12 +110,10 @@ const App = () => {
   // };
 
   useEffect(() => {
-    if (expandOrMinimize === 'expanded') {
-      setStatusContainerStyle(statusExpandedStyle);
-    } else {
-      setStatusContainerStyle(statusMinimizedStyle);
-    }
-  }, [expandOrMinimize]);
+    statusIsExpanded
+      ? setStatusContainerStyle(statusExpandedStyle)
+      : setStatusContainerStyle(statusMinimizedStyle);
+  }, [statusIsExpanded]);
 
   // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
   useEffect(() => {
@@ -142,8 +137,7 @@ const App = () => {
 
     // Minimize status-more-info view and hide status view if no drink's have been added
     if (drinkList.length <= 0) {
-      setExpandOrMinimize('minimized');
-      setStatusContainerStyle(statusMinimizedStyle);
+      setStatusIsExpanded(false);
     }
 
     // Refresh total BAC every minute
@@ -375,21 +369,8 @@ const App = () => {
     return;
   };
 
-  const handleExpandOrMinimizeButtonPress = (action: ExpOrMinAction) => {
-    switch (action) {
-      case 'expand':
-        setExpandOrMinimize('expanded');
-        break;
-      case 'minimize':
-        setExpandOrMinimize('minimized');
-        break;
-      default:
-        break;
-    }
-  };
-
   console.log('drinkList.length > 0', drinkList.length > 0);
-  console.log('expandOrMinimize: ', expandOrMinimize);
+  console.log('statusIsExpanded: ', statusIsExpanded);
   return (
     <View>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
@@ -446,17 +427,16 @@ const App = () => {
               ...styles.section,
               flexDirection: 'row',
               height: 35,
-              borderBottomColor:
-                expandOrMinimize === 'expanded'
-                  ? colors.backgroundDark
-                  : colors.violet,
+              borderBottomColor: statusIsExpanded
+                ? colors.backgroundDark
+                : colors.violet,
               // width: '100%',
             }}
           >
             {drinkList.length > 0 ? (
               <ExpandMinimizeButton
-                mode={expandOrMinimize}
-                buttonPress={handleExpandOrMinimizeButtonPress}
+                statusIsExpanded={statusIsExpanded}
+                setStatusIsExpanded={setStatusIsExpanded}
               />
             ) : null}
             <Status
@@ -465,7 +445,7 @@ const App = () => {
               totalBloodAlc={totalBloodAlc}
             />
           </View>
-          {expandOrMinimize === 'expanded' ? (
+          {statusIsExpanded ? (
             <StatusMoreInfo totalBac={totalBloodAlc} />
           ) : null}
         </View>

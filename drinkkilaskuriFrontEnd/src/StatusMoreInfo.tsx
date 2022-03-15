@@ -38,7 +38,7 @@ const StatusMoreInfo = ({ totalBac }: StatusMoreInfoProps) => {
         Olet taas selvänä {'\n'} n.
         <Text
           style={styles.soberHourText}
-        >{`${whenSoberHours} t ${whenSoberMinutes} min`}</Text>{' '}
+        >{` ${whenSoberHours} t ${whenSoberMinutes} min`}</Text>{' '}
         {'\n'}
         kuluttua.
       </Text>

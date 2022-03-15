@@ -46,10 +46,6 @@ export type Bodyweight = string;
 
 export type SetBodyweight = (bw: Bodyweight) => void;
 
-export type ExpOrMinAction = 'expand' | 'minimize';
-
-export type ExpOrMinState = 'expanded' | 'minimized';
-
 export interface AddDrinkProps {
   alcPercent: string | undefined;
   setAlcPercent: SetAlcPercentFunc;
@@ -199,8 +195,8 @@ export interface ReminderModalProps {
 }
 
 export interface ExpandMinimizeBtnProps {
-  mode: ExpOrMinState;
-  buttonPress: (action: ExpOrMinAction) => void;
+  statusIsExpanded: boolean;
+  setStatusIsExpanded: (expanded: boolean) => void;
 }
 
 export interface MessageModalProps {

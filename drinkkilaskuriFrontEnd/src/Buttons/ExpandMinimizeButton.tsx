@@ -17,23 +17,19 @@ const iconSize = 25;
 const iconColor = colors.beige;
 
 const ExpandMinimizeButton = ({
-  mode,
-  buttonPress,
+  statusIsExpanded,
+  setStatusIsExpanded,
 }: ExpandMinimizeBtnProps) => {
   let button = null;
-  if (mode === 'expanded') {
-    button = (
-      <TouchableOpacity onPress={() => buttonPress('minimize')}>
-        <MaterialIcon name="expand-less" size={iconSize} color={iconColor} />
-      </TouchableOpacity>
-    );
-  } else if (mode === 'minimized') {
-    button = (
-      <TouchableOpacity onPress={() => buttonPress('expand')}>
-        <MaterialIcon name="expand-more" size={iconSize} color={iconColor} />
-      </TouchableOpacity>
-    );
-  }
+  button = statusIsExpanded ? (
+    <TouchableOpacity onPress={() => setStatusIsExpanded(false)}>
+      <MaterialIcon name="expand-less" size={iconSize} color={iconColor} />
+    </TouchableOpacity>
+  ) : (
+    <TouchableOpacity onPress={() => setStatusIsExpanded(true)}>
+      <MaterialIcon name="expand-more" size={iconSize} color={iconColor} />
+    </TouchableOpacity>
+  );
 
   return <View style={styles.container}>{button}</View>;
 };
