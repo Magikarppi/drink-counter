@@ -78,7 +78,7 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
               color={colors.danger}
             />
           ) : (
-            <Entypo name="drink" size={iconSize} color={colors.beige} />
+            <Entypo name="drink" size={iconSize} color={'#9ef542'} />
           )}
         </View>
         {totalBloodAlc >= 0 ? (
