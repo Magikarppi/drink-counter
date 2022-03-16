@@ -46,6 +46,7 @@ const iconSize = 20;
 
 const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
   const [noMoreDrinks, setNoMoreDrinks] = useState<boolean>(false);
+
   useEffect(() => {
     if (drinkList && drinkLimit) {
       const noMore = parseInt(drinkLimit, 10) - drinkList?.length;
@@ -72,7 +73,7 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
             <MaterialIcons
               name="no-drinks"
               size={iconSize}
-              color={colors.beige}
+              color={colors.danger}
             />
           ) : (
             <Entypo name="drink" size={iconSize} color={colors.beige} />
@@ -87,7 +88,11 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
         ) : null}
         <View style={styles.iconWrapper}>
           {totalBloodAlc >= 0.5 ? (
-            <MaterialCommunityIcon name="car-off" size={25} color={'#ff401f'} />
+            <MaterialCommunityIcon
+              name="car-off"
+              size={25}
+              color={colors.danger}
+            />
           ) : null}
         </View>
       </View>

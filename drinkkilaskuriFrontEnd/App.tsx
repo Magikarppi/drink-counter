@@ -369,8 +369,6 @@ const App = () => {
     return;
   };
 
-  console.log('drinkList.length > 0', drinkList.length > 0);
-  console.log('statusIsExpanded: ', statusIsExpanded);
   return (
     <View>
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}

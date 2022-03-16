@@ -5,4 +5,5 @@ export const colors = {
   darkSecondary: 'brown',
   white: '#fffaed',
   brown: '#cf5315',
+  danger: '#ff401f',
 };

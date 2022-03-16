@@ -59,7 +59,6 @@ const Drink = ({
   useEffect(() => {
     if (consumedSvgValue && opacity) {
       console.log('consumaedSvg val:', consumedSvgValue);
-      console.log('opacity', opacity);
       if (consumedSvgValue >= 125) {
         setOpacity(0.6);
       }
