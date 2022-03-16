@@ -52,6 +52,8 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
       const noMore = parseInt(drinkLimit, 10) - drinkList?.length;
       if (noMore < 1) {
         setNoMoreDrinks(true);
+      } else {
+        setNoMoreDrinks(false);
       }
     }
   }, [drinkLimit, drinkList]);

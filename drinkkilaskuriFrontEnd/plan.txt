@@ -21,3 +21,11 @@ Drinkkilistan scrollaus näyttää olevan disabled kun StatusMoreInfo on expande
 
 "lisää drinkki ennen avaamista"
 
+Aseta raja ? drinkkiä 
+          tai 
+esim 0.5% - 1.0% veren alkoholipitoisuus (Reaktioaika, ajokyky ja liikkeiden hallinta heikkenevät, tunteet ailahtelevat)
+https://www.terveyskirjasto.fi/dlk01084/alkoholihumala-ja-muita-alkoholin-valittomia-vaikutuksia?q=alkoholi
+
+Eli joku infotaulu niinku tuol linkissä jonka perusteella voi päättää milloin lopettaa
+
+Kun drinkki on kulutettu miinusta se Statuksen drinkeistä? 2-1/2 = 0.08%
