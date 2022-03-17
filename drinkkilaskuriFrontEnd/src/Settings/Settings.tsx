@@ -1,8 +1,15 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 
 import { colors } from '../themes';
 import { SettingsProps } from '../types';
+import BACInfoModal from './BACInfoModal';
 import BodySize from './BodySize';
 import DrinkLimit from './DrinkLimit';
 import Reminder from './ReminderSetting';
@@ -59,11 +66,22 @@ const Settings = ({
   useSleepTime,
   toggleUseSleepTime,
 }: SettingsProps) => {
+  const [showBACInfo, setShowBACInfo] = useState<boolean>(false);
+
   return (
     <ScrollView>
       <View style={styles.container}>
+        <BACInfoModal
+          showModal={showBACInfo}
+          closeModal={() => setShowBACInfo(false)}
+        />
         <View style={styles.section}>
           <DrinkLimit drinkLimit={drinkLimit} setDrinkLimit={setDrinkLimit} />
+          <TouchableOpacity onPress={() => setShowBACInfo(true)}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>i niinkuin info</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.section}>
           <Reminder
