@@ -1,21 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { colors } from '../themes';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    width: '100%',
-    height: '100%',
+    justifyContent: 'center',
+  },
+  rowsWrapper: {
+    flex: 1,
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+  },
+  cell: {
+    flex: 1,
+    alignSelf: 'stretch',
+  },
+  text: {
+    fontSize: 15,
+    color: colors.beige,
   },
 });
 
-const BACInfo = () => {
-  return (
-    <View style={styles.container}>
-      <Text>0.5% humala</Text>
-    </View>
-  );
-};
+class BACInfoTable extends Component {
+  renderRow(datum: any) {
+    return (
+      <View key={datum} style={styles.rowsWrapper}>
+        <View style={styles.cell}>
+          <Text style={styles.text}>{datum}</Text>
+        </View>
+        <View style={styles.cell}>
+          <Text style={styles.text}>{datum}</Text>
+        </View>
+        <View style={styles.cell}>
+          <Text style={styles.text}>{datum}</Text>
+        </View>
+        <View style={styles.cell}>
+          <Text style={styles.text}>{datum}</Text>
+        </View>
+        <View style={styles.cell}>
+          <Text style={styles.text}>{datum}</Text>
+        </View>
+      </View>
+    );
+  }
 
-export default BACInfo;
+  render(): React.ReactNode {
+    const data = [8, 2, 3, 4, 5];
+
+    return (
+      <View style={styles.container}>
+        {data.map((datum) => {
+          return this.renderRow(datum);
+        })}
+      </View>
+    );
+  }
+}
+
+export default BACInfoTable;
