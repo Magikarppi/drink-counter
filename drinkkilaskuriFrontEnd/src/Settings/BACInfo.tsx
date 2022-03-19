@@ -13,9 +13,22 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
   },
-  cell: {
+  percentCell: {
     flex: 1,
     alignSelf: 'stretch',
+    borderWidth: 1,
+    borderColor: colors.violet,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textCell: {
+    flex: 6,
+    alignSelf: 'stretch',
+    borderWidth: 1,
+    borderColor: colors.violet,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    padding: 5,
   },
   text: {
     fontSize: 15,
@@ -24,36 +37,89 @@ const styles = StyleSheet.create({
 });
 
 class BACInfoTable extends Component {
-  renderRow(datum: any) {
-    return (
-      <View key={datum} style={styles.rowsWrapper}>
-        <View style={styles.cell}>
-          <Text style={styles.text}>{datum}</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.text}>{datum}</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.text}>{datum}</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.text}>{datum}</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.text}>{datum}</Text>
-        </View>
-      </View>
-    );
-  }
-
   render(): React.ReactNode {
-    const data = [8, 2, 3, 4, 5];
-
     return (
       <View style={styles.container}>
-        {data.map((datum) => {
-          return this.renderRow(datum);
-        })}
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>%</Text>
+          </View>
+          <View style={{ ...styles.textCell, alignItems: 'center' }}>
+            <Text style={styles.text}>Vaikutus</Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`> 0.25`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Estot vähenevät, itseluottamus kasvaa, lämmön ja hyvinvoinnin
+              tunne, tarkkaavuus heikentyy.
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`0,25 \n  – \n 0,5`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Mielihyvän tunne, kömpelyyttä, arvostelukyky heikkenee.
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`0,5 \n  – \n 1,0`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Reaktioaika, ajokyky ja liikkeiden hallinta heikkenevät, tunteet
+              ailahtelevat.
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`1,0 \n  – \n 2,5`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Heikkeneminen voimistuu, pahoinvointia, oksennuksia, sekavuutta.
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`2,5 \n  – \n 4,0`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Puhe sammaltaa, näköhäiriöitä, tajuttomuus.
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`> 0.4`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Hengitys vaikeutuu, verensokeri vähenee, lämmöntuotanto heikkenee.
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rowsWrapper}>
+          <View style={styles.percentCell}>
+            <Text style={styles.text}>{`> 0.5`}</Text>
+          </View>
+          <View style={styles.textCell}>
+            <Text style={styles.text}>
+              Keskimäärin tappava pitoisuus (pääkallo icon?)
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }
