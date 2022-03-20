@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Modal } from 'react-native';
+
 import CloseButton from '../Buttons/CloseButton';
 import { colors } from '../themes';
 import { BACInfoModalProps } from '../types';
-import BACInfo from './BACInfo';
+import BACInfoTable from './BACInfoTable';
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -11,7 +12,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#00000080',
+    // backgroundColor: '#00000080',
+    backgroundColor: '#000000da',
   },
   modalContainer: {
     width: '90%',
@@ -30,13 +32,12 @@ const styles = StyleSheet.create({
   },
   buttonElement: {
     // justifyContent: 'space-evenly',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '33%',
   },
 });
 
 const BACInfoModal = ({ showModal, closeModal }: BACInfoModalProps) => {
-  console.log('showModal: ', showModal);
   return (
     <Modal visible={showModal}>
       <View style={styles.screenContainer}>
@@ -45,12 +46,10 @@ const BACInfoModal = ({ showModal, closeModal }: BACInfoModalProps) => {
             <View style={styles.buttonElement}>
               <CloseButton closeModal={closeModal} />
             </View>
-            <View style={styles.buttonElement}>
-              {/* <SaveButton saveSettings={saveSettings} /> */}
-            </View>
+            <View style={styles.buttonElement} />
             <View style={styles.buttonElement} />
           </View>
-          <BACInfo />
+          <BACInfoTable />
         </View>
       </View>
     </Modal>

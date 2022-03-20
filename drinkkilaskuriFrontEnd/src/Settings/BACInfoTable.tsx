@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rowsWrapper: {
-    flex: 1,
+    flex: 2,
     alignSelf: 'stretch',
     flexDirection: 'row',
   },
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   text: {
-    fontSize: 15,
+    fontSize: 13,
     color: colors.beige,
   },
 });
@@ -40,11 +40,11 @@ class BACInfoTable extends Component {
   render(): React.ReactNode {
     return (
       <View style={styles.container}>
-        <View style={styles.rowsWrapper}>
+        <View style={{ ...styles.rowsWrapper, flex: 1 }}>
           <View style={styles.percentCell}>
             <Text style={styles.text}>%</Text>
           </View>
-          <View style={{ ...styles.textCell, alignItems: 'center' }}>
+          <View style={{ ...styles.textCell, alignItems: 'flex-start' }}>
             <Text style={styles.text}>Vaikutus</Text>
           </View>
         </View>
@@ -61,7 +61,7 @@ class BACInfoTable extends Component {
         </View>
         <View style={styles.rowsWrapper}>
           <View style={styles.percentCell}>
-            <Text style={styles.text}>{`0,25 \n  – \n 0,5`}</Text>
+            <Text style={styles.text}>{`0.25 \n  – \n 0.5`}</Text>
           </View>
           <View style={styles.textCell}>
             <Text style={styles.text}>
@@ -71,7 +71,7 @@ class BACInfoTable extends Component {
         </View>
         <View style={styles.rowsWrapper}>
           <View style={styles.percentCell}>
-            <Text style={styles.text}>{`0,5 \n  – \n 1,0`}</Text>
+            <Text style={styles.text}>{`0.5 \n – \n1.0`}</Text>
           </View>
           <View style={styles.textCell}>
             <Text style={styles.text}>
@@ -82,7 +82,7 @@ class BACInfoTable extends Component {
         </View>
         <View style={styles.rowsWrapper}>
           <View style={styles.percentCell}>
-            <Text style={styles.text}>{`1,0 \n  – \n 2,5`}</Text>
+            <Text style={styles.text}>{`1.0 \n  – \n2.5`}</Text>
           </View>
           <View style={styles.textCell}>
             <Text style={styles.text}>
@@ -92,7 +92,7 @@ class BACInfoTable extends Component {
         </View>
         <View style={styles.rowsWrapper}>
           <View style={styles.percentCell}>
-            <Text style={styles.text}>{`2,5 \n  – \n 4,0`}</Text>
+            <Text style={styles.text}>{`2.5 \n  – \n4.0`}</Text>
           </View>
           <View style={styles.textCell}>
             <Text style={styles.text}>

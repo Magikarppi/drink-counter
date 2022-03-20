@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   buttonElement: {
     // justifyContent: 'space-evenly',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '33%',
   },
 });
