@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from '../themes';
 import { SettingsProps } from '../types';
@@ -78,8 +79,19 @@ const Settings = ({
         <View style={styles.section}>
           <DrinkLimit drinkLimit={drinkLimit} setDrinkLimit={setDrinkLimit} />
           <TouchableOpacity onPress={() => setShowBACInfo(true)}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>i niinkuin info</Text>
+            <View
+              style={{
+                height: 30,
+                width: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Ionicon
+                name="information-circle-outline"
+                size={25}
+                color={colors.brown}
+              />
             </View>
           </TouchableOpacity>
         </View>
