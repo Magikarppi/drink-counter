@@ -29,3 +29,9 @@ https://www.terveyskirjasto.fi/dlk01084/alkoholihumala-ja-muita-alkoholin-valitt
 Eli joku infotaulu niinku tuol linkissä jonka perusteella voi päättää milloin lopettaa
 
 Kun drinkki on kulutettu miinusta se Statuksen drinkeistä? 2-1/2 = 0.08%
+
+lisää "alkoholivaikutukset" tms teksti info iconin viereen?
+prosentti-iconi inputin viereen?
+Nollaa prosennttiinput jos === 0
+laita BAC-tsekki drinkin lisäykseen + modaaliin
+Voi käyttää joko tai drinkkimäärä tai BAC rajaa?

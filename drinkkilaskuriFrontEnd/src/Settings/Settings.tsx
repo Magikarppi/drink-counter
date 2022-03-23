@@ -11,6 +11,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../themes';
 import { SettingsProps } from '../types';
 import BACInfoModal from './BACInfoModal';
+import BACLimit from './BACLimit';
 import BodySize from './BodySize';
 import DrinkLimit from './DrinkLimit';
 import Reminder from './ReminderSetting';
@@ -66,6 +67,8 @@ const Settings = ({
   setReminderMessage,
   useSleepTime,
   toggleUseSleepTime,
+  bacLimit,
+  setBACLimit,
 }: SettingsProps) => {
   const [showBACInfo, setShowBACInfo] = useState<boolean>(false);
 
@@ -78,6 +81,7 @@ const Settings = ({
         />
         <View style={styles.section}>
           <DrinkLimit drinkLimit={drinkLimit} setDrinkLimit={setDrinkLimit} />
+          <BACLimit bacLimit={bacLimit} setBACLimit={setBACLimit} />
           <TouchableOpacity onPress={() => setShowBACInfo(true)}>
             <View
               style={{

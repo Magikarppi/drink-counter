@@ -55,6 +55,8 @@ const SettingsModal = ({
   setReminderMessage,
   toggleUseSleepTime,
   useSleepTime,
+  bacLimit,
+  setBACLimit,
 }: SettingsModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
@@ -75,6 +77,8 @@ const SettingsModal = ({
             setBodyweight={setBodyweight}
             drinkLimit={drinkLimit}
             setDrinkLimit={setDrinkLimit}
+            bacLimit={bacLimit}
+            setBACLimit={setBACLimit}
             sleepTime={sleepTime}
             changeSleepTime={changeSleepTime}
             selectRemindInterval={selectRemindInterval}

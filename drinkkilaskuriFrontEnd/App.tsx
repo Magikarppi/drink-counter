@@ -85,6 +85,8 @@ const App = () => {
     useState<FavFolderIconStyle>(defaultFavFolderStyle);
   const [drinkLimit, setDrinkLimit] = useState<string>();
   const [drinkLimitReached, setDrinkLimitReached] = useState<boolean>(false);
+  const [bacLimit, setBACLimit] = useState<string>();
+  const [bacLimitReached, setBACLimitReached] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
   const [useSleepTime, setUseSleepTime] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -109,6 +111,7 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
 
+  console.log('bacLimit:', bacLimit);
   useEffect(() => {
     statusIsExpanded
       ? setStatusContainerStyle(statusExpandedStyle)
@@ -387,6 +390,8 @@ const App = () => {
           setBodyweight={setBodyweight}
           drinkLimit={drinkLimit}
           setDrinkLimit={setDrinkLimit}
+          bacLimit={bacLimit}
+          setBACLimit={setBACLimit}
           showModal={showSettings}
           closeModal={closeSettings}
           sleepTime={sleepTime}

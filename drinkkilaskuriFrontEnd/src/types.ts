@@ -42,6 +42,10 @@ export type SetDrinkLimit = (count: DrinkLimit) => void;
 
 export type DrinkLimit = string | undefined;
 
+export type BACLimit = string | undefined;
+
+export type SetBACLimit = (count: BACLimit) => void;
+
 export type Bodyweight = string;
 
 export type SetBodyweight = (bw: Bodyweight) => void;
@@ -101,7 +105,7 @@ export interface StatusProps {
   totalBloodAlc: number;
 }
 
-export interface SettingsModalProps {
+export interface SettingsModalProps extends BACLimitProps {
   showModal: boolean;
   closeModal: CloseModalFunc;
   changeSleepTime: ChangeSleepTimeFunc;
@@ -118,7 +122,7 @@ export interface SettingsModalProps {
   toggleUseSleepTime: () => void;
 }
 
-export interface SettingsProps {
+export interface SettingsProps extends BACLimitProps {
   changeSleepTime: ChangeSleepTimeFunc;
   sleepTime: SleepTime;
   selectRemindInterval: SelectRemindInterval;
@@ -178,6 +182,11 @@ export interface ReminderSettingProps {
 export interface DrinkLimitProps {
   drinkLimit: DrinkLimit;
   setDrinkLimit: SetDrinkLimit;
+}
+
+export interface BACLimitProps {
+  bacLimit: BACLimit;
+  setBACLimit: SetBACLimit;
 }
 
 export interface BodySizeProps {
