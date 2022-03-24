@@ -49,13 +49,16 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
 
   useEffect(() => {
     if (drinkList && drinkLimit) {
+      // check if no-more-drinks should be consumed
       const noMore = parseInt(drinkLimit, 10) - drinkList?.length;
       if (noMore < 1) {
-        setNoMoreDrinks(true);
+        return setNoMoreDrinks(true);
       } else {
-        setNoMoreDrinks(false);
+        return setNoMoreDrinks(false);
       }
     }
+    // Reset noMoreDrink to default (false) if for example drinklimit gets removed
+    setNoMoreDrinks(false);
   }, [drinkLimit, drinkList]);
 
   if (!drinkLimit && !totalBloodAlc) {
