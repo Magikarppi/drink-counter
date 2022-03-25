@@ -174,7 +174,11 @@ const App = () => {
     }
 
     if (drinkLimitReached) {
-      console.log('drinkLimit reached');
+      setShowReminder(true);
+      return;
+    }
+
+    if (bacLimitReached) {
       setShowReminder(true);
       return;
     }
