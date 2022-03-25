@@ -79,7 +79,7 @@ const ReminderModal = ({
   drinkLimitReached,
 }: ReminderModalProps) => {
   const drinkLimitRemindTitle =
-    'Olet ylittämässä drinkkirajasi. Haluatko silti lisätä drinkin?';
+    'Olet ylittämässä alkoholijuomarajojasi. Haluatko silti lisätä drinkin?';
   const sleepTimeRemindTitle =
     'Olet vaarassa sekoittaa unirytmiäsi. Haluatko silti lisätä drinkin?';
   const customRemindTitle = 'Haluatko lisätä juoman? Muistutus itsellesi:';
