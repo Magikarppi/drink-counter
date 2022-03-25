@@ -118,12 +118,15 @@ const App = () => {
       : setStatusContainerStyle(statusMinimizedStyle);
   }, [statusIsExpanded]);
 
-  // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
+  // Drink/BAC limit of 0 is not allowed (aina voi yhen ottaa...)
   useEffect(() => {
     if (drinkLimit === '0') {
       setDrinkLimit(undefined);
     }
-  }, [drinkLimit]);
+    if (bacLimit === '0') {
+      setBACLimit(undefined);
+    }
+  }, [drinkLimit, bacLimit]);
 
   // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
