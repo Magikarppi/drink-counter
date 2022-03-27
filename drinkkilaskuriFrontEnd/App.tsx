@@ -111,7 +111,6 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
 
-  console.log('bacLimit:', bacLimit);
   useEffect(() => {
     statusIsExpanded
       ? setStatusContainerStyle(statusExpandedStyle)

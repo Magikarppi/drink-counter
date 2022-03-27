@@ -35,3 +35,7 @@ prosentti-iconi inputin viereen?
 Nollaa prosennttiinput jos === 0
 laita BAC-tsekki drinkin lisäykseen + modaaliin
 Voi käyttää joko tai drinkkimäärä tai BAC rajaa?
+
+Order drink list so that consumed ones get below not-consumed?
+
+Sober timerissa jotain vikaa. Tuntuu että menee hitaampaa vauhtia kuin oikea aika. Eli siis drinkin whenSober laskennat on jotenki pielessä.
