@@ -152,6 +152,7 @@ const App = () => {
     return () => clearInterval(interval);
   }, [drinkList]);
 
+  // Check if drinkLimit has been reached and set state accordingly
   useEffect(() => {
     if (drinkLimit && drinkList) {
       const drinkLimitExceeded = drinkList?.length >= parseInt(drinkLimit, 10);
@@ -163,6 +164,18 @@ const App = () => {
       }
     }
   }, [drinkLimit, drinkList]);
+
+  // Check if bacLimit has been reached and set state accordingly
+  useEffect(() => {
+    if (bacLimit && totalBloodAlc) {
+      const bacLimitNum = parseFloat(bacLimit);
+      if (totalBloodAlc >= bacLimitNum) {
+        setBACLimitReached(true);
+      } else {
+        setBACLimitReached(false);
+      }
+    }
+  }, [bacLimit, totalBloodAlc]);
 
   const validateDrinkAddition = () => {
     if (!alcPercent || !amount) {

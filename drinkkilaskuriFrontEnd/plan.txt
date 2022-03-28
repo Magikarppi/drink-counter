@@ -35,6 +35,10 @@ prosentti-iconi inputin viereen?
 laita BAC-tsekki drinkin lisäykseen + modaaliin
 Voi käyttää joko tai drinkkimäärä tai BAC rajaa?
 
+BACLimit ei checkkaa ennakoivasti. Eli bac-limit voi mennä yli jos eka on ali mut sit vetää kossupullon nii 
+mut onko se tavallaan ok, koska periaatteessa sitä drinkkiä ei oo vielä juotu??
+useEffectissä pitäis tietää mitä drinkkiä oltais lisäämässä. tai sit addiin checkki?
+
 Order drink list so that consumed ones get below not-consumed?
 
 Sober timerissa jotain vikaa. Tuntuu että menee hitaampaa vauhtia kuin oikea aika. Eli siis drinkin whenSober laskennat on jotenki pielessä.
