@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TextInput, Text } from 'react-native';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+
 import { colors } from '../themes';
 import { BACLimitProps } from '../types';
 
@@ -15,6 +17,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  bacElementWrapper: {
+    width: '33%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+  },
   input: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,6 +35,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    color: colors.beige,
+    textAlign: 'center',
+  },
+  percentText: {
+    fontSize: 17,
     color: colors.beige,
     textAlign: 'center',
   },
@@ -51,8 +64,13 @@ const BACLimit = ({ bacLimit, setBACLimit }: BACLimitProps) => {
           />
         </View>
       </View>
-      <View style={{ ...styles.elementWrapper, alignItems: 'flex-start' }}>
-        <Text style={styles.text}>% alkoholia veressä</Text>
+      <View style={styles.bacElementWrapper}>
+        <View style={{ margin: 1 }}>
+          <Ionicon name="body-outline" size={20} color={colors.beige} />
+        </View>
+        <View style={{ margin: 1 }}>
+          <Text style={styles.percentText}>%</Text>
+        </View>
       </View>
     </View>
   );
