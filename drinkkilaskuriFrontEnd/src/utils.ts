@@ -21,11 +21,9 @@ export const calculateBAC = (drink: DrinkType, gender?: 'male' | 'female') => {
   return eBAC;
 };
 
-export const calcTotalBAC = (drinkList: DrinkType[]) => {
-  let total = 0;
-  drinkList.forEach((drink) => {
-    total += calculateBAC(drink);
-  });
+export const calculateTotalBAC = (drinkList: DrinkType[]) => {
+  const bacValues = drinkList.map((d) => calculateBAC(d));
+  const total = bacValues.reduce((acc, curr) => acc + curr);
   return total;
 };
 
