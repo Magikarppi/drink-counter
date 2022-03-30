@@ -18,7 +18,7 @@ import {
   FavFolderIconStyle,
   RemindInterval,
 } from './src/types';
-import { calcTotalBAC, calculateBAC, randomId } from './src/utils';
+import { calculateBAC, calculateTotalBAC, randomId } from './src/utils';
 import StatusMoreInfo from './src/StatusMoreInfo';
 
 const styles = StyleSheet.create({
@@ -133,7 +133,7 @@ const App = () => {
 
     // Refresh total BAC immediately when new drink added
     if (drinkList.length > 0) {
-      const totalBac = calcTotalBAC(drinkList);
+      const totalBac = calculateTotalBAC(drinkList);
       setTotalBloodAlc(totalBac);
     }
 
@@ -145,7 +145,8 @@ const App = () => {
     // Refresh total BAC every minute
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
-        const totalBac = calcTotalBAC(drinkList);
+        console.log('should calcTotalBAC with time: ', Date());
+        const totalBac = calculateTotalBAC(drinkList);
         setTotalBloodAlc(totalBac);
       }
     }, 60000);
