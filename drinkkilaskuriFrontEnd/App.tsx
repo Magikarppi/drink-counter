@@ -462,7 +462,8 @@ const App = () => {
             <Status
               drinkList={drinkList}
               drinkLimit={drinkLimit}
-              totalBloodAlc={totalBloodAlc}
+              totalBAC={totalBloodAlc}
+              bacLimit={bacLimit}
             />
           </View>
           {statusIsExpanded ? (

@@ -102,7 +102,8 @@ export interface DrinksProps {
 export interface StatusProps {
   drinkList: DrinkList;
   drinkLimit: string | undefined;
-  totalBloodAlc: number;
+  totalBAC: number;
+  bacLimit: string | undefined;
 }
 
 export interface SettingsModalProps extends BACLimitProps {

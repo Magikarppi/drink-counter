@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
 
 const iconSize = 20;
 
-const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
+const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
   const [noMoreDrinks, setNoMoreDrinks] = useState<boolean>(false);
 
   useEffect(() => {
     if (drinkList && drinkLimit) {
       // check if no-more-drinks should be consumed
-      const noMore = parseInt(drinkLimit, 10) - drinkList?.length;
-      if (noMore < 1) {
+      const status = parseInt(drinkLimit, 10) - drinkList?.length;
+      if (status < 1) {
         return setNoMoreDrinks(true);
       } else {
         return setNoMoreDrinks(false);
@@ -61,7 +61,21 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
     setNoMoreDrinks(false);
   }, [drinkLimit, drinkList]);
 
-  if (!drinkLimit && !totalBloodAlc) {
+  useEffect(() => {
+    if (totalBAC && bacLimit) {
+      // check if no-more-drinks should be consumed
+      const status = parseFloat(bacLimit) - totalBAC;
+      if (status <= 0) {
+        return setNoMoreDrinks(true);
+      } else {
+        return setNoMoreDrinks(false);
+      }
+    }
+    // Reset noMoreDrink to default (false) if for example bacLimit gets removed
+    setNoMoreDrinks(false);
+  }, [totalBAC, bacLimit]);
+
+  if (!drinkLimit && !totalBAC) {
     return null;
   }
 
@@ -84,15 +98,15 @@ const Status = ({ drinkList, drinkLimit, totalBloodAlc }: StatusProps) => {
             <Entypo name="drink" size={iconSize} color={'#9ef542'} />
           )}
         </View>
-        {totalBloodAlc >= 0 ? (
+        {totalBAC >= 0 ? (
           <View style={styles.textWrapper}>
-            <Text style={styles.text}>{`= ${totalBloodAlc.toFixed(2)}`}</Text>
+            <Text style={styles.text}>{`= ${totalBAC.toFixed(2)}`}</Text>
             <Text style={styles.text}>{'% '}</Text>
             <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
           </View>
         ) : null}
         <View style={styles.iconWrapper}>
-          {totalBloodAlc >= 0.5 ? (
+          {totalBAC >= 0.5 ? (
             <MaterialCommunityIcon
               name="car-off"
               size={25}
