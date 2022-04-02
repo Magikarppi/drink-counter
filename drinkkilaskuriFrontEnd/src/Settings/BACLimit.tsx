@@ -61,6 +61,7 @@ const BACLimit = ({ bacLimit, setBACLimit }: BACLimitProps) => {
             keyboardType="number-pad"
             placeholderTextColor={'grey'}
             textAlign="center"
+            maxLength={4}
           />
         </View>
       </View>
