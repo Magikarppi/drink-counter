@@ -33,9 +33,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    marginHorizontal: 5,
+    marginHorizontal: 2,
   },
-  text: {
+  currValueText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.beige,
+  },
+  goalValueText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: colors.beige,
@@ -83,37 +88,38 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
         <View style={styles.textWrapper}>
-          <Text style={styles.text}>{`${drinkList ? drinkList?.length : '0'} ${
-            drinkLimit ? '/ ' + drinkLimit : ''
-          }`}</Text>
+          <Text style={styles.currValueText}>{`${
+            drinkList ? drinkList?.length : '0'
+          } ${drinkLimit ? '/ ' + drinkLimit : ''}`}</Text>
         </View>
-        <View style={styles.iconWrapper}>
-          {noMoreDrinks ? (
-            <MaterialIcons
-              name="no-drinks"
-              size={iconSize}
-              color={colors.danger}
-            />
-          ) : (
-            <Entypo name="drink" size={iconSize} color={'#9ef542'} />
-          )}
-        </View>
+        {noMoreDrinks ? (
+          <MaterialIcons
+            name="no-drinks"
+            size={iconSize}
+            color={colors.danger}
+          />
+        ) : (
+          <Entypo name="drink" size={iconSize} color={'#9ef542'} />
+        )}
         {totalBAC >= 0 ? (
           <View style={styles.textWrapper}>
-            <Text style={styles.text}>{`= ${totalBAC.toFixed(2)}`}</Text>
-            <Text style={styles.text}>{'% '}</Text>
+            <Text style={styles.currValueText}>{`= ${totalBAC.toFixed(
+              2
+            )}`}</Text>
+            <Text style={styles.goalValueText}>
+              {bacLimit ? ' / ' + bacLimit : ''}
+            </Text>
+            <Text style={styles.currValueText}>{' %'}</Text>
             <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
           </View>
         ) : null}
-        <View style={styles.iconWrapper}>
-          {totalBAC >= 0.5 ? (
-            <MaterialCommunityIcon
-              name="car-off"
-              size={25}
-              color={colors.danger}
-            />
-          ) : null}
-        </View>
+        {totalBAC >= 0.5 ? (
+          <MaterialCommunityIcon
+            name="car-off"
+            size={25}
+            color={colors.danger}
+          />
+        ) : null}
       </View>
     </View>
   );
