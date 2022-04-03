@@ -48,22 +48,27 @@ const styles = StyleSheet.create({
 });
 
 const iconSize = 20;
-
+type LimitReached = 'BAC' | 'drink-count';
 const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
-  const [noMoreDrinks, setNoMoreDrinks] = useState<boolean>(false);
+  const [limitReached, setLimitReached] = useState<LimitReached | null>(null);
+  const [underlineDrinkCount, setUnderLineDrinkCount] =
+    useState<boolean>(false);
+  const [underlineBAC, setUnderLineBAC] = useState<boolean>(false);
 
   useEffect(() => {
     if (drinkList && drinkLimit) {
       // check if no-more-drinks should be consumed
       const status = parseInt(drinkLimit, 10) - drinkList?.length;
+      console.log('status ', status);
       if (status < 1) {
-        return setNoMoreDrinks(true);
+        console.log('setlimitreached drinkcount');
+        return setLimitReached('drink-count');
       } else {
-        return setNoMoreDrinks(false);
+        return setLimitReached(null);
       }
     }
-    // Reset noMoreDrink to default (false) if for example drinklimit gets removed
-    setNoMoreDrinks(false);
+    // Reset to default (null) if for example drinklimit gets removed
+    setLimitReached(null);
   }, [drinkLimit, drinkList]);
 
   useEffect(() => {
@@ -71,14 +76,29 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
       // check if no-more-drinks should be consumed
       const status = parseFloat(bacLimit) - totalBAC;
       if (status <= 0) {
-        return setNoMoreDrinks(true);
+        return setLimitReached('BAC');
       } else {
-        return setNoMoreDrinks(false);
+        return setLimitReached(null);
       }
     }
-    // Reset noMoreDrink to default (false) if for example bacLimit gets removed
-    setNoMoreDrinks(false);
+    // Reset to default (null) if for example bacLimit gets removed
+    setLimitReached(null);
   }, [totalBAC, bacLimit]);
+
+  useEffect(() => {
+    switch (limitReached) {
+      case 'BAC':
+        setUnderLineBAC(true);
+        break;
+      case 'drink-count':
+        setUnderLineDrinkCount(true);
+        break;
+      default:
+        setUnderLineBAC(false);
+        setUnderLineDrinkCount(false);
+        break;
+    }
+  }, [limitReached]);
 
   if (!drinkLimit && !totalBAC) {
     return null;
@@ -88,11 +108,21 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
         <View style={styles.textWrapper}>
-          <Text style={styles.currValueText}>{`${
-            drinkList ? drinkList?.length : '0'
-          } ${drinkLimit ? '/ ' + drinkLimit : ''}`}</Text>
+          <Text
+            style={
+              underlineDrinkCount
+                ? {
+                    ...styles.currValueText,
+                    borderBottomColor: colors.danger,
+                    borderBottomWidth: 1,
+                  }
+                : styles.currValueText
+            }
+          >{`${drinkList ? drinkList?.length : '0'} ${
+            drinkLimit ? '/ ' + drinkLimit : ''
+          }`}</Text>
         </View>
-        {noMoreDrinks ? (
+        {limitReached ? (
           <MaterialIcons
             name="no-drinks"
             size={iconSize}
@@ -103,13 +133,34 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
         )}
         {totalBAC >= 0 ? (
           <View style={styles.textWrapper}>
-            <Text style={styles.currValueText}>{`= ${totalBAC.toFixed(
-              2
-            )}`}</Text>
-            <Text style={styles.goalValueText}>
+            <Text style={styles.currValueText}>= </Text>
+            <Text
+              style={
+                underlineBAC
+                  ? {
+                      ...styles.goalValueText,
+                      borderBottomColor: colors.danger,
+                      borderBottomWidth: 1,
+                    }
+                  : styles.goalValueText
+              }
+            >{`${totalBAC.toFixed(2)}`}</Text>
+            <Text
+              style={
+                underlineBAC
+                  ? {
+                      ...styles.goalValueText,
+                      borderBottomColor: colors.danger,
+                      borderBottomWidth: 1,
+                    }
+                  : styles.goalValueText
+              }
+            >
               {bacLimit ? ' / ' + bacLimit : ''}
             </Text>
-            <Text style={styles.currValueText}>{' %'}</Text>
+            <Text style={{ ...styles.currValueText, color: colors.beige }}>
+              {' %'}
+            </Text>
             <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
           </View>
         ) : null}
