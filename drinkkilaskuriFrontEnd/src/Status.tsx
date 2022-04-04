@@ -100,7 +100,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
     }
   }, [limitReached]);
 
-  if (!drinkLimit && !totalBAC) {
+  if (!drinkLimit && !bacLimit && !totalBAC) {
     return null;
   }
 
