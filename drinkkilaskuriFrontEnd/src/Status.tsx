@@ -48,27 +48,21 @@ const styles = StyleSheet.create({
 });
 
 const iconSize = 20;
-type LimitReached = 'BAC' | 'drink-count';
+
 const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
-  const [limitReached, setLimitReached] = useState<LimitReached | null>(null);
-  const [underlineDrinkCount, setUnderLineDrinkCount] =
-    useState<boolean>(false);
-  const [underlineBAC, setUnderLineBAC] = useState<boolean>(false);
+  const [drinkCountLimit, setDrinkCountLimitReached] = useState<boolean>(false);
+  const [bacLimitReached, setBACLimitReached] = useState<boolean>(false);
 
   useEffect(() => {
     if (drinkList && drinkLimit) {
       // check if no-more-drinks should be consumed
       const status = parseInt(drinkLimit, 10) - drinkList?.length;
-      console.log('status ', status);
       if (status < 1) {
-        console.log('setlimitreached drinkcount');
-        return setLimitReached('drink-count');
-      } else {
-        return setLimitReached(null);
+        return setDrinkCountLimitReached(true);
       }
     }
-    // Reset to default (null) if for example drinklimit gets removed
-    setLimitReached(null);
+    // Reset to default (false) if for example drinklimit gets removed
+    setDrinkCountLimitReached(false);
   }, [drinkLimit, drinkList]);
 
   useEffect(() => {
@@ -76,29 +70,12 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
       // check if no-more-drinks should be consumed
       const status = parseFloat(bacLimit) - totalBAC;
       if (status <= 0) {
-        return setLimitReached('BAC');
-      } else {
-        return setLimitReached(null);
+        return setBACLimitReached(true);
       }
     }
-    // Reset to default (null) if for example bacLimit gets removed
-    setLimitReached(null);
+    // Reset to default (false) if for example bacLimit gets removed
+    setBACLimitReached(false);
   }, [totalBAC, bacLimit]);
-
-  useEffect(() => {
-    switch (limitReached) {
-      case 'BAC':
-        setUnderLineBAC(true);
-        break;
-      case 'drink-count':
-        setUnderLineDrinkCount(true);
-        break;
-      default:
-        setUnderLineBAC(false);
-        setUnderLineDrinkCount(false);
-        break;
-    }
-  }, [limitReached]);
 
   if (!drinkLimit && !bacLimit && !totalBAC) {
     return null;
@@ -110,7 +87,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
         <View style={styles.textWrapper}>
           <Text
             style={
-              underlineDrinkCount
+              drinkCountLimit
                 ? {
                     ...styles.currValueText,
                     borderBottomColor: colors.danger,
@@ -122,7 +99,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
             drinkLimit ? '/ ' + drinkLimit : ''
           }`}</Text>
         </View>
-        {limitReached ? (
+        {drinkCountLimit || bacLimitReached ? (
           <MaterialIcons
             name="no-drinks"
             size={iconSize}
@@ -136,7 +113,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
             <Text style={styles.currValueText}>= </Text>
             <Text
               style={
-                underlineBAC
+                bacLimitReached
                   ? {
                       ...styles.goalValueText,
                       borderBottomColor: colors.danger,
@@ -147,7 +124,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
             >{`${totalBAC.toFixed(2)}`}</Text>
             <Text
               style={
-                underlineBAC
+                bacLimitReached
                   ? {
                       ...styles.goalValueText,
                       borderBottomColor: colors.danger,
