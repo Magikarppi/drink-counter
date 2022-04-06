@@ -119,7 +119,7 @@ const App = () => {
 
   // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
   useEffect(() => {
-    if (drinkLimit === '0') {
+    if (drinkLimit === '0' || drinkLimit === '') {
       setDrinkLimit(undefined);
     }
   }, [drinkLimit]);
@@ -164,6 +164,11 @@ const App = () => {
         setDrinkLimitReached(false);
       }
     }
+
+    // if drinkLimit has been removed reset to false
+    if (!drinkLimit) {
+      setDrinkLimitReached(false);
+    }
   }, [drinkLimit, drinkList]);
 
   // Check if bacLimit has been reached and set state accordingly
@@ -175,6 +180,11 @@ const App = () => {
       } else {
         setBACLimitReached(false);
       }
+    }
+
+    // if bacLimit has been removed reset to false
+    if (!bacLimit) {
+      setBACLimitReached(false);
     }
   }, [bacLimit, totalBloodAlc]);
 
