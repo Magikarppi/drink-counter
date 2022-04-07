@@ -411,6 +411,7 @@ const App = () => {
           reminderMessage={reminderMessage}
           sleepTimeReminderMsg={sleepTimeReminderMsg}
           drinkLimitReached={drinkLimitReached}
+          bacLimitReached={bacLimitReached}
         />
         <SettingsModal
           bodyweight={bodyweight}

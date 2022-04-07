@@ -77,6 +77,7 @@ const ReminderModal = ({
   closeModal,
   continueAdd,
   drinkLimitReached,
+  bacLimitReached,
 }: ReminderModalProps) => {
   const drinkLimitRemindTitle =
     'Olet ylittämässä alkoholijuomarajojasi. Haluatko silti lisätä drinkin?';
@@ -93,7 +94,7 @@ const ReminderModal = ({
   };
 
   const getReminderTitle = () => {
-    if (!drinkLimitReached && !sleepTimeReminderMsg) {
+    if (!drinkLimitReached && !sleepTimeReminderMsg && !bacLimitReached) {
       return customRemindTitle;
     } else if (!drinkLimitReached && sleepTimeReminderMsg) {
       return sleepTimeRemindTitle;
