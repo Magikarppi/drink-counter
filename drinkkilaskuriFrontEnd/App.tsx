@@ -111,18 +111,29 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
 
+  // Check and set the right exp/min button and style for Status
   useEffect(() => {
     statusIsExpanded
       ? setStatusContainerStyle(statusExpandedStyle)
       : setStatusContainerStyle(statusMinimizedStyle);
   }, [statusIsExpanded]);
 
-  // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
+  // Check and format input values
   useEffect(() => {
+    // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
     if (drinkLimit === '0' || drinkLimit === '') {
       setDrinkLimit(undefined);
     }
-  }, [drinkLimit]);
+
+    if (bacLimit) {
+      // Remove whitepaces
+      setBACLimit(bacLimit.trim());
+      // if bacLimit is an empty string set it to undefined
+      if (/^\s*$/.test(bacLimit)) {
+        setBACLimit(undefined);
+      }
+    }
+  }, [drinkLimit, bacLimit]);
 
   // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
