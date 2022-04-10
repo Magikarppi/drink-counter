@@ -121,7 +121,19 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
                     }
                   : styles.goalValueText
               }
-            >{`${totalBAC.toFixed(2)}`}</Text>
+            >
+              {`${totalBAC.toFixed(2)}`}
+              <Text
+                style={{
+                  ...styles.currValueText,
+                  color: colors.beige,
+                  fontSize: 15,
+                }}
+              >
+                {'%'}
+              </Text>
+            </Text>
+
             <Text
               style={
                 bacLimitReached
@@ -134,9 +146,15 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
               }
             >
               {bacLimit ? ' / ' + bacLimit : ''}
-            </Text>
-            <Text style={{ ...styles.currValueText, color: colors.beige }}>
-              {' %'}
+              <Text
+                style={{
+                  ...styles.currValueText,
+                  color: colors.beige,
+                  fontSize: 15,
+                }}
+              >
+                {'%'}
+              </Text>
             </Text>
             <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
           </View>
