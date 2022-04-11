@@ -145,16 +145,21 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
                   : styles.goalValueText
               }
             >
-              {bacLimit ? ' / ' + bacLimit : ''}
-              <Text
-                style={{
-                  ...styles.currValueText,
-                  color: colors.beige,
-                  fontSize: 15,
-                }}
-              >
-                {'%'}
-              </Text>
+              {bacLimit
+                ? ' / ' +
+                  bacLimit +
+                  (
+                    <Text
+                      style={{
+                        ...styles.currValueText,
+                        color: colors.beige,
+                        fontSize: 15,
+                      }}
+                    >
+                      {'%'}
+                    </Text>
+                  )
+                : ''}
             </Text>
             <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
           </View>
