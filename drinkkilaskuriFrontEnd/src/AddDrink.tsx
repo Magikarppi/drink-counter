@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 18,
-    color: 'grey',
-    shadowColor: colors.beige,
+    color: colors.violet,
+    // textShadowColor: colors.beige,
     textShadowColor: 'brown',
     textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
+    textShadowRadius: 1,
   },
   buttonText: {
     fontSize: 17,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   smallPrintText: {
     fontSize: 10,
-    color: colors.beige,
+    color: colors.violet,
   },
 });
 
