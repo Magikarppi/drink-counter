@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     height: '12%',
     borderBottomColor: 'dark-grey',
     borderBottomWidth: 2,
-    borderStyle: 'solid',    
+    borderStyle: 'solid',
   },
   titleContainer: {
     width: '60%',
@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
   text: {
     color: colors.violet,
     fontSize: 30,
+    textShadowColor: colors.brown,
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
 });
 
@@ -39,11 +42,13 @@ interface HeaderProps {
   openModal: () => void;
 }
 
-const MainHeader = ({openModal}: HeaderProps) => {
+const MainHeader = ({ openModal }: HeaderProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.sideContainer} />
-      <View style={styles.titleContainer}><Text style={styles.text}>MaxiNapsu</Text></View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.text}>MaxiNapsu</Text>
+      </View>
       <View style={styles.sideContainer}>
         <SettingsButton openModal={openModal} />
       </View>
