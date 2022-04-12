@@ -83,7 +83,7 @@ const ReminderSetting = ({
             value={reminderMessage}
             placeholder="Oisko sittenkin vettä tähän väliin?"
             keyboardType="default"
-            placeholderTextColor={'#d9d9d9'}
+            placeholderTextColor={'grey'}
             textAlign="center"
             maxLength={100}
           />
@@ -97,7 +97,7 @@ const ReminderSetting = ({
             />
           </View>
           <View style={styles.checkBoxElementsWrapper}>
-            <Text style={styles.checkBoxText}>Maxidrinkin jälkeen</Text>
+            <Text style={styles.checkBoxText}>Rajojen ylittyessä</Text>
             <CheckBox
               handlePress={() => selectRemindInterval('afterMax')}
               selected={selectedRemindInterval === 'afterMax'}
