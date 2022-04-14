@@ -1,28 +1,36 @@
 import { DrinkType, FavDrinkType, RType } from './types';
 
-export const calculateBAC = (drink: DrinkType, gender?: 'male' | 'female') => {
+export const calculateBAC = (
+  drink: DrinkType,
+  bodyweight: string,
+  gender?: 'male' | 'female'
+) => {
   const rType: RType = gender === 'male' ? 0.68 : 0.55;
   const { alcPercent, amount } = drink;
-  const personsWeight = 80;
+  const personsWeightNum = parseInt(bodyweight, 10);
   const b = 0.017;
   const nowInMinutes = new Date().getTime() / 1000 / 60;
   const timeConsumedMinutes = drink.timeConsumed.getTime() / 1000 / 60;
   const timeElapsedInH = (nowInMinutes - timeConsumedMinutes) / 60;
 
+  console.log('timeElapsedInH: ', timeElapsedInH);
   // Every drink has it's own state for how much it contributes to the total BAC
   // Add all drinks BAC for the total BAC?
   // Compare how many millis have passed since the drinks consumption and current time
   const amountInCl = amount * 100;
   const alcInGrams = ((amountInCl * alcPercent) / 100 / 1.5) * 12;
-  const eBAC = alcInGrams / (rType * personsWeight) - b * timeElapsedInH;
+  const eBAC = alcInGrams / (rType * personsWeightNum) - b * timeElapsedInH;
   const alcInGrams2 = 0.079 * amountInCl * alcPercent;
-  const eBAC2 = alcInGrams2 / (rType * personsWeight) - b * timeElapsedInH;
+  const eBAC2 = alcInGrams2 / (rType * personsWeightNum) - b * timeElapsedInH;
 
   return eBAC;
 };
 
-export const calculateTotalBAC = (drinkList: DrinkType[]) => {
-  const bacValues = drinkList.map((d) => calculateBAC(d));
+export const calculateTotalBAC = (
+  drinkList: DrinkType[],
+  bodyweight: string
+) => {
+  const bacValues = drinkList.map((d) => calculateBAC(d, bodyweight));
   const total = bacValues.reduce((acc, curr) => acc + curr);
   return total;
 };

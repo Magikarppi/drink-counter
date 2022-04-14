@@ -20,6 +20,7 @@ import {
 } from './src/types';
 import { calculateBAC, calculateTotalBAC, randomId } from './src/utils';
 import StatusMoreInfo from './src/StatusMoreInfo';
+import { UserContext } from './src/UserContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -144,7 +145,7 @@ const App = () => {
 
     // Refresh total BAC immediately when new drink added
     if (drinkList.length > 0) {
-      const totalBac = calculateTotalBAC(drinkList);
+      const totalBac = calculateTotalBAC(drinkList, bodyweight);
       setTotalBloodAlc(totalBac);
     }
 
@@ -157,12 +158,12 @@ const App = () => {
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
         console.log('should calcTotalBAC with time: ', Date());
-        const totalBac = calculateTotalBAC(drinkList);
+        const totalBac = calculateTotalBAC(drinkList, bodyweight);
         setTotalBloodAlc(totalBac);
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, [drinkList]);
+  }, [drinkList, bodyweight]);
 
   // Check if drinkLimit has been reached and set state accordingly
   useEffect(() => {
@@ -259,7 +260,7 @@ const App = () => {
       favorited: false,
     };
 
-    calculateBAC(newDrink, 'male');
+    // calculateBAC(newDrink, 'male');
 
     if (drinkList) {
       const newDrinkList = [...drinkList, newDrink];
@@ -411,97 +412,101 @@ const App = () => {
   };
 
   return (
-    <View>
-      {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
-      <HeaderMain openModal={openSettings} />
-      <View style={styles.container}>
-        <ReminderModal
-          showModal={showReminder}
-          closeModal={closeReminder}
-          continueAdd={handleContinueAddDrink}
-          reminderMessage={reminderMessage}
-          sleepTimeReminderMsg={sleepTimeReminderMsg}
-          drinkLimitReached={drinkLimitReached}
-          bacLimitReached={bacLimitReached}
-        />
-        <SettingsModal
-          bodyweight={bodyweight}
-          setBodyweight={setBodyweight}
-          drinkLimit={drinkLimit}
-          setDrinkLimit={setDrinkLimit}
-          bacLimit={bacLimit}
-          setBACLimit={setBACLimit}
-          showModal={showSettings}
-          closeModal={closeSettings}
-          sleepTime={sleepTime}
-          changeSleepTime={changeSleepTime}
-          selectRemindInterval={selectRemindInterval}
-          selectedRemindInterval={remindInterval}
-          reminderMessage={reminderMessage}
-          setReminderMessage={setReminderMessage}
-          useSleepTime={useSleepTime}
-          toggleUseSleepTime={toggleUseSleepTime}
-        />
-        <FavoritesModal
-          showModal={showFavorites}
-          closeModal={closeFavorites}
-          addDrink={addDrink}
-          favorites={favorites}
-          removeFavorite={removeFavorite}
-        />
-        <MessageModal message={message} showModal={showMessage} />
-        <View style={styles.section}>
-          <AddDrink
-            alcPercent={alcPercent}
-            setAlcPercent={setAlcPercent}
-            amount={amount}
-            setAmount={setAmount}
-            drinkName={drinkName}
-            setDrinkName={setDrinkName}
-            addDrink={validateDrinkAddition}
-            openFavorites={openFavorites}
-            favFolderIconStyle={favFolderIconStyle}
+    <UserContext.Provider value={bodyweight}>
+      <View>
+        {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
+        <HeaderMain openModal={openSettings} />
+        <View style={styles.container}>
+          <ReminderModal
+            showModal={showReminder}
+            closeModal={closeReminder}
+            continueAdd={handleContinueAddDrink}
+            reminderMessage={reminderMessage}
+            sleepTimeReminderMsg={sleepTimeReminderMsg}
+            drinkLimitReached={drinkLimitReached}
+            bacLimitReached={bacLimitReached}
           />
-        </View>
-        <View style={statusContainerStyle}>
-          <View
-            style={{
-              ...styles.section,
-              flexDirection: 'row',
-              height: 35,
-              borderBottomColor: statusIsExpanded
-                ? colors.backgroundDark
-                : colors.violet,
-              // width: '100%',
-            }}
-          >
-            {drinkList.length > 0 ? (
-              <ExpandMinimizeButton
-                statusIsExpanded={statusIsExpanded}
-                setStatusIsExpanded={setStatusIsExpanded}
-              />
-            ) : null}
-            <Status
-              drinkList={drinkList}
-              drinkLimit={drinkLimit}
-              totalBAC={totalBloodAlc}
-              bacLimit={bacLimit}
-            />
-          </View>
-          {statusIsExpanded ? (
-            <StatusMoreInfo totalBac={totalBloodAlc} />
-          ) : null}
-        </View>
-        <View style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}>
-          <Drinks
-            drinkList={drinkList}
-            addToFavorites={addToFavorites}
-            removeDrink={removeDrink}
+          <SettingsModal
+            bodyweight={bodyweight}
+            setBodyweight={setBodyweight}
+            drinkLimit={drinkLimit}
+            setDrinkLimit={setDrinkLimit}
+            bacLimit={bacLimit}
+            setBACLimit={setBACLimit}
+            showModal={showSettings}
+            closeModal={closeSettings}
+            sleepTime={sleepTime}
+            changeSleepTime={changeSleepTime}
+            selectRemindInterval={selectRemindInterval}
+            selectedRemindInterval={remindInterval}
+            reminderMessage={reminderMessage}
+            setReminderMessage={setReminderMessage}
+            useSleepTime={useSleepTime}
+            toggleUseSleepTime={toggleUseSleepTime}
+          />
+          <FavoritesModal
+            showModal={showFavorites}
+            closeModal={closeFavorites}
+            addDrink={addDrink}
+            favorites={favorites}
             removeFavorite={removeFavorite}
           />
+          <MessageModal message={message} showModal={showMessage} />
+          <View style={styles.section}>
+            <AddDrink
+              alcPercent={alcPercent}
+              setAlcPercent={setAlcPercent}
+              amount={amount}
+              setAmount={setAmount}
+              drinkName={drinkName}
+              setDrinkName={setDrinkName}
+              addDrink={validateDrinkAddition}
+              openFavorites={openFavorites}
+              favFolderIconStyle={favFolderIconStyle}
+            />
+          </View>
+          <View style={statusContainerStyle}>
+            <View
+              style={{
+                ...styles.section,
+                flexDirection: 'row',
+                height: 35,
+                borderBottomColor: statusIsExpanded
+                  ? colors.backgroundDark
+                  : colors.violet,
+                // width: '100%',
+              }}
+            >
+              {drinkList.length > 0 ? (
+                <ExpandMinimizeButton
+                  statusIsExpanded={statusIsExpanded}
+                  setStatusIsExpanded={setStatusIsExpanded}
+                />
+              ) : null}
+              <Status
+                drinkList={drinkList}
+                drinkLimit={drinkLimit}
+                totalBAC={totalBloodAlc}
+                bacLimit={bacLimit}
+              />
+            </View>
+            {statusIsExpanded ? (
+              <StatusMoreInfo totalBac={totalBloodAlc} />
+            ) : null}
+          </View>
+          <View
+            style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}
+          >
+            <Drinks
+              drinkList={drinkList}
+              addToFavorites={addToFavorites}
+              removeDrink={removeDrink}
+              removeFavorite={removeFavorite}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </UserContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Svg, { Circle } from 'react-native-svg';
@@ -6,6 +6,7 @@ import Svg, { Circle } from 'react-native-svg';
 import { colors } from './themes';
 import { DrinkProps } from './types';
 import { calculateBAC } from './utils';
+import { UserContext } from './UserContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,9 +46,11 @@ const Drink = ({
   const [consumedSvgValue, setConsumedSvgValue] = useState<number>();
   const [opacity, setOpacity] = useState<number>();
 
+  const bodyweight = useContext(UserContext);
+
   useEffect(() => {
-    setInitialDrinkBAC(calculateBAC(drink));
-  }, [drink]);
+    setInitialDrinkBAC(calculateBAC(drink, bodyweight));
+  }, [drink, bodyweight]);
 
   // initialize state for consumption circle and opacity
   useEffect(() => {
@@ -94,14 +97,14 @@ const Drink = ({
 
     const interval = setInterval(() => {
       if (drink) {
-        const bac = calculateBAC(drink);
+        const bac = calculateBAC(drink, bodyweight);
 
         const value = getConsumedValueForSvg(bac);
         setConsumedSvgValue(value);
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, [drink, initialDrinkBAC, consumedSvgValue]);
+  }, [drink, initialDrinkBAC, consumedSvgValue, bodyweight]);
 
   return (
     <View style={{ ...styles.container, opacity }}>
