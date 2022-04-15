@@ -46,7 +46,7 @@ const Drink = ({
   const [consumedSvgValue, setConsumedSvgValue] = useState<number>();
   const [opacity, setOpacity] = useState<number>();
 
-  const bodyweight = useContext(UserContext);
+  const { bodyweight } = useContext(UserContext);
 
   useEffect(() => {
     setInitialDrinkBAC(calculateBAC(drink, bodyweight));

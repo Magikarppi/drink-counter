@@ -412,7 +412,7 @@ const App = () => {
   };
 
   return (
-    <UserContext.Provider value={bodyweight}>
+    <UserContext.Provider value={{ bodyweight: bodyweight }}>
       <View>
         {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
         <HeaderMain openModal={openSettings} />
