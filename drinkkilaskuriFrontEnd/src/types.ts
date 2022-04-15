@@ -34,7 +34,11 @@ type ReminderMessage = string | undefined;
 
 type SetReminderMessageFunc = Dispatch<SetStateAction<string | undefined>>;
 
-export type SelectRemindInterval = (intervall: RemindInterval) => void;
+export type Sex = 'male' | 'female';
+
+export type SelectSexFunc = (sex: Sex) => void;
+
+export type SelectRemindInterval = (interval: RemindInterval) => void;
 
 export type RemindInterval = 'always' | 'afterMax';
 
@@ -202,6 +206,14 @@ export interface ReminderModalProps {
   reminderMessage: ReminderMessage;
   sleepTimeReminderMsg: string | undefined;
   drinkLimitReached: boolean;
+  bacLimitReached: boolean;
+}
+
+export interface WelcomeModalProps {
+  showModal: boolean;
+  closeModal: CloseModalFunc;
+  selectSex: SelectSexFunc;
+  selectedSex: Sex;
 }
 
 export interface ExpandMinimizeBtnProps {
