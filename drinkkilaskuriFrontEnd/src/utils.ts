@@ -1,5 +1,11 @@
 import { DrinkType, FavDrinkType, RType } from './types';
 
+// How much alcohol human body metabolizes in an hour (%)
+// Your burnoff rate is measured by how fast your body can decrease your BAC percentage.
+// The rate for everyone is about 0.016% per hour https://www.losangelesduiattorney.com/glossary/alcohol-burnoff-rate/
+const metabolizationRate = 0.016;
+
+// calculate one drink's BloodAlcoholContent
 export const calculateBAC = (
   drink: DrinkType,
   bodyweight: string,
@@ -8,22 +14,27 @@ export const calculateBAC = (
   const rType: RType = gender === 'male' ? 0.68 : 0.55;
   const { alcPercent, amount } = drink;
   const personsWeightNum = parseInt(bodyweight, 10);
-  const b = 0.017;
+
+  // Compare how much time in hours have passed since the drinks consumption
   const nowInMinutes = new Date().getTime() / 1000 / 60;
   const timeConsumedMinutes = drink.timeConsumed.getTime() / 1000 / 60;
   const timeElapsedInH = (nowInMinutes - timeConsumedMinutes) / 60;
 
-  console.log('timeElapsedInH: ', timeElapsedInH);
-  // Every drink has it's own state for how much it contributes to the total BAC
-  // Add all drinks BAC for the total BAC?
-  // Compare how many millis have passed since the drinks consumption and current time
+  // How much alcohol the drink has in grams
   const amountInCl = amount * 100;
-  const alcInGrams = ((amountInCl * alcPercent) / 100 / 1.5) * 12;
-  const eBAC = alcInGrams / (rType * personsWeightNum) - b * timeElapsedInH;
-  const alcInGrams2 = 0.079 * amountInCl * alcPercent;
-  const eBAC2 = alcInGrams2 / (rType * personsWeightNum) - b * timeElapsedInH;
+  const alcInGrams = 0.079 * amountInCl * alcPercent;
 
-  return eBAC;
+  // Calculate the drink's initial BAC
+  const weightAndGenderFactor = personsWeightNum * 1000 * rType;
+  const eBAC = (alcInGrams / weightAndGenderFactor) * 100;
+
+  // How much alcohol has the human body metabolized since the drink's consumption
+  const alcAmountBurned = timeElapsedInH * metabolizationRate;
+
+  // How much BAC left for that drink
+  const trueBAC = eBAC - alcAmountBurned;
+
+  return trueBAC;
 };
 
 export const calculateTotalBAC = (
@@ -35,10 +46,9 @@ export const calculateTotalBAC = (
   return total;
 };
 
-// Your burnoff rate is measured by how fast your body can decrease your BAC percentage.
-// The rate for everyone is about 0.16% per hour https://www.losangelesduiattorney.com/glossary/alcohol-burnoff-rate/
 export const calculateWhenSober = (totalBAC: number) => {
-  const burntimeInH = totalBAC / 0.16;
+  const burntimeInH = totalBAC / metabolizationRate;
+  console.log('burnTimeInH: ', burntimeInH);
   return burntimeInH;
 };
 
