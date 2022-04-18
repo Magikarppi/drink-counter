@@ -1,4 +1,4 @@
-import { DrinkType, FavDrinkType, RType } from './types';
+import { DrinkType, RType } from './types';
 
 // How much alcohol human body metabolizes in an hour (%)
 // Your burnoff rate is measured by how fast your body can decrease your BAC percentage.
@@ -48,7 +48,6 @@ export const calculateTotalBAC = (
 
 export const calculateWhenSober = (totalBAC: number) => {
   const burntimeInH = totalBAC / metabolizationRate;
-  console.log('burnTimeInH: ', burntimeInH);
   return burntimeInH;
 };
 
@@ -56,10 +55,3 @@ export const randomId = () => {
   const r = Math.floor(Math.random() * 100000);
   return r;
 };
-
-export const favDrinksDummy: FavDrinkType[] = new Array(10).fill({
-  id: randomId(),
-  name: 'IPA',
-  alcPercent: 4.7,
-  amount: 0.33,
-});
