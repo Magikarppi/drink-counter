@@ -81,6 +81,23 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
     return null;
   }
 
+  // const summonBACLimit = () => {
+  //   return ` / ${bacLimit} `
+
+  //     (
+  //       <Text
+  //         style={{
+  //           ...styles.currValueText,
+  //           color: colors.beige,
+  //           fontSize: 15,
+  //         }}
+  //       >
+  //         {'‰'}
+  //       </Text>
+  //     )
+  //   );
+  // };
+
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
@@ -122,7 +139,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
                   : styles.goalValueText
               }
             >
-              {`${totalBAC.toFixed(2)}`}
+              {`${(totalBAC * 10).toFixed(2)}`}
               <Text
                 style={{
                   ...styles.currValueText,
@@ -130,7 +147,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
                   fontSize: 15,
                 }}
               >
-                {'%'}
+                {'‰'}
               </Text>
             </Text>
 
@@ -145,26 +162,25 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
                   : styles.goalValueText
               }
             >
-              {bacLimit
-                ? ' / ' +
-                  bacLimit +
-                  (
-                    <Text
-                      style={{
-                        ...styles.currValueText,
-                        color: colors.beige,
-                        fontSize: 15,
-                      }}
-                    >
-                      {'%'}
-                    </Text>
-                  )
-                : ''}
+              {bacLimit ? ` / ${bacLimit}` : ''}
+              {bacLimit ? (
+                <Text
+                  style={{
+                    ...styles.currValueText,
+                    color: colors.beige,
+                    fontSize: 15,
+                  }}
+                >
+                  {'‰'}
+                </Text>
+              ) : (
+                ''
+              )}
             </Text>
             <Ionicon name="body-outline" size={iconSize} color={colors.beige} />
           </View>
         ) : null}
-        {totalBAC >= 0.5 ? (
+        {totalBAC >= 0.05 ? (
           <MaterialCommunityIcon
             name="car-off"
             size={25}

@@ -67,11 +67,11 @@ const BACLimit = ({ bacLimit, setBACLimit }: BACLimitProps) => {
       </View>
       <View style={styles.bacElementWrapper}>
         <View style={{ margin: 1 }}>
+          <Text style={styles.text}>‰ (promillea)</Text>
+        </View>
+        {/* <View style={{ margin: 1 }}>
           <Ionicon name="body-outline" size={20} color={colors.beige} />
-        </View>
-        <View style={{ margin: 1 }}>
-          <Text style={styles.percentText}>%</Text>
-        </View>
+        </View> */}
       </View>
     </View>
   );
