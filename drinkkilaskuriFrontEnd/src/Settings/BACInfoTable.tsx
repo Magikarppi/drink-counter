@@ -69,7 +69,7 @@ class BACInfoTable extends Component {
           }}
         >
           <View style={styles.percentCell}>
-            <Text style={styles.titleText}>%</Text>
+            <Text style={styles.titleText}>‰</Text>
           </View>
           <View
             style={{

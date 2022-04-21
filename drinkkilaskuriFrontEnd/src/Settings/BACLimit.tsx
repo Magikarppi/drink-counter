@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TextInput, Text } from 'react-native';
-import Ionicon from 'react-native-vector-icons/Ionicons';
+// import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from '../themes';
 import { BACLimitProps } from '../types';
