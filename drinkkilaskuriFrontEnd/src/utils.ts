@@ -34,7 +34,12 @@ export const calculateBAC = (
   // How much BAC left for that drink
   const trueBAC = eBAC - alcAmountBurned;
 
-  return trueBAC;
+  if (trueBAC < 0) {
+    // Negative blood alcohol content doesn't make sense so return 0
+    return 0;
+  } else {
+    return trueBAC;
+  }
 };
 
 export const calculateTotalBAC = (
