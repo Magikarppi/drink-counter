@@ -470,15 +470,14 @@ const App = () => {
               <StatusMoreInfo totalBac={totalBloodAlc} />
             ) : null}
           </View>
-          <View
-            style={{ ...styles.section, borderBottomWidth: 0, height: 300 }}
-          >
+          <View style={{ ...styles.section, borderBottomWidth: 0 }}>
             <Drinks
               drinkList={drinkList}
               addToFavorites={addToFavorites}
               removeDrink={removeDrink}
               removeFavorite={removeFavorite}
             />
+            <View style={{ height: 70 }} />
           </View>
         </View>
       </View>

@@ -14,20 +14,21 @@ const Drinks = ({
   }
 
   return (
-    <ScrollView style={{ width: '100%' }}>
-      <View style={{ flexDirection: 'column-reverse' }}>
-        {drinkList.map((drink, i) => {
-          return (
-            <Drink
-              key={i}
-              drink={drink}
-              addToFavorites={addToFavorites}
-              removeDrink={removeDrink}
-              removeFavorite={removeFavorite}
-            />
-          );
-        })}
-      </View>
+    <ScrollView
+      style={{ width: '100%' }}
+      contentContainerStyle={{ flexDirection: 'column-reverse' }}
+    >
+      {drinkList.map((drink, i) => {
+        return (
+          <Drink
+            key={i}
+            drink={drink}
+            addToFavorites={addToFavorites}
+            removeDrink={removeDrink}
+            removeFavorite={removeFavorite}
+          />
+        );
+      })}
     </ScrollView>
   );
 };
