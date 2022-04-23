@@ -109,7 +109,9 @@ const ReminderModal = ({
         <View style={styles.filler} />
         <View style={styles.elementsContainer}>
           <View style={styles.mainTextWrapper}>
-            <Text style={styles.mainText}>{getReminderTitle()}</Text>
+            <View style={{ marginBottom: 5 }}>
+              <Text style={styles.mainText}>{getReminderTitle()}</Text>
+            </View>
             {!showSleepTimeRemindInfo() ? (
               <Text style={styles.reminderText}>{reminderMessage}</Text>
             ) : (
@@ -120,12 +122,14 @@ const ReminderModal = ({
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity onPress={closeModal}>
-              <View style={{ ...styles.button, backgroundColor: '#7FFF00' }}>
+              <View style={{ ...styles.button, backgroundColor: colors.beige }}>
                 <Text style={styles.buttonText}>Peruuta</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={continueAdd}>
-              <View style={{ ...styles.button, backgroundColor: '#c74a63' }}>
+              <View
+                style={{ ...styles.button, backgroundColor: colors.danger }}
+              >
                 <Text style={styles.buttonText}>Lisää</Text>
               </View>
             </TouchableOpacity>
