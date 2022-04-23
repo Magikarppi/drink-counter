@@ -68,7 +68,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
   useEffect(() => {
     if (totalBAC && bacLimit) {
       // check if no-more-drinks should be consumed
-      const status = parseFloat(bacLimit) - totalBAC;
+      const status = parseFloat(bacLimit) - totalBAC * 10;
       if (status <= 0) {
         return setBACLimitReached(true);
       }
@@ -80,23 +80,6 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
   if (!drinkLimit && !bacLimit && !totalBAC) {
     return null;
   }
-
-  // const summonBACLimit = () => {
-  //   return ` / ${bacLimit} `
-
-  //     (
-  //       <Text
-  //         style={{
-  //           ...styles.currValueText,
-  //           color: colors.beige,
-  //           fontSize: 15,
-  //         }}
-  //       >
-  //         {'‰'}
-  //       </Text>
-  //     )
-  //   );
-  // };
 
   return (
     <View style={styles.container}>
