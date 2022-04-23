@@ -18,7 +18,7 @@ import {
   FavFolderIconStyle,
   RemindInterval,
 } from './src/types';
-import { calculateBAC, calculateTotalBAC, randomId } from './src/utils';
+import { calculateTotalBAC, randomId } from './src/utils';
 import StatusMoreInfo from './src/StatusMoreInfo';
 import { UserContext } from './src/UserContext';
 
@@ -42,17 +42,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
 });
-
-// const Section: React.FC<{
-//   title?: string;
-// }> = ({ children, title }) => {
-//   const isDarkMode = useColorScheme() === 'dark';
-//   return (
-//     <View style={styles.sectionContainer}>
-//         {children}
-//     </View>
-//   );
-// };
 
 const defaultFavFolderStyle = {
   color: colors.beige,
@@ -101,17 +90,6 @@ const App = () => {
   const [statusContainerStyle, setStatusContainerStyle] =
     useState<any>(statusMinimizedStyle);
 
-  // const [darkMode, setDarkMode] = useState<boolean>(false);
-  // const isDarkMode = useColorScheme() === 'dark';
-
-  //   useEffect(() => {
-  //     setDarkMode(colorScheme === "dark");
-  // }, [colorScheme]);
-
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
-
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
     statusIsExpanded
@@ -157,7 +135,6 @@ const App = () => {
     // Refresh total BAC every minute
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
-        console.log('should calcTotalBAC with time: ', Date());
         const totalBac = calculateTotalBAC(drinkList, bodyweight);
         setTotalBloodAlc(totalBac);
       }
@@ -414,7 +391,6 @@ const App = () => {
   return (
     <UserContext.Provider value={{ bodyweight: bodyweight }}>
       <View>
-        {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
         <HeaderMain openModal={openSettings} />
         <View style={styles.container}>
           <ReminderModal

@@ -32,7 +32,6 @@ Kun drinkki on kulutettu miinusta se Statuksen drinkeistä? 2-1/2 = 0.08%
 
 lisää "alkoholivaikutukset" tms teksti info iconin viereen?
 prosentti-iconi inputin viereen?
-laita BAC-tsekki drinkin lisäykseen + modaaliin
 Voi käyttää joko tai drinkkimäärä tai BAC rajaa?
 
 BACLimit ei checkkaa ennakoivasti. Eli bac-limit voi mennä yli jos eka on ali mut sit vetää kossupullon nii 
@@ -42,3 +41,33 @@ useEffectissä pitäis tietää mitä drinkkiä oltais lisäämässä. tai sit a
 Order drink list so that consumed ones get below not-consumed?
 
 Sober timerissa jotain vikaa. Tuntuu että menee hitaampaa vauhtia kuin oikea aika. Eli siis drinkin whenSober laskennat on jotenki pielessä.
+
+on vissiin ongelma että limitReached voi olla sekä bacille että drinkkicountille koska näin toinen voi korvata toisen paikan ennen ku state päivittyy oikean
+tai sit tämä että bacLimit input voi olla nyt tyhjä stringi mikä aiheuttaa ongelmia, nollaa input tai handlaa tyhjä string falsena
+nyt esim 0 bacLimit näkyy statuksessa
+
+bacLimit-inputin info iconin positio
+
+drinkin nimi max pituus (padding)?
+
+center Status when no limits relative to Status More info
+
+bac-info tablen % promilleksi + muut % promilleiksi
+
+lisää ilmoitus tms kun haitat suurempia kuin hyödyt - point at which diminished returns
+https://www.utoledo.edu/studentaffairs/counseling/selfhelp/substanceuse/bac.html
+
+lisää chekki calculate bacciin ettei palauta negatiivista
+
+korjaa DUI ja baclimit vastaamaan promilleja
+
+lisää checkmark icon jos drinkki on metabolisoitu
+
+jos kaksi drinkkiä lisätty ja toinen kulutettu. Jos ei-kulutettu poistetaan, jo kulutettu
+drinkki vaikuttaa palautuvan ei-kulutetuksi ainakin ei oo enää faded out + jtn outoo
+
+tee Statuksen totalBACista kolme desimaalinen? vai promilleiksi
+
+Laita StatusMoreinfoon setShowSoberText iffiin kun whenSober on <= 0 ?
+
+ainakin kun on paljon alkoa veressä STatusMoreInfo kello ei miinusta 1 minaa kerralla vaan about 4 (pitäiskö mennä 5-10min tarkkuudel?)
