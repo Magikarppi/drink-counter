@@ -246,6 +246,9 @@ const App = () => {
     } else {
       setDrinkList([newDrink]);
     }
+    setAlcPercent(undefined);
+    setAmount(undefined);
+    setDrinkName(undefined);
     Keyboard.dismiss();
     return;
   };
