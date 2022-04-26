@@ -20,6 +20,8 @@ type SetDrinkNameFunc = (name: string | undefined) => void;
 
 type AddToFavoritesFunc = (drink: DrinkType) => void;
 
+type AddFavoriteDrinkFunc = (drink: FavDrinkType) => void;
+
 type RemoveFavoriteFunc = (drink: FavDrinkType) => void;
 
 type RemoveDrinkFunc = (drink: DrinkType) => void;
@@ -145,13 +147,13 @@ export interface SettingsProps extends BACLimitProps {
 export interface FavoritesModalProps {
   showModal: boolean;
   closeModal: CloseModalFunc;
-  addDrink: AddDrinkFunc;
+  addDrink: AddFavoriteDrinkFunc;
   favorites: FavDrinkType[] | null;
   removeFavorite: RemoveFavoriteFunc;
 }
 
 export interface FavoritesProps {
-  addDrink: AddDrinkFunc;
+  addDrink: AddFavoriteDrinkFunc;
   favorites: FavDrinkType[] | null;
   removeFavorite: RemoveFavoriteFunc;
 }

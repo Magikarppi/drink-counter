@@ -110,13 +110,10 @@ const Favorites = ({ favorites, addDrink, removeFavorite }: FavoritesProps) => {
         contentContainerStyle={{ flexGrow: 1 }}
       >
         {favorites.map((drink) => {
+          console.log('drink:', drink);
           return (
             <View style={styles.drinkContainer} key={Math.random()}>
-              <TouchableOpacity
-                onPress={() =>
-                  addDrink(drink.alcPercent, drink.amount, drink.name)
-                }
-              >
+              <TouchableOpacity onPress={() => addDrink(drink)}>
                 <View style={styles.drinkInfoWrapper}>
                   <View
                     style={{

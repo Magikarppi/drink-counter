@@ -177,9 +177,11 @@ const App = () => {
     }
   }, [bacLimit, totalBloodAlc]);
 
-  const validateDrinkAddition = () => {
-    if (!alcPercent || !amount) {
-      return;
+  const validateDrinkAddition = (favDrink?: FavDrinkType) => {
+    if (!favDrink?.alcPercent) {
+      if (!alcPercent || !amount) {
+        return;
+      }
     }
 
     if (drinkLimitReached) {
@@ -216,7 +218,11 @@ const App = () => {
       }
     }
 
-    addDrink();
+    if (favDrink?.alcPercent) {
+      addDrinkFromFavorites(favDrink);
+    } else {
+      addDrink();
+    }
     return;
   };
 
@@ -250,6 +256,26 @@ const App = () => {
     setAmount(undefined);
     setDrinkName(undefined);
     Keyboard.dismiss();
+    return;
+  };
+
+  const addDrinkFromFavorites = (favDrink: FavDrinkType) => {
+    const newDrink: DrinkType = {
+      amount: favDrink.amount,
+      alcPercent: favDrink.alcPercent,
+      timeConsumed: new Date(),
+      id: randomId(),
+      name: favDrink.name,
+      favorited: true,
+    };
+
+    if (drinkList) {
+      const newDrinkList = [...drinkList, newDrink];
+      setDrinkList(newDrinkList);
+    } else {
+      setDrinkList([newDrink]);
+    }
+    setShowFavorites(false);
     return;
   };
 
@@ -306,7 +332,10 @@ const App = () => {
   };
 
   const addToFavorites = (drink: DrinkType) => {
-    const favoritedDrink = { ...drink, favorited: true };
+    const favoritedDrink = {
+      ...drink,
+      favorited: true,
+    };
 
     if (!drinkList) {
       return;
@@ -426,7 +455,7 @@ const App = () => {
           <FavoritesModal
             showModal={showFavorites}
             closeModal={closeFavorites}
-            addDrink={addDrink}
+            addDrink={validateDrinkAddition}
             favorites={favorites}
             removeFavorite={removeFavorite}
           />
