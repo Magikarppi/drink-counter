@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.violet,
     borderBottomWidth: 2,
   },
+  statusGhostEl: { width: '10%', backgroundColor: 'white' },
 });
 
 const defaultFavFolderStyle = {
@@ -490,13 +491,16 @@ const App = () => {
                   statusIsExpanded={statusIsExpanded}
                   setStatusIsExpanded={setStatusIsExpanded}
                 />
-              ) : null}
+              ) : (
+                <View style={styles.statusGhostEl} />
+              )}
               <Status
                 drinkList={drinkList}
                 drinkLimit={drinkLimit}
                 totalBAC={totalBloodAlc}
                 bacLimit={bacLimit}
               />
+              <View style={styles.statusGhostEl} />
             </View>
             {statusIsExpanded ? (
               <StatusMoreInfo totalBac={totalBloodAlc} />

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: '80%',
     height: '100%',
   },
   contentWrapper: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    marginHorizontal: 2,
+    marginHorizontal: 5,
   },
   currValueText: {
     fontSize: 20,
@@ -110,7 +110,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
         )}
         {totalBAC >= 0 ? (
           <View style={styles.textWrapper}>
-            <Text style={styles.currValueText}>= </Text>
+            <Text style={styles.currValueText}> = </Text>
             <Text
               style={
                 bacLimitReached
@@ -164,11 +164,13 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
           </View>
         ) : null}
         {totalBAC >= 0.05 ? (
-          <MaterialCommunityIcon
-            name="car-off"
-            size={25}
-            color={colors.danger}
-          />
+          <View style={styles.iconWrapper}>
+            <MaterialCommunityIcon
+              name="car-off"
+              size={25}
+              color={colors.danger}
+            />
+          </View>
         ) : null}
       </View>
     </View>
