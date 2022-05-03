@@ -49,35 +49,15 @@ const styles = StyleSheet.create({
 
 const iconSize = 20;
 
-const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
-  const [drinkCountLimit, setDrinkCountLimitReached] = useState<boolean>(false);
-  const [bacLimitReached, setBACLimitReached] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (drinkList && drinkLimit) {
-      // check if no-more-drinks should be consumed
-      const status = parseInt(drinkLimit, 10) - drinkList?.length;
-      if (status < 1) {
-        return setDrinkCountLimitReached(true);
-      }
-    }
-    // Reset to default (false) if for example drinklimit gets removed
-    setDrinkCountLimitReached(false);
-  }, [drinkLimit, drinkList]);
-
-  useEffect(() => {
-    if (totalBAC && bacLimit) {
-      // check if no-more-drinks should be consumed
-      const status = parseFloat(bacLimit) - totalBAC * 10;
-      if (status <= 0) {
-        return setBACLimitReached(true);
-      }
-    }
-    // Reset to default (false) if for example bacLimit gets removed
-    setBACLimitReached(false);
-  }, [totalBAC, bacLimit]);
-
-  if (!drinkLimit && !bacLimit && !totalBAC) {
+const Status = ({
+  drinkList,
+  drinkCountLimit,
+  totalBAC,
+  bacLimit,
+  drinkCountLimitReached,
+  bacLimitReached,
+}: StatusProps) => {
+  if (!drinkCountLimit && !bacLimit && !totalBAC) {
     return null;
   }
 
@@ -87,7 +67,7 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
         <View style={styles.textWrapper}>
           <Text
             style={
-              drinkCountLimit
+              drinkCountLimitReached
                 ? {
                     ...styles.currValueText,
                     borderBottomColor: colors.danger,
@@ -96,10 +76,10 @@ const Status = ({ drinkList, drinkLimit, totalBAC, bacLimit }: StatusProps) => {
                 : styles.currValueText
             }
           >{`${drinkList ? drinkList?.length : '0'} ${
-            drinkLimit ? '/ ' + drinkLimit : ''
+            drinkCountLimit ? '/ ' + drinkCountLimit : ''
           }`}</Text>
         </View>
-        {drinkCountLimit || bacLimitReached ? (
+        {drinkCountLimitReached || bacLimitReached ? (
           <MaterialIcons
             name="no-drinks"
             size={iconSize}

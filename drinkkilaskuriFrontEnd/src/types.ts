@@ -44,9 +44,9 @@ export type SelectRemindInterval = (interval: RemindInterval) => void;
 
 export type RemindInterval = 'always' | 'afterMax';
 
-export type SetDrinkLimit = (count: DrinkLimit) => void;
+export type SetDrinkCountLimit = (count: DrinkCountLimit) => void;
 
-export type DrinkLimit = string | undefined;
+export type DrinkCountLimit = string | undefined;
 
 export type BACLimit = string | undefined;
 
@@ -107,9 +107,11 @@ export interface DrinksProps {
 
 export interface StatusProps {
   drinkList: DrinkList;
-  drinkLimit: string | undefined;
+  drinkCountLimit: string | undefined;
   totalBAC: number;
   bacLimit: string | undefined;
+  drinkCountLimitReached: boolean;
+  bacLimitReached: boolean;
 }
 
 export interface SettingsModalProps extends BACLimitProps {
@@ -119,8 +121,8 @@ export interface SettingsModalProps extends BACLimitProps {
   sleepTime: SleepTime;
   selectedRemindInterval: RemindInterval;
   selectRemindInterval: SelectRemindInterval;
-  setDrinkLimit: SetDrinkLimit;
-  drinkLimit: DrinkLimit;
+  setDrinkCountLimit: SetDrinkCountLimit;
+  drinkCountLimit: DrinkCountLimit;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
   reminderMessage: ReminderMessage;
@@ -134,8 +136,8 @@ export interface SettingsProps extends BACLimitProps {
   sleepTime: SleepTime;
   selectRemindInterval: SelectRemindInterval;
   selectedRemindInterval: RemindInterval;
-  setDrinkLimit: SetDrinkLimit;
-  drinkLimit: DrinkLimit;
+  setDrinkCountLimit: SetDrinkCountLimit;
+  drinkCountLimit: DrinkCountLimit;
   bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
   reminderMessage: ReminderMessage;
@@ -186,9 +188,9 @@ export interface ReminderSettingProps {
   setReminderMessage: SetReminderMessageFunc;
 }
 
-export interface DrinkLimitProps {
-  drinkLimit: DrinkLimit;
-  setDrinkLimit: SetDrinkLimit;
+export interface DrinkCountLimitProps {
+  drinkCountLimit: DrinkCountLimit;
+  setDrinkCountLimit: SetDrinkCountLimit;
 }
 
 export interface BACLimitProps {
@@ -207,7 +209,7 @@ export interface ReminderModalProps {
   continueAdd: () => void;
   reminderMessage: ReminderMessage;
   sleepTimeReminderMsg: string | undefined;
-  drinkLimitReached: boolean;
+  drinkCountLimitReached: boolean;
   bacLimitReached: boolean;
 }
 

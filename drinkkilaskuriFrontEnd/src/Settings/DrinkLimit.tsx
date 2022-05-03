@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TextInput, Text } from 'react-native';
 import { colors } from '../themes';
-import { DrinkLimitProps } from '../types';
+import { DrinkCountLimitProps } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +31,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const DrinkLimit = ({ drinkLimit, setDrinkLimit }: DrinkLimitProps) => {
+const DrinkCountLimit = ({
+  drinkCountLimit,
+  setDrinkCountLimit,
+}: DrinkCountLimitProps) => {
   return (
     <View style={styles.container}>
       <View style={{ ...styles.elementWrapper, alignItems: 'flex-end' }}>
@@ -41,8 +44,8 @@ const DrinkLimit = ({ drinkLimit, setDrinkLimit }: DrinkLimitProps) => {
         <View style={styles.input}>
           <TextInput
             style={{ color: colors.beige }}
-            value={drinkLimit}
-            onChangeText={setDrinkLimit}
+            value={drinkCountLimit}
+            onChangeText={setDrinkCountLimit}
             placeholder="4"
             keyboardType="number-pad"
             placeholderTextColor={'grey'}
@@ -57,4 +60,4 @@ const DrinkLimit = ({ drinkLimit, setDrinkLimit }: DrinkLimitProps) => {
   );
 };
 
-export default DrinkLimit;
+export default DrinkCountLimit;

@@ -74,8 +74,9 @@ const App = () => {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [favFolderIconStyle, setFavFolderIconStyle] =
     useState<FavFolderIconStyle>(defaultFavFolderStyle);
-  const [drinkLimit, setDrinkLimit] = useState<string>();
-  const [drinkLimitReached, setDrinkLimitReached] = useState<boolean>(false);
+  const [drinkCountLimit, setDrinkCountLimit] = useState<string>();
+  const [drinkCountLimitReached, setDrinkCountLimitReached] =
+    useState<boolean>(false);
   const [bacLimit, setBACLimit] = useState<string>();
   const [bacLimitReached, setBACLimitReached] = useState<boolean>(false);
   const [sleepTime, setSleepTime] = useState<Date | undefined>(new Date());
@@ -101,8 +102,8 @@ const App = () => {
   // Check and format input values
   useEffect(() => {
     // Drink limit of 0 is not allowed (aina voi yhen ottaa...)
-    if (drinkLimit === '0' || drinkLimit === '') {
-      setDrinkLimit(undefined);
+    if (drinkCountLimit === '0' || drinkCountLimit === '') {
+      setDrinkCountLimit(undefined);
     }
 
     if (bacLimit) {
@@ -113,7 +114,7 @@ const App = () => {
         setBACLimit(undefined);
       }
     }
-  }, [drinkLimit, bacLimit]);
+  }, [drinkCountLimit, bacLimit]);
 
   // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
@@ -143,32 +144,33 @@ const App = () => {
     return () => clearInterval(interval);
   }, [drinkList, bodyweight]);
 
-  // Check if drinkLimit has been reached and set state accordingly
+  // Check if drinkCountLimit has been reached and set state accordingly
   useEffect(() => {
-    if (drinkLimit && drinkList) {
-      const drinkLimitExceeded = drinkList?.length >= parseInt(drinkLimit, 10);
-      const drinkLimitNumber = parseInt(drinkLimit, 10);
+    if (drinkCountLimit && drinkList) {
+      const drinkLimitExceeded =
+        drinkList?.length >= parseInt(drinkCountLimit, 10);
+      const drinkLimitNumber = parseInt(drinkCountLimit, 10);
       if (drinkLimitNumber > 0 && drinkLimitExceeded) {
-        setDrinkLimitReached(true);
+        setDrinkCountLimitReached(true);
       } else {
-        setDrinkLimitReached(false);
+        setDrinkCountLimitReached(false);
       }
     }
 
-    // if drinkLimit has been removed reset to false
-    if (!drinkLimit) {
-      setDrinkLimitReached(false);
+    // if drinkCountLimit has been removed reset to false
+    if (!drinkCountLimit) {
+      setDrinkCountLimitReached(false);
     }
-  }, [drinkLimit, drinkList]);
+  }, [drinkCountLimit, drinkList]);
 
   // Check if bacLimit has been reached and set state accordingly
   useEffect(() => {
     if (bacLimit && totalBloodAlc) {
-      const bacLimitNum = parseFloat(bacLimit);
-      if (totalBloodAlc >= bacLimitNum) {
-        setBACLimitReached(true);
+      const status = parseFloat(bacLimit) - totalBloodAlc * 10;
+      if (status <= 0) {
+        return setBACLimitReached(true);
       } else {
-        setBACLimitReached(false);
+        return setBACLimitReached(false);
       }
     }
 
@@ -185,7 +187,7 @@ const App = () => {
       }
     }
 
-    if (drinkLimitReached) {
+    if (drinkCountLimitReached) {
       setShowReminder(true);
       return;
     }
@@ -432,14 +434,14 @@ const App = () => {
             continueAdd={handleContinueAddDrink}
             reminderMessage={reminderMessage}
             sleepTimeReminderMsg={sleepTimeReminderMsg}
-            drinkLimitReached={drinkLimitReached}
+            drinkCountLimitReached={drinkCountLimitReached}
             bacLimitReached={bacLimitReached}
           />
           <SettingsModal
             bodyweight={bodyweight}
             setBodyweight={setBodyweight}
-            drinkLimit={drinkLimit}
-            setDrinkLimit={setDrinkLimit}
+            drinkCountLimit={drinkCountLimit}
+            setDrinkCountLimit={setDrinkCountLimit}
             bacLimit={bacLimit}
             setBACLimit={setBACLimit}
             showModal={showSettings}
@@ -496,9 +498,11 @@ const App = () => {
               )}
               <Status
                 drinkList={drinkList}
-                drinkLimit={drinkLimit}
+                drinkCountLimit={drinkCountLimit}
                 totalBAC={totalBloodAlc}
                 bacLimit={bacLimit}
+                drinkCountLimitReached={drinkCountLimitReached}
+                bacLimitReached={bacLimitReached}
               />
               <View style={styles.statusGhostEl} />
             </View>
