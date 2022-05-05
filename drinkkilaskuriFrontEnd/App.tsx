@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Keyboard } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AddDrink from './src/AddDrink';
 import ExpandMinimizeButton from './src/Buttons/ExpandMinimizeButton';
@@ -180,6 +181,24 @@ const App = () => {
     }
   }, [bacLimit, totalBloodAlc]);
 
+  const storeDrink = async (drink: DrinkType) => {
+    try {
+      await AsyncStorage.setItem(`@${drink.id}`, JSON.stringify(drink));
+    } catch (e) {
+      console.log('error storing drink to asyncStorage:');
+      console.log(e);
+    }
+  };
+
+  const removeDrinkFromStorage = async (drinkId: number) => {
+    try {
+      await AsyncStorage.removeItem(`@${drinkId}`);
+    } catch (e) {
+      console.log('error removing drink from storage:');
+      console.log(e);
+    }
+  };
+
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
       if (!alcPercent || !amount) {
@@ -252,6 +271,7 @@ const App = () => {
       const newDrinkList = [...drinkList, newDrink];
       setDrinkList(newDrinkList);
       setShowFavorites(false);
+      storeDrink(newDrink);
     } else {
       setDrinkList([newDrink]);
     }
@@ -278,6 +298,8 @@ const App = () => {
     } else {
       setDrinkList([newDrink]);
     }
+
+    storeDrink(newDrink);
     setShowFavorites(false);
     return;
   };
@@ -289,6 +311,7 @@ const App = () => {
     const drinkListCopy = [...drinkList];
     const newDrinkList = drinkListCopy.filter((f) => f.id !== drink.id);
     setDrinkList(newDrinkList);
+    removeDrinkFromStorage(drink.id);
     return;
   };
 
