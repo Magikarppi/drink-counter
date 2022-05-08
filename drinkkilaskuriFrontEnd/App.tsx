@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, Keyboard } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -93,6 +93,48 @@ const App = () => {
   const [statusContainerStyle, setStatusContainerStyle] =
     useState<any>(statusMinimizedStyle);
 
+  const storeDrink = async (drink: DrinkType) => {
+    try {
+      await AsyncStorage.setItem(`@${drink.id}`, JSON.stringify(drink));
+    } catch (e) {
+      console.log('error storing drink to asyncStorage:');
+      console.log(e);
+    }
+  };
+
+  const removeDrinkFromStorage = async (drinkId: number) => {
+    try {
+      await AsyncStorage.removeItem(`@${drinkId}`);
+    } catch (e) {
+      console.log('error removing drink from storage:');
+      console.log(e);
+    }
+  };
+
+  // Set drinkList to the fetched drinks from AsyncStorage
+  const getDrinksFromStorage = useCallback(
+    () => async () => {
+      try {
+        const keys = await AsyncStorage.getAllKeys();
+        if (keys.length > 0) {
+          keys.map(async (k) => {
+            const storedDrinkString = await AsyncStorage.getItem(k);
+
+            if (storedDrinkString) {
+              const storedDrink = JSON.parse(storedDrinkString);
+              setDrinkList([...drinkList, storedDrink]);
+              return;
+            }
+          });
+        }
+      } catch (e) {
+        console.log('error with getting data from async-storage:');
+        console.log(e);
+      }
+    },
+    [drinkList]
+  );
+
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
     statusIsExpanded
@@ -181,23 +223,12 @@ const App = () => {
     }
   }, [bacLimit, totalBloodAlc]);
 
-  const storeDrink = async (drink: DrinkType) => {
-    try {
-      await AsyncStorage.setItem(`@${drink.id}`, JSON.stringify(drink));
-    } catch (e) {
-      console.log('error storing drink to asyncStorage:');
-      console.log(e);
+  // If drinkList is empty check if there are drinks in AsyncStorage and update drinkList
+  useEffect(() => {
+    if (drinkList.length < 1) {
+      getDrinksFromStorage();
     }
-  };
-
-  const removeDrinkFromStorage = async (drinkId: number) => {
-    try {
-      await AsyncStorage.removeItem(`@${drinkId}`);
-    } catch (e) {
-      console.log('error removing drink from storage:');
-      console.log(e);
-    }
-  };
+  }, [drinkList, getDrinksFromStorage]);
 
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
