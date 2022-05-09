@@ -93,6 +93,7 @@ const App = () => {
   const [statusContainerStyle, setStatusContainerStyle] =
     useState<any>(statusMinimizedStyle);
 
+  console.log('drinklist:', drinkList);
   const storeDrink = async (drink: DrinkType) => {
     try {
       await AsyncStorage.setItem(`@${drink.id}`, JSON.stringify(drink));
@@ -112,28 +113,27 @@ const App = () => {
   };
 
   // Set drinkList to the fetched drinks from AsyncStorage
-  const getDrinksFromStorage = useCallback(
-    () => async () => {
-      try {
-        const keys = await AsyncStorage.getAllKeys();
-        if (keys.length > 0) {
-          keys.map(async (k) => {
-            const storedDrinkString = await AsyncStorage.getItem(k);
+  const getDrinksFromStorage = useCallback(async () => {
+    console.log('from storeage run');
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      if (keys.length > 0) {
+        keys.map(async (k) => {
+          const storedDrinkString = await AsyncStorage.getItem(k);
 
-            if (storedDrinkString) {
-              const storedDrink = JSON.parse(storedDrinkString);
-              setDrinkList([...drinkList, storedDrink]);
-              return;
-            }
-          });
-        }
-      } catch (e) {
-        console.log('error with getting data from async-storage:');
-        console.log(e);
+          if (storedDrinkString) {
+            const storedDrink = JSON.parse(storedDrinkString);
+            console.log('storedDrink: ', storedDrink);
+            setDrinkList([...drinkList, storedDrink]);
+            return;
+          }
+        });
       }
-    },
-    [drinkList]
-  );
+    } catch (e) {
+      console.log('error with getting data from async-storage:');
+      console.log(e);
+    }
+  }, [drinkList]);
 
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
@@ -226,6 +226,7 @@ const App = () => {
   // If drinkList is empty check if there are drinks in AsyncStorage and update drinkList
   useEffect(() => {
     if (drinkList.length < 1) {
+      console.log('getDrinksFromStorage()');
       getDrinksFromStorage();
     }
   }, [drinkList, getDrinksFromStorage]);
