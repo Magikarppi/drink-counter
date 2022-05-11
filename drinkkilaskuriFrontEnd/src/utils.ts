@@ -5,19 +5,31 @@ import { DrinkType, RType } from './types';
 // The rate for everyone is about 0.016% per hour https://www.losangelesduiattorney.com/glossary/alcohol-burnoff-rate/
 const metabolizationRate = 0.016;
 
+const getTimeConsumedMinutes = (aTimeConsumed: string | Date) => {
+  let timeConsumed: Date;
+  if (typeof aTimeConsumed === 'string') {
+    timeConsumed = new Date(aTimeConsumed);
+  } else {
+    timeConsumed = aTimeConsumed;
+  }
+  return timeConsumed.getTime() / 1000 / 60;
+};
+
 // calculate one drink's BloodAlcoholContent
 export const calculateBAC = (
   drink: DrinkType,
   bodyweight: string,
   gender?: 'male' | 'female'
 ) => {
+  console.log('drink in calculateBAC: ', drink);
   const rType: RType = gender === 'male' ? 0.68 : 0.55;
   const { alcPercent, amount } = drink;
   const personsWeightNum = parseInt(bodyweight, 10);
 
   // Compare how much time in hours have passed since the drinks consumption
   const nowInMinutes = new Date().getTime() / 1000 / 60;
-  const timeConsumedMinutes = drink.timeConsumed.getTime() / 1000 / 60;
+
+  const timeConsumedMinutes = getTimeConsumedMinutes(drink.timeConsumed);
   const timeElapsedInH = (nowInMinutes - timeConsumedMinutes) / 60;
 
   // How much alcohol the drink has in grams
