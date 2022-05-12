@@ -93,7 +93,6 @@ const App = () => {
   const [statusContainerStyle, setStatusContainerStyle] =
     useState<any>(statusMinimizedStyle);
 
-  console.log('drinklist:', drinkList);
   const storeDrink = async (drink: DrinkType) => {
     try {
       await AsyncStorage.setItem(`@${drink.id}`, JSON.stringify(drink));
@@ -114,7 +113,6 @@ const App = () => {
 
   // Set drinkList to the fetched drinks from AsyncStorage
   const getDrinksFromStorage = useCallback(async () => {
-    console.log('from storeage run');
     try {
       const keys = await AsyncStorage.getAllKeys();
       if (keys.length > 0) {
@@ -134,6 +132,25 @@ const App = () => {
       console.log(e);
     }
   }, [drinkList]);
+
+  // Remove items from storage
+  const clearStorage = async () => {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+
+      if (keys.length > 0) {
+        try {
+          await AsyncStorage.multiRemove(keys);
+        } catch (error) {
+          console.log('error removing from async-storage: ');
+          console.log(error);
+        }
+      }
+    } catch (error) {
+      console.log('error getting keys from async-storage: ');
+      console.log(error);
+    }
+  };
 
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
@@ -226,10 +243,19 @@ const App = () => {
   // If drinkList is empty check if there are drinks in AsyncStorage and update drinkList
   useEffect(() => {
     if (drinkList.length < 1) {
-      console.log('getDrinksFromStorage()');
       getDrinksFromStorage();
     }
   }, [drinkList, getDrinksFromStorage]);
+
+  // // clear drinks from local state and storage when all have been consumed
+  // useEffect(() => {
+  //   console.log('totalBAC: ', totalBloodAlc);
+  //   if (drinkList.length > 0 && totalBloodAlc <= 0) {
+  //     console.log('clear useeffect()');
+  //     clearStorage();
+  //     setDrinkList([]);
+  //   }
+  // }, [drinkList, totalBloodAlc]);
 
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
@@ -296,8 +322,6 @@ const App = () => {
       name: drinkName,
       favorited: false,
     };
-
-    // calculateBAC(newDrink, 'male');
 
     if (drinkList) {
       const newDrinkList = [...drinkList, newDrink];
