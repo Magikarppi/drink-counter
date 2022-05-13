@@ -116,13 +116,12 @@ const App = () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
       if (keys.length > 0) {
-        keys.map(async (k) => {
+        keys.forEach(async (k) => {
           const storedDrinkString = await AsyncStorage.getItem(k);
 
           if (storedDrinkString) {
             const storedDrink = JSON.parse(storedDrinkString);
-            console.log('storedDrink: ', storedDrink);
-            setDrinkList([...drinkList, storedDrink]);
+            setDrinkList((prevState) => [...prevState, storedDrink]);
             return;
           }
         });
@@ -131,7 +130,7 @@ const App = () => {
       console.log('error with getting data from async-storage:');
       console.log(e);
     }
-  }, [drinkList]);
+  }, []);
 
   // Remove items from storage
   const clearStorage = async () => {

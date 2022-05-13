@@ -98,7 +98,6 @@ const Drink = ({
     const interval = setInterval(() => {
       if (drink) {
         const bac = calculateBAC(drink, bodyweight);
-
         const value = getConsumedValueForSvg(bac);
         setConsumedSvgValue(value);
       }
