@@ -152,7 +152,9 @@ const Drink = ({
               />
             </Svg>
           ) : null}
-          <Ionicons name="flame-outline" size={15} color={colors.brown} />
+          {consumedSvgValue !== 125 && (
+            <Ionicons name="flame-outline" size={15} color={colors.brown} />
+          )}
         </View>
       </View>
       <View style={{ ...styles.property, flex: 2 }}>
