@@ -95,7 +95,7 @@ const App = () => {
 
   const storeDrink = async (drink: DrinkType) => {
     try {
-      await AsyncStorage.setItem(`@${drink.id}`, JSON.stringify(drink));
+      await AsyncStorage.setItem(`drink-${drink.id}`, JSON.stringify(drink));
     } catch (e) {
       console.log('error storing drink to asyncStorage:');
       console.log(e);
@@ -104,7 +104,7 @@ const App = () => {
 
   const removeDrinkFromStorage = async (drinkId: number) => {
     try {
-      await AsyncStorage.removeItem(`@${drinkId}`);
+      await AsyncStorage.removeItem(`drink-${drinkId}`);
     } catch (e) {
       console.log('error removing drink from storage:');
       console.log(e);
@@ -114,7 +114,8 @@ const App = () => {
   // Set drinkList to the fetched drinks from AsyncStorage
   const getDrinksFromStorage = useCallback(async () => {
     try {
-      const keys = await AsyncStorage.getAllKeys();
+      const allKeys = await AsyncStorage.getAllKeys();
+      const keys = allKeys.filter((k) => k.startsWith('drink-'));
       if (keys.length > 0) {
         keys.forEach(async (k) => {
           const storedDrinkString = await AsyncStorage.getItem(k);
@@ -150,6 +151,27 @@ const App = () => {
       console.log(error);
     }
   };
+
+  const storeBodyweight = async (bw: string) => {
+    try {
+      await AsyncStorage.setItem('bodyweight', JSON.stringify(bw));
+    } catch (e) {
+      console.log('error storing bodyweight to asyncStorage:');
+      console.log(e);
+    }
+  };
+
+  const getBodyweightFromStorage = useCallback(async () => {
+    try {
+      const bw = await AsyncStorage.getItem('bodyweight');
+      if (bw) {
+        setBodyweight(JSON.parse(bw));
+      }
+    } catch (e) {
+      console.log('error with getting bodyweight from async-storage:');
+      console.log(e);
+    }
+  }, []);
 
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
@@ -255,6 +277,11 @@ const App = () => {
   //     setDrinkList([]);
   //   }
   // }, [drinkList, totalBloodAlc]);
+
+  // Get bodyweight from storage if set
+  useEffect(() => {
+    getBodyweightFromStorage();
+  }, [getBodyweightFromStorage]);
 
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
@@ -501,6 +528,11 @@ const App = () => {
     return;
   };
 
+  const handleSetBodyweight = (bw: string) => {
+    setBodyweight(bw);
+    storeBodyweight(bw);
+  };
+
   return (
     <UserContext.Provider value={{ bodyweight: bodyweight }}>
       <View>
@@ -517,7 +549,7 @@ const App = () => {
           />
           <SettingsModal
             bodyweight={bodyweight}
-            setBodyweight={setBodyweight}
+            setBodyweight={handleSetBodyweight}
             drinkCountLimit={drinkCountLimit}
             setDrinkCountLimit={setDrinkCountLimit}
             bacLimit={bacLimit}
