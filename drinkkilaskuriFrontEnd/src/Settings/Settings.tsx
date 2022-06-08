@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from '../themes';
@@ -13,7 +7,7 @@ import { SettingsProps } from '../types';
 import BACInfoModal from './BACInfoModal';
 import BACLimit from './BACLimit';
 import BodySize from './BodySize';
-import DrinkLimit from './DrinkLimit';
+import DrinkCountLimit from './DrinkCountLimit';
 import Reminder from './ReminderSetting';
 import SleepTime from './SleepTime';
 
@@ -59,8 +53,8 @@ const Settings = ({
   sleepTime,
   selectRemindInterval,
   selectedRemindInterval,
-  setDrinkLimit,
-  drinkLimit,
+  setDrinkCountLimit,
+  drinkCountLimit,
   bodyweight,
   setBodyweight,
   reminderMessage,
@@ -80,7 +74,10 @@ const Settings = ({
           closeModal={() => setShowBACInfo(false)}
         />
         <View style={styles.section}>
-          <DrinkLimit drinkLimit={drinkLimit} setDrinkLimit={setDrinkLimit} />
+          <DrinkCountLimit
+            drinkCountLimit={drinkCountLimit}
+            setDrinkCountLimit={setDrinkCountLimit}
+          />
           <BACLimit bacLimit={bacLimit} setBACLimit={setBACLimit} />
           <TouchableOpacity onPress={() => setShowBACInfo(true)}>
             <View

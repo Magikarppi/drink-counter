@@ -173,6 +173,30 @@ const App = () => {
     }
   }, []);
 
+  const storeDrinkCountLimit = async (aDrinkCount: string | undefined) => {
+    try {
+      await AsyncStorage.setItem(
+        'drinkCountLimit',
+        JSON.stringify(aDrinkCount)
+      );
+    } catch (error) {
+      console.log('error with storing drinkCountLimit to asyncStorage');
+      console.log(error);
+    }
+  };
+
+  const getDrinkCountLimitFromStorage = useCallback(async () => {
+    try {
+      const dcl = await AsyncStorage.getItem('drinkCountLimit');
+      if (dcl !== null) {
+        setDrinkCountLimit(JSON.parse(dcl));
+      }
+    } catch (e) {
+      console.log('error with getting drinkCountLimit from async-storage:');
+      console.log(e);
+    }
+  }, []);
+
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
     statusIsExpanded
@@ -278,10 +302,11 @@ const App = () => {
   //   }
   // }, [drinkList, totalBloodAlc]);
 
-  // Get bodyweight from storage if set
+  // Get bodyweight, drinkCountLimit from storage if set
   useEffect(() => {
     getBodyweightFromStorage();
-  }, [getBodyweightFromStorage]);
+    getDrinkCountLimitFromStorage();
+  }, [getBodyweightFromStorage, getDrinkCountLimitFromStorage]);
 
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
@@ -428,6 +453,7 @@ const App = () => {
     return;
   };
 
+  // flash favorites folder icon style to indicate addition
   const flashFavFolderStyle = () => {
     const tempStyle: FavFolderIconStyle = {
       color: colors.violet,
@@ -528,6 +554,11 @@ const App = () => {
     return;
   };
 
+  const handleSetDrinkCountLimit = (aDrinkCount: string | undefined) => {
+    setDrinkCountLimit(aDrinkCount);
+    storeDrinkCountLimit(aDrinkCount);
+  };
+
   const handleSetBodyweight = (bw: string) => {
     setBodyweight(bw);
     storeBodyweight(bw);
@@ -551,7 +582,7 @@ const App = () => {
             bodyweight={bodyweight}
             setBodyweight={handleSetBodyweight}
             drinkCountLimit={drinkCountLimit}
-            setDrinkCountLimit={setDrinkCountLimit}
+            setDrinkCountLimit={handleSetDrinkCountLimit}
             bacLimit={bacLimit}
             setBACLimit={setBACLimit}
             showModal={showSettings}
