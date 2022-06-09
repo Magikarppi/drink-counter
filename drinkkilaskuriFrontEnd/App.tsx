@@ -210,7 +210,7 @@ const App = () => {
     try {
       const limit = await AsyncStorage.getItem('bacLimit');
       if (limit !== null) {
-        setDrinkCountLimit(JSON.parse(limit));
+        setBACLimit(JSON.parse(limit));
       }
     } catch (e) {
       console.log('error with getting bacLimit from async-storage:');
