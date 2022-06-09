@@ -197,6 +197,27 @@ const App = () => {
     }
   }, []);
 
+  const storeBACLimit = async (limit: string | undefined) => {
+    try {
+      await AsyncStorage.setItem('bacLimit', JSON.stringify(limit));
+    } catch (error) {
+      console.log('error with storing bacLimit to async-storage:');
+      console.log(error);
+    }
+  };
+
+  const getBACLimitFromStorage = useCallback(async () => {
+    try {
+      const limit = await AsyncStorage.getItem('bacLimit');
+      if (limit !== null) {
+        setDrinkCountLimit(JSON.parse(limit));
+      }
+    } catch (e) {
+      console.log('error with getting bacLimit from async-storage:');
+      console.log(e);
+    }
+  }, []);
+
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
     statusIsExpanded
@@ -302,11 +323,16 @@ const App = () => {
   //   }
   // }, [drinkList, totalBloodAlc]);
 
-  // Get bodyweight, drinkCountLimit from storage if set
+  // Get and set bodyweight, drinkCountLimit and bacLimit from storage
   useEffect(() => {
     getBodyweightFromStorage();
     getDrinkCountLimitFromStorage();
-  }, [getBodyweightFromStorage, getDrinkCountLimitFromStorage]);
+    getBACLimitFromStorage();
+  }, [
+    getBodyweightFromStorage,
+    getDrinkCountLimitFromStorage,
+    getBACLimitFromStorage,
+  ]);
 
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
@@ -564,6 +590,11 @@ const App = () => {
     storeBodyweight(bw);
   };
 
+  const handleSetBACLimit = (limit: string | undefined) => {
+    setBACLimit(limit);
+    storeBACLimit(limit);
+  };
+
   return (
     <UserContext.Provider value={{ bodyweight: bodyweight }}>
       <View>
@@ -584,7 +615,7 @@ const App = () => {
             drinkCountLimit={drinkCountLimit}
             setDrinkCountLimit={handleSetDrinkCountLimit}
             bacLimit={bacLimit}
-            setBACLimit={setBACLimit}
+            setBACLimit={handleSetBACLimit}
             showModal={showSettings}
             closeModal={closeSettings}
             sleepTime={sleepTime}
