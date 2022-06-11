@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { colors } from '../themes';
 import { CheckBoxProps } from '../types';
-
-const styles = StyleSheet.create({});
 
 const CheckBox = ({ handlePress, selected }: CheckBoxProps) => {
   return (

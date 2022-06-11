@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Text } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../themes';
 
@@ -15,14 +15,17 @@ const styles = StyleSheet.create({
 
 interface SettingsButtonProps {
   openModal: () => void;
-};
+}
 
 const SettingsButton = ({ openModal }: SettingsButtonProps) => {
-
   return (
     <TouchableWithoutFeedback onPress={openModal}>
       <View style={styles.closeContainer}>
-        <Ionicons name="settings-outline" size={30} color={colors.backgroundDark} />
+        <Ionicons
+          name="settings-outline"
+          size={30}
+          color={colors.backgroundDark}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

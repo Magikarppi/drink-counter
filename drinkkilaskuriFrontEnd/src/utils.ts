@@ -21,7 +21,6 @@ export const calculateBAC = (
   bodyweight: string,
   gender?: 'male' | 'female'
 ) => {
-  console.log('drink in calculateBAC: ', drink);
   const rType: RType = gender === 'male' ? 0.68 : 0.55;
   const { alcPercent, amount } = drink;
   const personsWeightNum = parseInt(bodyweight, 10);

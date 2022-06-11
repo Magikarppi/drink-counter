@@ -34,8 +34,6 @@ const Clock = ({ showClock, changeSleepTime, sleepTime }: ClockProps) => {
     changeSleepTime(date);
   };
 
-  console.log('showclock', showClock);
-
   if (!showClock) {
     return null;
   }

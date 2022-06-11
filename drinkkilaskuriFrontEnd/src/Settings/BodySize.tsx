@@ -43,7 +43,6 @@ const BodySize = ({ bodyweight, setBodyweight }: BodySizeProps) => {
             style={{ color: colors.beige }}
             value={bodyweight}
             onChangeText={setBodyweight}
-            // placeholder="70"
             keyboardType="number-pad"
             placeholderTextColor={'grey'}
             textAlign="center"

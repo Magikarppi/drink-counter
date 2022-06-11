@@ -76,7 +76,7 @@ const ReminderModal = ({
   sleepTimeReminderMsg,
   closeModal,
   continueAdd,
-  drinkLimitReached,
+  drinkCountLimitReached,
   bacLimitReached,
 }: ReminderModalProps) => {
   const drinkLimitRemindTitle =
@@ -86,7 +86,7 @@ const ReminderModal = ({
   const customRemindTitle = 'Haluatko lisätä juoman? Muistutus itsellesi:';
 
   const showSleepTimeRemindInfo = () => {
-    if (!drinkLimitReached && sleepTimeReminderMsg) {
+    if (!drinkCountLimitReached && sleepTimeReminderMsg) {
       return true;
     } else {
       return false;
@@ -94,9 +94,9 @@ const ReminderModal = ({
   };
 
   const getReminderTitle = () => {
-    if (!drinkLimitReached && !sleepTimeReminderMsg && !bacLimitReached) {
+    if (!drinkCountLimitReached && !sleepTimeReminderMsg && !bacLimitReached) {
       return customRemindTitle;
-    } else if (!drinkLimitReached && sleepTimeReminderMsg) {
+    } else if (!drinkCountLimitReached && sleepTimeReminderMsg) {
       return sleepTimeRemindTitle;
     } else {
       return drinkLimitRemindTitle;
