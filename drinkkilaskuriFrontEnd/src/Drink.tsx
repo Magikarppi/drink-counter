@@ -61,19 +61,21 @@ const Drink = ({
   // make the drink "faded out" if consumed
   useEffect(() => {
     if (consumedSvgValue && opacity) {
-      console.log('consumaedSvg val:', consumedSvgValue);
       if (consumedSvgValue >= 125) {
+        console.log(drink.name);
+        console.log('svg:', consumedSvgValue);
         setOpacity(0.6);
       }
     }
-  }, [consumedSvgValue, opacity]);
+  }, [consumedSvgValue, opacity, drink.name]);
 
   // Calculate and update drink's blood alcohol content every minute
   useEffect(() => {
-    if (!initialDrinkBAC) {
+    if (initialDrinkBAC === undefined) {
       return;
     }
 
+    console.log(drink.name + 'consumedSvgValue: ' + consumedSvgValue);
     if (consumedSvgValue) {
       if (consumedSvgValue >= 125) {
         return;
@@ -82,6 +84,9 @@ const Drink = ({
 
     // calculate value to match Svg circle requirements
     const getConsumedValueForSvg = (bac: number) => {
+      if (initialDrinkBAC === 0) {
+        return 125;
+      }
       // 125 = 100% juomasta poltettu
       // 63 ~= 50%
       // ...
@@ -101,7 +106,7 @@ const Drink = ({
         const value = getConsumedValueForSvg(bac);
         setConsumedSvgValue(value);
       }
-    }, 60000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [drink, initialDrinkBAC, consumedSvgValue, bodyweight]);
 
