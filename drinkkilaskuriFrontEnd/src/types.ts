@@ -75,6 +75,7 @@ export interface DrinkType {
   timeConsumed: Date;
   id: number;
   favorited: boolean;
+  svgMultiplier: number;
 }
 
 export interface FavDrinkType {

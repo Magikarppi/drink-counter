@@ -19,7 +19,7 @@ import {
   FavFolderIconStyle,
   RemindInterval,
 } from './src/types';
-import { calculateTotalBAC, randomId } from './src/utils';
+import { calculateBAC, calculateTotalBAC, randomId } from './src/utils';
 import StatusMoreInfo from './src/StatusMoreInfo';
 import { UserContext } from './src/UserContext';
 
@@ -391,14 +391,20 @@ const App = () => {
     const alcPercentTrimmed = parseFloat(alcPercent.replace(',', '.'));
     const amountTrimmed = parseFloat(amount.replace(',', '.'));
 
-    const newDrink: DrinkType = {
+    let newDrink: DrinkType = {
       amount: amountTrimmed,
       alcPercent: alcPercentTrimmed,
       timeConsumed: new Date(),
       id: randomId(),
       name: drinkName,
       favorited: false,
+      svgMultiplier: 125,
     };
+
+    const drinkBAC = calculateBAC(newDrink, bodyweight);
+    const svgMultiplier = 125 / drinkBAC;
+
+    newDrink = { ...newDrink, svgMultiplier: svgMultiplier };
 
     if (drinkList) {
       const newDrinkList = [...drinkList, newDrink];
@@ -416,14 +422,20 @@ const App = () => {
   };
 
   const addDrinkFromFavorites = (favDrink: FavDrinkType) => {
-    const newDrink: DrinkType = {
+    let newDrink: DrinkType = {
       amount: favDrink.amount,
       alcPercent: favDrink.alcPercent,
       timeConsumed: new Date(),
       id: randomId(),
       name: favDrink.name,
       favorited: true,
+      svgMultiplier: 125,
     };
+
+    const drinkBAC = calculateBAC(newDrink, bodyweight);
+    const svgMultiplier = 125 / drinkBAC;
+
+    newDrink = { ...newDrink, svgMultiplier: svgMultiplier };
 
     if (drinkList) {
       const newDrinkList = [...drinkList, newDrink];
