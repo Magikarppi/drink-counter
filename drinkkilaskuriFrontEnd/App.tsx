@@ -292,13 +292,13 @@ const App = () => {
     if (drinkList.length <= 0) {
       setStatusIsExpanded(false);
     }
-    // Refresh total BAC every minute
+    // Refresh total BAC every 10 seconds
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
         const totalBac = calculateTotalBAC(drinkList, bodyweight, sex);
         setTotalBloodAlc(totalBac);
       }
-    }, 60000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [drinkList, bodyweight, sex]);
 

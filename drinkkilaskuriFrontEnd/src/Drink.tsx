@@ -100,13 +100,14 @@ const Drink = ({
       return consumedValueReversed;
     };
 
+    // calculate and update drink's BAC every second
     const interval = setInterval(() => {
       if (drink) {
         const bac = calculateBAC(drink, bodyweight, sex);
         const value = getConsumedValueForSvg(bac);
         setConsumedSvgValue(value);
       }
-    }, 6000);
+    }, 1000);
     return () => clearInterval(interval);
   }, [drink, initialDrinkBAC, consumedSvgValue, bodyweight, sex]);
 
