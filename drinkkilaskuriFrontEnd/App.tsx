@@ -275,31 +275,32 @@ const App = () => {
 
   // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
+    // if user's sex is not set we should not go any further
+    if (!sex) {
+      return;
+    }
     // if user removes all added drinks, reset total BAC
     if (drinkList.length < 1) {
       setTotalBloodAlc(0);
     }
-
     // Refresh total BAC immediately when new drink added
     if (drinkList.length > 0) {
-      const totalBac = calculateTotalBAC(drinkList, bodyweight);
+      const totalBac = calculateTotalBAC(drinkList, bodyweight, sex);
       setTotalBloodAlc(totalBac);
     }
-
     // Minimize status-more-info view and hide status view if no drink's have been added
     if (drinkList.length <= 0) {
       setStatusIsExpanded(false);
     }
-
     // Refresh total BAC every minute
     const interval = setInterval(() => {
       if (drinkList.length > 0) {
-        const totalBac = calculateTotalBAC(drinkList, bodyweight);
+        const totalBac = calculateTotalBAC(drinkList, bodyweight, sex);
         setTotalBloodAlc(totalBac);
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, [drinkList, bodyweight]);
+  }, [drinkList, bodyweight, sex]);
 
   // Check if drinkCountLimit has been reached and set state accordingly
   useEffect(() => {
@@ -415,7 +416,8 @@ const App = () => {
   };
 
   const addDrink = () => {
-    if (!alcPercent || !amount) {
+    // if alcPercent or amount or user's sex is not set we should not go any further
+    if (!alcPercent || !amount || !sex) {
       return;
     }
 
@@ -432,7 +434,7 @@ const App = () => {
       svgMultiplier: 125,
     };
 
-    const drinkBAC = calculateBAC(newDrink, bodyweight);
+    const drinkBAC = calculateBAC(newDrink, bodyweight, sex);
     const svgMultiplier = 125 / drinkBAC;
 
     newDrink = { ...newDrink, svgMultiplier: svgMultiplier };
@@ -453,6 +455,11 @@ const App = () => {
   };
 
   const addDrinkFromFavorites = (favDrink: FavDrinkType) => {
+    // if user's sex is not set we should not go any further
+    if (!sex) {
+      return;
+    }
+
     let newDrink: DrinkType = {
       amount: favDrink.amount,
       alcPercent: favDrink.alcPercent,
@@ -463,7 +470,7 @@ const App = () => {
       svgMultiplier: 125,
     };
 
-    const drinkBAC = calculateBAC(newDrink, bodyweight);
+    const drinkBAC = calculateBAC(newDrink, bodyweight, sex);
     const svgMultiplier = 125 / drinkBAC;
 
     newDrink = { ...newDrink, svgMultiplier: svgMultiplier };
@@ -621,6 +628,7 @@ const App = () => {
     setSex(aSex);
     setShowSelectSex(false);
     storeSex(aSex);
+    return;
   };
 
   const handleContinueAddDrink = () => {
@@ -645,7 +653,7 @@ const App = () => {
   };
 
   return (
-    <UserContext.Provider value={{ bodyweight: bodyweight }}>
+    <UserContext.Provider value={{ bodyweight: bodyweight, sex: sex }}>
       <View>
         <HeaderMain openModal={openSettings} />
         <View style={styles.container}>

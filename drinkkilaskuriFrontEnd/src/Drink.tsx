@@ -46,11 +46,11 @@ const Drink = ({
   const [consumedSvgValue, setConsumedSvgValue] = useState<number>();
   const [opacity, setOpacity] = useState<number>();
 
-  const { bodyweight } = useContext(UserContext);
+  const { bodyweight, sex } = useContext(UserContext);
 
   useEffect(() => {
-    setInitialDrinkBAC(calculateBAC(drink, bodyweight));
-  }, [drink, bodyweight]);
+    setInitialDrinkBAC(calculateBAC(drink, bodyweight, sex));
+  }, [drink, bodyweight, sex]);
 
   // initialize state for consumption circle and opacity
   useEffect(() => {
@@ -102,13 +102,13 @@ const Drink = ({
 
     const interval = setInterval(() => {
       if (drink) {
-        const bac = calculateBAC(drink, bodyweight);
+        const bac = calculateBAC(drink, bodyweight, sex);
         const value = getConsumedValueForSvg(bac);
         setConsumedSvgValue(value);
       }
     }, 6000);
     return () => clearInterval(interval);
-  }, [drink, initialDrinkBAC, consumedSvgValue, bodyweight]);
+  }, [drink, initialDrinkBAC, consumedSvgValue, bodyweight, sex]);
 
   return (
     <View style={{ ...styles.container, opacity }}>

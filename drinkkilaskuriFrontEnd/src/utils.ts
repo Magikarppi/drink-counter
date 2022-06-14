@@ -1,4 +1,4 @@
-import { DrinkType, RType } from './types';
+import { DrinkType, RType, Sex } from './types';
 
 // How much alcohol human body metabolizes in an hour (%)
 // Your burnoff rate is measured by how fast your body can decrease your BAC percentage.
@@ -19,9 +19,9 @@ const getTimeConsumedMinutes = (aTimeConsumed: string | Date) => {
 export const calculateBAC = (
   drink: DrinkType,
   bodyweight: string,
-  gender?: 'male' | 'female'
+  sex: Sex
 ) => {
-  const rType: RType = gender === 'male' ? 0.68 : 0.55;
+  const rType: RType = sex === 'male' ? 0.68 : 0.55;
   const { alcPercent, amount } = drink;
   const personsWeightNum = parseInt(bodyweight, 10);
 
@@ -55,9 +55,10 @@ export const calculateBAC = (
 
 export const calculateTotalBAC = (
   drinkList: DrinkType[],
-  bodyweight: string
+  bodyweight: string,
+  sex: Sex
 ) => {
-  const bacValues = drinkList.map((d) => calculateBAC(d, bodyweight));
+  const bacValues = drinkList.map((d) => calculateBAC(d, bodyweight, sex));
   const total = bacValues.reduce((acc, curr) => acc + curr);
   return total;
 };
