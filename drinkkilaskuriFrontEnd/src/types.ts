@@ -240,6 +240,7 @@ export interface BACInfoModalProps {
   closeModal: () => void;
 }
 
-export interface SexSelectProps {
-  handleSexSelect: (sex: Sex) => void;
+export interface SelectSexModalProps {
+  handleSelectSex: (sex: Sex) => void;
+  showModal: boolean;
 }

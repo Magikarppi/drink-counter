@@ -18,10 +18,12 @@ import {
   FavDrinkType,
   FavFolderIconStyle,
   RemindInterval,
+  Sex,
 } from './src/types';
 import { calculateBAC, calculateTotalBAC, randomId } from './src/utils';
 import StatusMoreInfo from './src/StatusMoreInfo';
 import { UserContext } from './src/UserContext';
+import SelectSexModal from './src/SelectSexModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +66,8 @@ const statusExpandedStyle = {
 };
 
 const App = () => {
+  const [showSelectSex, setShowSelectSex] = useState<boolean>(false);
+  const [sex, setSex] = useState<Sex>();
   const [drinkList, setDrinkList] = useState<DrinkType[]>([]);
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
@@ -92,6 +96,29 @@ const App = () => {
   const [statusIsExpanded, setStatusIsExpanded] = useState<boolean>(false);
   const [statusContainerStyle, setStatusContainerStyle] =
     useState<any>(statusMinimizedStyle);
+
+  const storeSex = async (aSex: Sex) => {
+    try {
+      await AsyncStorage.setItem('sex', JSON.stringify(aSex));
+    } catch (error) {
+      console.log('error storing sex to asyncStorage:');
+      console.log(error);
+    }
+  };
+
+  const getSexFromStorage = async () => {
+    try {
+      const storedSex = await AsyncStorage.getItem('sex');
+      if (storedSex) {
+        setSex(JSON.parse(storedSex));
+      } else {
+        setShowSelectSex(true);
+      }
+    } catch (error) {
+      console.log('error with getting sex from asyncStorage:');
+      console.log(error);
+    }
+  };
 
   const storeDrink = async (drink: DrinkType) => {
     try {
@@ -216,6 +243,10 @@ const App = () => {
       console.log('error with getting bacLimit from async-storage:');
       console.log(e);
     }
+  }, []);
+
+  useEffect(() => {
+    getSexFromStorage();
   }, []);
 
   // Check and set the right exp/min button and style for Status
@@ -586,6 +617,12 @@ const App = () => {
     return;
   };
 
+  const handleSelectSex = (aSex: Sex) => {
+    setSex(aSex);
+    setShowSelectSex(false);
+    storeSex(aSex);
+  };
+
   const handleContinueAddDrink = () => {
     setShowReminder(false);
     addDrink();
@@ -612,6 +649,10 @@ const App = () => {
       <View>
         <HeaderMain openModal={openSettings} />
         <View style={styles.container}>
+          <SelectSexModal
+            showModal={showSelectSex}
+            handleSelectSex={handleSelectSex}
+          />
           <ReminderModal
             showModal={showReminder}
             closeModal={closeReminder}
