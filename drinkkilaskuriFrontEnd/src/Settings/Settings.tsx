@@ -6,7 +6,6 @@ import { colors } from '../themes';
 import { SettingsProps } from '../types';
 import BACInfoModal from './BACInfoModal';
 import BACLimit from './BACLimit';
-import BodySize from './BodySize';
 import DrinkCountLimit from './DrinkCountLimit';
 import Reminder from './ReminderSetting';
 import SleepTime from './SleepTime';
@@ -55,8 +54,6 @@ const Settings = ({
   selectedRemindInterval,
   setDrinkCountLimit,
   drinkCountLimit,
-  bodyweight,
-  setBodyweight,
   reminderMessage,
   setReminderMessage,
   useSleepTime,
@@ -103,9 +100,6 @@ const Settings = ({
             reminderMessage={reminderMessage}
             setReminderMessage={setReminderMessage}
           />
-        </View>
-        <View style={styles.section}>
-          <BodySize bodyweight={bodyweight} setBodyweight={setBodyweight} />
         </View>
         <SleepTime
           sleepTime={sleepTime}

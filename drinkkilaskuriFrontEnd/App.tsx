@@ -24,6 +24,7 @@ import { calculateBAC, calculateTotalBAC, randomId } from './src/utils';
 import StatusMoreInfo from './src/StatusMoreInfo';
 import { UserContext } from './src/UserContext';
 import SelectSexModal from './src/SelectSexModal';
+import SelectBodyweight from './src/SelectBodyweightModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,6 +69,9 @@ const statusExpandedStyle = {
 const App = () => {
   const [showSelectSex, setShowSelectSex] = useState<boolean>(false);
   const [sex, setSex] = useState<Sex>();
+  const [showSelectBodyweight, setShowSelectBodyweight] =
+    useState<boolean>(false);
+  const [bodyweight, setBodyweight] = useState<Bodyweight>();
   const [drinkList, setDrinkList] = useState<DrinkType[]>([]);
   const [alcPercent, setAlcPercent] = useState<string>();
   const [amount, setAmount] = useState<string>();
@@ -91,7 +95,6 @@ const App = () => {
   const [sleepTimeReminderMsg, setSleepTimeReminderMsg] = useState<string>();
   const [remindInterval, setRemindInterval] =
     useState<RemindInterval>('afterMax');
-  const [bodyweight, setBodyweight] = useState<Bodyweight>('70');
   const [totalBloodAlc, setTotalBloodAlc] = useState<number>(0);
   const [statusIsExpanded, setStatusIsExpanded] = useState<boolean>(false);
   const [statusContainerStyle, setStatusContainerStyle] =
@@ -247,7 +250,12 @@ const App = () => {
 
   useEffect(() => {
     getSexFromStorage();
-  }, []);
+    getBodyweightFromStorage();
+    if (sex && !bodyweight) {
+      setShowSelectBodyweight(true);
+    }
+    setShowSelectBodyweight(false);
+  }, [getBodyweightFromStorage, sex, bodyweight]);
 
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
@@ -275,8 +283,8 @@ const App = () => {
 
   // Calculate and update total blood alcohol content (total BAC) every minute and when a new drink gets added
   useEffect(() => {
-    // if user's sex is not set we should not go any further
-    if (!sex) {
+    // if user's sex or bodyweight is not set we should not go any further
+    if (!sex || !bodyweight) {
       return;
     }
     // if user removes all added drinks, reset total BAC
@@ -355,9 +363,8 @@ const App = () => {
   //   }
   // }, [drinkList, totalBloodAlc]);
 
-  // Get and set bodyweight, drinkCountLimit and bacLimit from storage
+  // Get and set drinkCountLimit and bacLimit from storage
   useEffect(() => {
-    getBodyweightFromStorage();
     getDrinkCountLimitFromStorage();
     getBACLimitFromStorage();
   }, [
@@ -416,8 +423,8 @@ const App = () => {
   };
 
   const addDrink = () => {
-    // if alcPercent or amount or user's sex is not set we should not go any further
-    if (!alcPercent || !amount || !sex) {
+    // if alcPercent, amount, user's sex or bodyweight is not set we should not go any further
+    if (!alcPercent || !amount || !sex || !bodyweight) {
       return;
     }
 
@@ -455,8 +462,8 @@ const App = () => {
   };
 
   const addDrinkFromFavorites = (favDrink: FavDrinkType) => {
-    // if user's sex is not set we should not go any further
-    if (!sex) {
+    // if user's sex or bodyweight is not set we should not go any further
+    if (!alcPercent || !amount || !sex || !bodyweight) {
       return;
     }
 
@@ -624,6 +631,10 @@ const App = () => {
     return;
   };
 
+  const closeSelectBodyweight = () => {
+    return setShowSelectBodyweight(false);
+  };
+
   const handleSelectSex = (aSex: Sex) => {
     setSex(aSex);
     setShowSelectSex(false);
@@ -642,9 +653,12 @@ const App = () => {
     storeDrinkCountLimit(aDrinkCount);
   };
 
-  const handleSetBodyweight = (bw: string) => {
-    setBodyweight(bw);
-    storeBodyweight(bw);
+  const handleSetBodyweight = (bw: string | undefined) => {
+    if (bw) {
+      setBodyweight(bw);
+      storeBodyweight(bw);
+    }
+    return;
   };
 
   const handleSetBACLimit = (limit: string | undefined) => {
@@ -660,6 +674,14 @@ const App = () => {
           <SelectSexModal
             showModal={showSelectSex}
             handleSelectSex={handleSelectSex}
+            bodyweight={bodyweight}
+            setBodyweight={handleSetBodyweight}
+          />
+          <SelectBodyweight
+            showModal={showSelectBodyweight}
+            closeModal={closeSelectBodyweight}
+            bodyweight={bodyweight}
+            setBodyweight={handleSetBodyweight}
           />
           <ReminderModal
             showModal={showReminder}
@@ -671,8 +693,6 @@ const App = () => {
             bacLimitReached={bacLimitReached}
           />
           <SettingsModal
-            bodyweight={bodyweight}
-            setBodyweight={handleSetBodyweight}
             drinkCountLimit={drinkCountLimit}
             setDrinkCountLimit={handleSetDrinkCountLimit}
             bacLimit={bacLimit}

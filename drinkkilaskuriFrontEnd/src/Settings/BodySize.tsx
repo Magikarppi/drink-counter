@@ -37,7 +37,7 @@ const BodySize = ({ bodyweight, setBodyweight }: BodySizeProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputSection}>
-        <Text style={styles.text}>Kehonpaino kg</Text>
+        <Text style={styles.text}>Kehonpainoni on n. </Text>
         <View style={styles.input}>
           <TextInput
             style={{ color: colors.beige }}
@@ -48,8 +48,9 @@ const BodySize = ({ bodyweight, setBodyweight }: BodySizeProps) => {
             textAlign="center"
           />
         </View>
+        <Text style={styles.text}>kg</Text>
       </View>
-      <Text style={{ ...styles.text, fontSize: 10 }}>
+      <Text style={{ ...styles.text, fontSize: 12, color: colors.brown }}>
         Käytetään veren tarkemman alkoholipitoisuuden laskemiseen
       </Text>
     </View>

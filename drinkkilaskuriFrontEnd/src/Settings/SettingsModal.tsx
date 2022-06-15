@@ -49,8 +49,6 @@ const SettingsModal = ({
   selectedRemindInterval,
   setDrinkCountLimit,
   drinkCountLimit,
-  bodyweight,
-  setBodyweight,
   reminderMessage,
   setReminderMessage,
   toggleUseSleepTime,
@@ -73,8 +71,6 @@ const SettingsModal = ({
             <View style={styles.buttonElement} />
           </View>
           <Settings
-            bodyweight={bodyweight}
-            setBodyweight={setBodyweight}
             drinkCountLimit={drinkCountLimit}
             setDrinkCountLimit={setDrinkCountLimit}
             bacLimit={bacLimit}

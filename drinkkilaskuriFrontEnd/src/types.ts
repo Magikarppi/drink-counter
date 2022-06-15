@@ -52,7 +52,7 @@ export type BACLimit = string | undefined;
 
 export type SetBACLimit = (count: BACLimit) => void;
 
-export type Bodyweight = string;
+export type Bodyweight = string | undefined;
 
 export type SetBodyweight = (bw: Bodyweight) => void;
 
@@ -124,8 +124,6 @@ export interface SettingsModalProps extends BACLimitProps {
   selectRemindInterval: SelectRemindInterval;
   setDrinkCountLimit: SetDrinkCountLimit;
   drinkCountLimit: DrinkCountLimit;
-  bodyweight: Bodyweight;
-  setBodyweight: SetBodyweight;
   reminderMessage: ReminderMessage;
   setReminderMessage: SetReminderMessageFunc;
   useSleepTime: boolean;
@@ -139,8 +137,6 @@ export interface SettingsProps extends BACLimitProps {
   selectedRemindInterval: RemindInterval;
   setDrinkCountLimit: SetDrinkCountLimit;
   drinkCountLimit: DrinkCountLimit;
-  bodyweight: Bodyweight;
-  setBodyweight: SetBodyweight;
   reminderMessage: ReminderMessage;
   setReminderMessage: SetReminderMessageFunc;
   useSleepTime: boolean;
@@ -243,4 +239,13 @@ export interface BACInfoModalProps {
 export interface SelectSexModalProps {
   handleSelectSex: (sex: Sex) => void;
   showModal: boolean;
+  bodyweight: Bodyweight;
+  setBodyweight: SetBodyweight;
+}
+
+export interface SelectBodyweightModalProps {
+  showModal: boolean;
+  closeModal: () => void;
+  bodyweight: Bodyweight;
+  setBodyweight: SetBodyweight;
 }

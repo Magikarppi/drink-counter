@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Modal, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
+import BodySize from './Settings/BodySize';
 import { colors } from './themes';
-import { SelectSexModalProps } from './types';
+import { SelectBodyweightModalProps } from './types';
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -78,33 +79,28 @@ const styles = StyleSheet.create({
   },
 });
 
-const SelectSexModal = ({
+const SelectBodyweight = ({
   showModal,
-  handleSelectSex,
-}: SelectSexModalProps) => {
+  closeModal,
+  setBodyweight,
+  bodyweight,
+}: SelectBodyweightModalProps) => {
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
         <View style={styles.filler} />
         <View style={styles.elementsContainer}>
           <Text style={styles.welcomeText}>Tervetuloa!</Text>
-          <Text style={styles.infoText}>Olen</Text>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={() => handleSelectSex('male')}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>Mies</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleSelectSex('female')}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>Nainen</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+          <BodySize bodyweight={bodyweight} setBodyweight={setBodyweight} />
+          <TouchableOpacity onPress={() => closeModal()}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Ok</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
   );
 };
 
-export default SelectSexModal;
+export default SelectBodyweight;
