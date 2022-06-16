@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
 import BodySize from './Settings/BodySize';
 import { colors } from './themes';
@@ -81,18 +81,24 @@ const styles = StyleSheet.create({
 
 const SelectBodyweight = ({
   showModal,
-  closeModal,
   setBodyweight,
-  bodyweight,
 }: SelectBodyweightModalProps) => {
+  // for input
+  const [bwInput, setBwInput] = useState<string>();
+
+  // Parent state, context and asyncStore are set only after user presses "Ok"
+  const handleSetBodyweight = () => {
+    setBodyweight(bwInput);
+  };
+
   return (
     <Modal visible={showModal} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
         <View style={styles.filler} />
         <View style={styles.elementsContainer}>
           <Text style={styles.welcomeText}>Tervetuloa!</Text>
-          <BodySize bodyweight={bodyweight} setBodyweight={setBodyweight} />
-          <TouchableOpacity onPress={() => closeModal()}>
+          <BodySize bodyweight={bwInput} setBodyweight={setBwInput} />
+          <TouchableOpacity onPress={() => handleSetBodyweight()}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Ok</Text>
             </View>

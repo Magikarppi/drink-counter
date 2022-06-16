@@ -248,14 +248,24 @@ const App = () => {
     }
   }, []);
 
+  // Get and set user's sex, bodyweight, drinkCountLimit and bacLimit from storage
   useEffect(() => {
     getSexFromStorage();
     getBodyweightFromStorage();
+    getDrinkCountLimitFromStorage();
+    getBACLimitFromStorage();
+  }, [
+    getBodyweightFromStorage,
+    getDrinkCountLimitFromStorage,
+    getBACLimitFromStorage,
+  ]);
+
+  // Show selectBodyweightModal after user has selected their sex
+  useEffect(() => {
     if (sex && !bodyweight) {
       setShowSelectBodyweight(true);
     }
-    setShowSelectBodyweight(false);
-  }, [getBodyweightFromStorage, sex, bodyweight]);
+  }, [sex, bodyweight]);
 
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
@@ -362,16 +372,6 @@ const App = () => {
   //     setDrinkList([]);
   //   }
   // }, [drinkList, totalBloodAlc]);
-
-  // Get and set drinkCountLimit and bacLimit from storage
-  useEffect(() => {
-    getDrinkCountLimitFromStorage();
-    getBACLimitFromStorage();
-  }, [
-    getBodyweightFromStorage,
-    getDrinkCountLimitFromStorage,
-    getBACLimitFromStorage,
-  ]);
 
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
@@ -631,10 +631,6 @@ const App = () => {
     return;
   };
 
-  const closeSelectBodyweight = () => {
-    return setShowSelectBodyweight(false);
-  };
-
   const handleSelectSex = (aSex: Sex) => {
     setSex(aSex);
     setShowSelectSex(false);
@@ -657,6 +653,7 @@ const App = () => {
     if (bw) {
       setBodyweight(bw);
       storeBodyweight(bw);
+      setShowSelectBodyweight(false);
     }
     return;
   };
@@ -679,8 +676,6 @@ const App = () => {
           />
           <SelectBodyweight
             showModal={showSelectBodyweight}
-            closeModal={closeSelectBodyweight}
-            bodyweight={bodyweight}
             setBodyweight={handleSetBodyweight}
           />
           <ReminderModal

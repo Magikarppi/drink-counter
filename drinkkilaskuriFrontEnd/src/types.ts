@@ -245,7 +245,5 @@ export interface SelectSexModalProps {
 
 export interface SelectBodyweightModalProps {
   showModal: boolean;
-  closeModal: () => void;
-  bodyweight: Bodyweight;
   setBodyweight: SetBodyweight;
 }
