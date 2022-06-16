@@ -260,10 +260,13 @@ const App = () => {
     getBACLimitFromStorage,
   ]);
 
-  // Show selectBodyweightModal after user has selected their sex
+  // Show selectBodyweightModal after user has selected their sex and close if set
   useEffect(() => {
     if (sex && !bodyweight) {
       setShowSelectBodyweight(true);
+    }
+    if (bodyweight) {
+      setShowSelectBodyweight(false);
     }
   }, [sex, bodyweight]);
 
