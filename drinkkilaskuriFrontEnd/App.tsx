@@ -260,16 +260,6 @@ const App = () => {
     getBACLimitFromStorage,
   ]);
 
-  // Show selectBodyweightModal after user has selected their sex and close if set
-  useEffect(() => {
-    if (sex && !bodyweight) {
-      setShowSelectBodyweight(true);
-    }
-    if (bodyweight) {
-      setShowSelectBodyweight(false);
-    }
-  }, [sex, bodyweight]);
-
   // Check and set the right exp/min button and style for Status
   useEffect(() => {
     statusIsExpanded
@@ -638,6 +628,11 @@ const App = () => {
     setSex(aSex);
     setShowSelectSex(false);
     storeSex(aSex);
+
+    // show set-bodyweight-modal after this
+    if (!bodyweight) {
+      setShowSelectBodyweight(true);
+    }
     return;
   };
 
