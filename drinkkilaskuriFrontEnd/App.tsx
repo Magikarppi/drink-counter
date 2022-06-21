@@ -369,6 +369,13 @@ const App = () => {
   const validateDrinkAddition = (favDrink?: FavDrinkType) => {
     if (!favDrink?.alcPercent) {
       if (!alcPercent || !amount) {
+        setMessage('Lisää molemmat alk. % ja määrä');
+        setShowMessage(true);
+        setTimeout(() => {
+          setMessage(null);
+          setShowMessage(false);
+          return;
+        }, 2500);
         return;
       }
     }

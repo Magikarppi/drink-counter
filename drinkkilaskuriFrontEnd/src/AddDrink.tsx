@@ -165,7 +165,7 @@ const AddDrink = ({
               ...styles.inputBox,
             }}
           >
-            <Text style={styles.inputText}>Nimi</Text>
+            <Text style={styles.inputText}>Juoman nimi</Text>
             <Text style={styles.smallPrintText}>(valinnainen)</Text>
             <TextInput
               style={{
