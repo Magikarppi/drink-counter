@@ -337,16 +337,12 @@ const App = () => {
     if (bacLimit && totalBloodAlc) {
       const status = parseFloat(bacLimit) - totalBloodAlc * 10;
       if (status <= 0) {
+        // if totalBloodAlc is bigger than bacLimit set it to reached
         return setBACLimitReached(true);
-      } else {
-        return setBACLimitReached(false);
       }
     }
-
-    // if bacLimit has been removed reset to false
-    if (!bacLimit) {
-      setBACLimitReached(false);
-    }
+    // if no bacLimit or totalBloodAlc (is 0) then reset to false
+    return setBACLimitReached(false);
   }, [bacLimit, totalBloodAlc]);
 
   // If drinkList is empty check if there are drinks in AsyncStorage and update drinkList
