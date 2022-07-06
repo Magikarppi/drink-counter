@@ -18,10 +18,10 @@ const Drinks = ({
       style={{ width: '100%' }}
       contentContainerStyle={{ flexDirection: 'column-reverse' }}
     >
-      {drinkList.map((drink, i) => {
+      {drinkList.map((drink) => {
         return (
           <Drink
-            key={i}
+            key={drink.id}
             drink={drink}
             addToFavorites={addToFavorites}
             removeDrink={removeDrink}
